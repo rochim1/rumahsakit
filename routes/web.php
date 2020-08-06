@@ -35,6 +35,7 @@ Route::get('/contact', function () {
 Route::get('/signin', function () {
     return view('login.index');
 });
-Route::get('/adminPage', function () {
-    return view('admin.content');
-});
+
+// Route::get('/adminPage', function () {
+//     return view('admin.content');
+// });
