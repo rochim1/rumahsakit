@@ -15,6 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
+    protected $namespaceAdmin = 'App\Http\Controllers\admin';
 
     /**
      * The path to the "home" route for your application.
@@ -45,6 +46,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+        // membuat custom route untuk halaman admin (sparate route file, have both route file)
+        $this->mapAdminRoutes();
 
         //
     }
@@ -76,5 +79,14 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
+    }
+
+    // mendefinisikan fungsi mapAdminRoutes
+    protected function mapAdminRoutes()
+    {
+        Route::middleware('web')
+            // ->namespace($this->namespaceAdmin)
+            ->namespace($this->namespace.'\admin')
+            ->group(base_path('routes/admin.php'));
     }
 }
