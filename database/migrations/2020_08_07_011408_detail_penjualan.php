@@ -15,8 +15,10 @@ class DetailPenjualan extends Migration
     {
         Schema::create('detail_penjualan', function(Blueprint $table){
             $table->id('id_detail_penjualan');
-            $table->foreignId('id_penjualan')->constrained('penjualan');
-            $table->foreignId('id_produk')->constrained('produk');
+            $table->unsignedBigInteger('id_penjualan');
+            $table->foreign('id_penjualan')->references('id_penjualan')->on('penjualan');
+            $table->unsignedBigInteger('id_produk');
+            $table->foreign('id_produk')->references('id_produk')->on('produk');
             $table->integer('harga_produk');
             $table->integer('jumlah');
             $table->integer('harga_total');
