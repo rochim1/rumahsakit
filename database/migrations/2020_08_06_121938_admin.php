@@ -17,7 +17,7 @@ class Admin extends Migration
             $table->id('id_admin'); // sudah auto increment
             $table->string('nama')->comment('nama admin');
             $table->string('alamat', 200);
-            $table->bigInteger('telpon');
+            $table->text('telpon');
             $table->string('email')->unique();
             $table->string('password')->default('sha1');
             $table->timestamps();
