@@ -15,7 +15,7 @@ class Admin extends Migration
     {
         Schema::create('admin', function (Blueprint $table) {
             $table->id('id_admin'); // sudah auto increment
-            $table->string('name')->comment('nama admin');
+            $table->string('nama')->comment('nama admin');
             $table->string('alamat', 200);
             $table->bigInteger('telpon');
             $table->string('email')->unique();

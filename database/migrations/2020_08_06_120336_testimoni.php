@@ -13,7 +13,13 @@ class Testimoni extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('testimoni', function(Blueprint $table){
+            $table->id('id_testimoni');
+            $table->foreignId('id_user')->constrained('users');
+            // Constraint adalah batasan atau aturan yang ada pada table. Constraint mencegah penghapusan data dari suatu table yang mempunyai keterkaitan dengan table yang lain.
+            $table->string('komentar',250);
+            $table->softDeletes('deleted_at');
+        });
     }
 
     /**
