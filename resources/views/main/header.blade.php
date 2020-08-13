@@ -56,7 +56,7 @@
 	        	<li class="nav-item"><a href="{{url('galeri')}}" class="nav-link">Galeri</a></li>
 	        	<li class="nav-item"><a href="{{url('genteng')}}" class="nav-link">Genteng</a></li>
 	          <li class="nav-item"><a href="{{url('contact')}}" class="nav-link">Contact</a></li>
-	        	<li class="nav-item"><a href="{{url('signin')}}" class="nav-link">Login</a></li>
+	        	<li class="nav-item"><a href="{{url('login')}}" class="nav-link">Login</a></li>
 	        </ul>
 	      </div>
 	    </div>

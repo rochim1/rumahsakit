@@ -1,17 +1,6 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title>Login-Genteng Sokka</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet"> 
-		<!-- MATERIAL DESIGN ICONIC FONT -->
-		<link rel="stylesheet" href="{{asset('login/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css')}}">
-		
-		<!-- STYLE CSS -->
-		<link rel="stylesheet" href="{{asset('login/css/style.css')}}">
-	</head>
-
+@extends('login.main')
+@section('title','login')
+@section('content')
 	<body>
 
 		<div class="wrapper">
@@ -19,22 +8,29 @@
 				<img src="images/registration-form-8.jpg" alt="">
 			</div>
 			<div class="form-inner">
-				<form action="">
+				<form action="{{route('login')}}" method="POST">
+					@csrf
 					<div class="form-header">
-						<h3>Sign up</h3>
-						<img src="images/sign-up.png" alt="" class="sign-up-icon">
-					</div>
-					<div class="form-group">
-						<label for="">Username:</label>
-						<input type="text" class="form-control" data-validation="length alphanumeric" data-validation-length="3-12">
+						<h3>LogIn</h3>
+						<img src="images/sign-up.png" alt="" class="@error('email') is-invalid @enderror sign-up-icon">
 					</div>
 					<div class="form-group">
 						<label for="">E-mail:</label>
-						<input type="text" class="form-control" data-validation="email">
+						<input type="text" name="email" class="form-control" data-validation="email">
+					@error('email')
+						<div class="invalid-feedback">
+							email wajib diisi. <strong>{{ $message }}</strong>
+						</div>
+					@enderror
 					</div>
 					<div class="form-group" >
 						<label for="">Password:</label>
-						<input type="password" class="form-control" data-validation="length" data-validation-length="min8">
+						<input type="password" name="password" class="@error('email') is-invalid @enderror form-control" data-validation="length" data-validation-length="min8">
+					@error('password')
+						<div class="invalid-feedback">
+							password salah. <strong>{{ $message }}</strong>
+						</div>
+					@enderror
 					</div>
 					<button>Buat Akun</button>
 					<div class="socials">
@@ -62,3 +58,4 @@
 		<script src="js/main.js"></script>
 	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
+@endsection

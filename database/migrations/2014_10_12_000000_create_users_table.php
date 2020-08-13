@@ -16,8 +16,8 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id('id_user'); // sudah auto increment
             $table->string('nama')->comment('nama user');
-            $table->string('alamat', 200)->comment('alamat user untuk pengiriman');
-            $table->text('telpon');
+            $table->string('alamat', 200)->comment('alamat user untuk pengiriman')->nullable();
+            $table->text('telpon')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             // dapat dikosongi (null)
