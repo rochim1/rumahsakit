@@ -16,24 +16,25 @@
 					</div>
 					<div class="form-group">
 						<label for="">E-mail:</label>
-						<input type="text" name="email" class="form-control" data-validation="email">
+						<input type="email" name="email" class="form-control" data-validation="email">
 					@error('email')
 						<div class="invalid-feedback">
-							email wajib diisi. <strong>{{ $message }}</strong>
+							<strong>{{ $message }}</strong>
 						</div>
 					@enderror
 					</div>
 					<div class="form-group" >
 						<label for="">Password:</label>
-						<input type="password" name="password" class="@error('email') is-invalid @enderror form-control" data-validation="length" data-validation-length="min8">
+						<input type="password" name="password" class="@error('password') is-invalid @enderror form-control" data-validation="length" data-validation-length="min8">
 					@error('password')
 						<div class="invalid-feedback">
-							password salah. <strong>{{ $message }}</strong>
+							<strong>{{ $message }}</strong>
 						</div>
 					@enderror
 					</div>
-					<button>Buat Akun</button>
+					<button>masuk</button>
 					<div class="socials">
+					<a class="" href="{{route('register')}}">belum punya akun</a>
 						<p>Atau Login dengan</p>
 						<a href="" class="socials-icon">
 							<i class="zmdi zmdi-facebook"></i>

@@ -12,5 +12,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/admin/login', 'adminMainController@login')->name('landingpage');
 
-Route::get('/dashboard', 'adminMainController@index');
+Route::get('/frontend', 'adminMainController@frontend')->name('landingpage');
+Route::get('/header', 'adminMainController@header')->name('header');
+Route::get('/content', 'adminMainController@content')->name('content');
+Route::get('/footer', 'adminMainController@footer')->name('footer');
+
+Route::get('/admin', 'adminMainController@index')->name('admin');
+Route::get('/produk', 'adminMainController@produk')->name('listproduk');
+Route::get('/tambahproduk', 'adminMainController@tambahproduk')->name('tambahproduk');
+Route::get('/junkproduk', 'adminMainController@produkjunk')->name('produkjunk');
+
+Route::get('/konsumen', 'adminMainController@konsumen')->name('konsumen');
+Route::get('/adminlist', 'adminMainController@admin')->name('tampiladmin');
+Route::get('/users', 'adminMainController@users')->name('AllUsers');

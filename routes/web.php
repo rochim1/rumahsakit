@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Auth::routes();
-Route::get('/', function () {
-    return view('welcome');
-});
 // Route::get('/', function () {
-//     return view('pages.content');
+//     return view('welcome');
 // });
+Route::get('/', function () {
+    return view('pages.content');
+});
 //menamai route sebagai induk , bisa di akses dengan route('induk') dengan hyperlink
 Route::get('/home', array('as'=>'induk',function(){
     return view('pages.content');
@@ -35,9 +35,15 @@ Route::get('/genteng', function () {
 Route::get('/contact', function () {
     return view('pages.contact');
 });
-
+Route::get('/logindefault', function(){
+    return view('auth.login');
+});
 // Route::get('/newregister', 'HomeController@registrasi' )->name;
 
 
 // Route::get('/home', 'HomeController@index')->name('home');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
