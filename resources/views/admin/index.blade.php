@@ -6,6 +6,12 @@
   </button>
 </div>
 @endunless
+
+@if(Session::has('credential'))
+{{-- untuk cek credential user yang login --}}
+    {{-- {{ dd(Session::get('credential')[1]) }} --}}
+@endif
+
 @include('admin.header')
 <!--**********************************
             Content body start

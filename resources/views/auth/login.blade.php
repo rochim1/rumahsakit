@@ -68,6 +68,19 @@
                 </div>
             </div>
         </div>
+<div id="cek">
+@{{ini}}
+</div>
+<script>
+    var test = new Vue({
+        el: '#cek',
+        data : {
+            ini :'berhasil',
+        }
+    });
+</script>
+
+
     </div>
 </div>
 @endsection

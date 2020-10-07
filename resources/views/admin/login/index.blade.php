@@ -13,9 +13,11 @@
         integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="{{asset('Componentadmin/css/style.css')}}" rel="stylesheet">
     @yield('style')
+    {{-- <link rel="stylesheet" href="{{asset('css/app.css')}}"> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> --}}
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/vue.js') }}"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script> --}}
+    {{-- <script src="{{ asset('css/app.css') }}"></script> --}}
 </head>
 
 <body class="h-100">
@@ -48,27 +50,39 @@
     <script src="{{asset('Componentadmin/js/gleek.js')}}"></script>
     <script src="{{asset('Componentadmin/js/styleSwitcher.js')}}"></script>
         <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                message: {
-                    judul: '',
-                    surat: 'silahkan login',
-                    pesan: 'anda login pada : ' + new Date().toLocaleString(),
-                    array : [
-                        {
-                            content: 'isi pertama'
-                        },
-                        {
-                            content: 'isi kedua'
-                        },
-                        {
-                            content: 'isi ketiga'
-                        }]
-                }
+       
+    new Vue({
+        el: '#top_title',
+        data : {
+            times: '',
+            dates : '',
+        },
+        mounted() {  this.time(), this.date() },
+            methods: 
+            {
+                zeroPadding: function(num, digit) {
+                    var zero = '';
+                    for(var i = 0; i < digit; i++) {
+                        zero += '0';
+                    }
+                    return (zero + num).slice(-digit);
+                },
+                // benuk penulisan fungsi langsung juga bisa seperti time(){ .. }
+                time: function() {
+                    var cd = new Date();
+                    this.times = this.zeroPadding(cd.getHours(), 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2);
+                    setTimeout(this.time,1000) ;
+                    // setInterval(this.time,1000);
+                    },
+                date: function() {
+                    var cd = new Date();
+                    var week = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+                    this.dates =  this.zeroPadding(cd.getFullYear(), 4) + '-' + this.zeroPadding(cd.getMonth()+1, 2) + '-' + this.zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
+                },
             },
-
-        });
+            
+    })
+    
     </script>
 </body>
 

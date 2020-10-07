@@ -18,37 +18,40 @@
                 <div class="form-input-content">
                     <div class="card login-form mb-0">
                         <div class="card-body pt-5">
-                            <a class="text-center" href="index.html">
+                            <a id="top_title" class="text-center" href="index.html">
+                                <h6>@{{ times}}</h6>
+                                <h6>@{{ dates}}</h6>
                                 <h4>Admin login</h4>
                             </a>
 
-                            <form class="mt-5 mb-5 login-input">
+                            <form class="mt-5 mb-5 login-input" method="post" action="{{route('log_admin')}}">
+                                @csrf
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="Email">
+                                    <input name="email" v-model="email" type="email" class="form-control"
+                                        placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password">
+                                    <input name="password" v-model="password" type="password" class="form-control"
+                                        placeholder="Password">
                                 </div>
                                 <button class="btn login-form__btn submit w-100">Sign In</button>
                             </form>
-
-                            {{-- vue js --}}
-                            <div id="app">
-                            <h1>@{{ message.judul}}</h1>
-                                <table class="table table-striped">
-                                    <tr>
-                                    <td>@{{message.pesan}}</td>
-                                    </tr>
-                                    <tr v-for="item in message.array">
-                                        <td>@{{ item.content }}</td>
-                                    </tr>
-                                    <tr class="text-center" v-if="!message.array.length">
-                                        <td>data masih kosong</td>
-                                    </tr>
-                                </table>
+                            @if (session('message'))
+                                <div class="alert alert-danger" role="alert">         
+                                    {{
+                                    session('message')
+                                    }}
                             </div>
+                                @endif  
+                            <script>
+                                var login = new Vue({
 
-                            
+                                })
+
+                            </script>
+
+
+
 
 
                             <p class="mt-5 login-form__footer">Dont have account? <a href="page-register.html"
