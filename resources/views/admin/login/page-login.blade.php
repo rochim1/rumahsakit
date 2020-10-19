@@ -7,6 +7,10 @@
         height: 200px;
     }
 
+    .is-invalid {
+        border: 1px solid red;
+    }
+
 </style>
 
 @endsection
@@ -27,22 +31,54 @@
                             <form class="mt-5 mb-5 login-input" method="post" action="{{route('log_admin')}}">
                                 @csrf
                                 <div class="form-group">
-                                    <input name="email" v-model="email" type="email" class="form-control"
-                                        placeholder="Email">
+                                    <input value="{{ old('email') }}" name="email" v-model="email" type="email"
+                                        class="@error('email') is-invalid @enderror form-control" placeholder="Email">
+
+                                    @error('email')
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
                                 </div>
+
                                 <div class="form-group">
-                                    <input name="password" v-model="password" type="password" class="form-control"
+                                    <input data-validation-length="min8" name="password" v-model="password"
+                                        type="password" class="@error('password') is-invalid @enderror form-control"
                                         placeholder="Password">
+                                    @error('password')
+                                    <div class="invalid-feedback">
+                                        <strong>{{ $message }}</strong>
+                                    </div>
+                                    @enderror
+                                </div>
+                                <div class="form-check form-check-inline mb-3 mt-0">
+                                    <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="inlineCheckbox1">remember me</label>
                                 </div>
                                 <button class="btn login-form__btn submit w-100">Sign In</button>
                             </form>
                             @if (session('message'))
-                                <div class="alert alert-danger" role="alert">         
-                                    {{
+                            <div class="alert alert-danger" role="alert">
+                                {{
                                     session('message')
                                     }}
                             </div>
-                                @endif  
+                            {{-- {{
+                                dd(Cookie::get('credential'))
+                            }} --}}
+                            @endif
+                            @if ($errors->any())
+                            <div class="alert alert-danger" role="alert">
+
+                                ditemukan {{ $jumlah = $errors->count()}}
+                                @if ($jumlah >1) beberapa error @else error @endif
+                                : <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
                             <script>
                                 var login = new Vue({
 

@@ -20,6 +20,7 @@ class Admin extends Migration
             $table->text('telpon');
             $table->string('email')->unique();
             $table->string('password')->default('sha1');
+            $table->rememberToken();
             $table->timestamps();
             $table->softDeletes('deleted_at');
         });
@@ -33,6 +34,6 @@ class Admin extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('admin');
     }
 }

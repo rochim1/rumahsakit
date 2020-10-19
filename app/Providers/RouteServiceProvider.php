@@ -16,6 +16,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected $namespace = 'App\Http\Controllers';
     protected $namespaceAdmin = 'App\Http\Controllers\admin';
+    protected $namespaceRumahSakit = 'App\Http\Controllers\rumahsakit';
 
     /**
      * The path to the "home" route for your application.
@@ -49,6 +50,7 @@ class RouteServiceProvider extends ServiceProvider
         // membuat custom route untuk halaman admin (sparate route file, have both route file)
         $this->mapAdminRoutes();
 
+        $this->mapRumahsakitRoutes();
         //
     }
 
@@ -88,5 +90,13 @@ class RouteServiceProvider extends ServiceProvider
             // ->namespace($this->namespaceAdmin)
             ->namespace($this->namespace.'\admin')
             ->group(base_path('routes/admin.php'));
+    }
+
+    protected function mapRumahsakitRoutes()
+    {
+        Route::middleware('web')
+            // ->namespace($this->namespaceAdmin)
+            ->namespace($this->namespace) //untuk mendefinisikan folder controllernya
+            ->group(base_path('routes/rumahsakit.php')); //untuk mendefinisikan folder routenya
     }
 }

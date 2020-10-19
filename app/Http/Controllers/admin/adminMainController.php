@@ -7,19 +7,34 @@ use App\Http\Controllers\Controller;
 use App\user;
 use App\admin;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\Request;
+// use Illuminate\Http\Request;
+use App\Http\Requests\ErrorFormRequest; 
+
 
 class adminMainController extends Controller
 {
-    public function Auth(Request $request)
-    {   
-        // fungsi untuk validasi data dari form dengan ketentuan yang terdaftar=
+    public function checkLogin(ErrorFormRequest $request){
+        if ($request->remember) {
+            $ingat = $request->remember ? true : false; //varialbel yang akan berisi true atau false
+            $data = $request->only('email', 'password');
+
+            // $value = $request->cookie(['name','password']);
+            // return back()->with('message','remember berhasil')->cookie('credential',$value,60);
+        }
+    }
+    public function Auth(ErrorFormRequest $request)
+    {
+        // fungsi untuk validasi data dari form dengan ketentuan yang terdaftar , otomatis jalan
+        // $this->validate(
+        //     $request,
+        //     ['email' => 'required'],
+        //     ['email.required' => '*email harus diisi']
+        // );
+
         // $validatedData = $request->validate([
-        // 'email' => ['required', 'unique:admin', 'max:80'],
-        // 'password' => ['required'],
+        //     'email' => ['required', 'max:80'],
+        //     'password' => ['required'],
         // ]);
-
-
 
         // dd($request->all()); //ini adalah fungsi untuk menampilkan request seperti print_r
         $admin = admin::where('email', '=', $request->email )->firstOrFail();
@@ -31,7 +46,6 @@ class adminMainController extends Controller
                 
                 $serialize = $admin->toArray();
                 Session::push('credential', $serialize);
-                
                 Session::put('name',$admin->nama);
                 Session::put('email',$admin->email);
                 Session::put('login',TRUE);
@@ -39,13 +53,13 @@ class adminMainController extends Controller
                 return redirect("/admin");
             }
             else 
-            {    
-                return back()->with('message','email atau password salah');
+            {    //metode withInput adalah untuk mengembalikan data form ke halaman lain
+                return back()->with('message','email atau password salah')->withInput($request->except('password'));
                 // return "password : ". $request->password ." dosn't match with :". $admin->password;
             }
         }
         else {
-            return 'wrong credentials';
+                return back()->with('message','email atau password salah');
         }
         
     }

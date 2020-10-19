@@ -19,7 +19,7 @@
         Scripts
     ***********************************-->
    <script src="{{asset('js/jquery.min.js')}}"></script>
-   {{-- <script src="{{asset('js/bootstrap.min.js')}}"></script> --}}
+   <script src="{{asset('js/bootstrap.min.js')}}"></script>
 
    <script src="{{asset('Componentadmin/plugins/common/common.min.js')}}"></script>
    <script src="{{asset('Componentadmin/js/custom.min.js')}}"></script>
@@ -29,8 +29,9 @@
 
    {{-- ioicon --}}
    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+   <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
    <!-- Chartjs --> 
-   <script src="{{asset('Componentadmin/plugins/chart.js/Chart.bundle.min.js')}}"></script>
+   {{-- <script src="{{asset('Componentadmin/plugins/chart.js/Chart.bundle.min.js')}}"></script>
    <!-- Circle progress -->
    <script src="{{asset('Componentadmin/plugins/circle-progress/circle-progress.min.js')}}"></script>
    <!-- Datamap -->
@@ -46,7 +47,7 @@
    <!-- ChartistJS -->
    <script src="{{asset('Componentadmin/plugins/chartist/js/chartist.min.js')}}"></script>
    <script src="{{asset('Componentadmin/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js')}}">
-   </script>
+   </script> --}}
 
    <script src="{{asset('Componentadmin/js/dashboard/dashboard-1.js')}}"></script>
    @yield('script')

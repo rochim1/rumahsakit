@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             // dapat dikosongi (null)
             $table->string('password');
             $table->rememberToken();
+            // remember token digunakan untuk fungsi remember me
             $table->timestamps();
             $table->softDeletes('deleted_at')->nullable();
         });
