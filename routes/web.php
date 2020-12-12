@@ -16,15 +16,22 @@ Auth::routes();
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-// Route::get('/', function () {
-//     return view('pages.content');
-// });
+
+Route::get('/', function () {
+    return view('rumahsakit.main_content');
+});
     Route::get('/harapanbersama', function () {
         return view('rumahsakit.main_content');
     })->name('halamanutama');
     Route::get('/harapanbersama/tentangkami', function () {
         return view('rumahsakit.tentang_kami');
     })->name('tentangkami');
+    Route::get('/harapanbersama/layanan', function () {
+        return view('rumahsakit.services');
+    })->name('layanan');
+    Route::get('/harapanbersama/contact', function () {
+        return view('rumahsakit.contact');
+    })->name('contact');
 
 //menamai route sebagai induk , bisa di akses dengan route('induk') dengan hyperlink
 Route::get('/home', array('as'=>'induk',function(){

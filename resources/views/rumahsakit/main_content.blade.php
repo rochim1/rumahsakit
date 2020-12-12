@@ -69,7 +69,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col-12 col-lg-9">
                             <div class="medilife-appointment-form">
-                                <h4 class="text-white mb-3">buat janji</h4>
+                                <h4 class="text-white mb-3">Buat Janji</h4>
                                 <form action="#" method="post">
                                     <div class="row align-items-end">
                                         <div class="col-12 col-md-4">
@@ -149,17 +149,17 @@
                                 <!-- Single Contact Info -->
                                 <div class="single-contact-info mb-30">
                                     <img src="{{asset('rs/img/icons/alarm-clock.png')}}" alt="">
-                                    <p>Mon - Sat 08:00 - 21:00 <br>Sunday CLOSED</p>
+                                    <p>Senin - Minggu <br>24 jam - non stop</p>
                                 </div>
                                 <!-- Single Contact Info -->
                                 <div class="single-contact-info mb-30">
                                     <img src="{{asset('rs/img/icons/envelope.png')}}" alt="">
-                                    <p>0080 673 729 766 <br>contact@business.com</p>
+                                    <p>082154441119 <br>rsHarapanBersama@mail.com</p>
                                 </div>
                                 <!-- Single Contact Info -->
                                 <div class="single-contact-info">
                                     <img src="{{asset('rs/img/icons/map-pin.png')}}" alt="">
-                                    <p>Lamas Str, no 14-18 <br>41770 Miami</p>
+                                    <p>Jalan Mawar Melati KM.15 Bantul <br>121513</p>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +193,7 @@
                                 <i class="icon-doctor"></i>
                             </div>
                             <div class="service-content">
-                                <h5>The Best Doctors</h5>
+                                <h5>Doctors</h5>
                                 <p>Lorem ipsum dolor sit amet, consecte tuer adipiscing elit, sed diam nonummy nibh
                                     euismod tincidunt ut.</p>
                             </div>
@@ -441,28 +441,28 @@
                     <div class="col-12 col-sm-6">
                         <div class="single-emergency-helpline mb-50">
                             <h5>London</h5>
-                            <p>0080 673 729 766 <br> contact@business.com <br> Lamas Str, no 14-18 <br> 41770 Miami</p>
+                            <p>082154441119 <br> rsHarapanBersama@mail.com <br> Lamas Str, no 14-18 <br> 41770 Miami</p>
                         </div>
                     </div>
                     <!-- Single Emergency Helpline -->
                     <div class="col-12 col-sm-6">
                         <div class="single-emergency-helpline mb-50">
                             <h5>New Castle</h5>
-                            <p>0080 673 729 766 <br> contact@business.com <br> Lamas Str, no 14-18 <br> 41770 Miami</p>
+                            <p>082154441119 <br> rsHarapanBersama@mail.com <br> Lamas Str, no 14-18 <br> 41770 Miami</p>
                         </div>
                     </div>
                     <!-- Single Emergency Helpline -->
                     <div class="col-12 col-sm-6">
                         <div class="single-emergency-helpline mb-50">
                             <h5>Manchester</h5>
-                            <p>0080 673 729 766 <br> contact@business.com <br> Lamas Str, no 14-18 <br> 41770 Miami</p>
+                            <p>082154441119 <br> rsHarapanBersama@mail.com <br> Lamas Str, no 14-18 <br> 41770 Miami</p>
                         </div>
                     </div>
                     <!-- Single Emergency Helpline -->
                     <div class="col-12 col-sm-6">
                         <div class="single-emergency-helpline mb-50">
                             <h5>Bristol</h5>
-                            <p>0080 673 729 766 <br> contact@business.com <br> Lamas Str, no 14-18 <br> 41770 Miami</p>
+                            <p>082154441119 <br> rsHarapanBersama@mail.com <br> Lamas Str, no 14-18 <br> 41770 Miami</p>
                         </div>
                     </div>
                 </div>

@@ -12,19 +12,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// ->middleware('login_admin');
+
+
+// Route::post('/authAdmin', 'adminMainController@Auth')->name('log_admin');
 Route::post('/authAdmin', 'adminMainController@Auth')->name('log_admin');
+// Route::post('/authAdmin', function(){return "berhasil";})->name('log_admin');
+Route::get('/admin/login', 'adminMainController@login')->name('loginadmin')->middleware('exeptForLoged');
 
-Route::get('/admin/login', 'adminMainController@login')->name('loginadmin');
-
-// example : you can do like that : 
-// Route::get('/admin', 'adminMainController@index')->name('admin')->middleware('authAdmin'); or 
+// example : you can do like that :
+// Route::get('/admin', 'adminMainController@index')->name('admin')->middleware('authAdmin'); or
 Route::group(['middleware' => 'authAdmin'], function () {
     Route::get('/admin/logout', 'adminMainController@logout')->name('logoutadmin');
 
+    Route::get('/content', 'adminMainController@content')->name('content');
     Route::get('/frontend', 'adminMainController@frontend')->name('landingpage');
     Route::get('/header', 'adminMainController@header')->name('header');
-    Route::get('/content', 'adminMainController@content')->name('content');
     Route::get('/footer', 'adminMainController@footer')->name('footer');
 
     Route::get('/admin', 'adminMainController@index')->name('admin');

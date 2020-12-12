@@ -30,7 +30,7 @@
    {{-- ioicon --}}
    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
-   <!-- Chartjs --> 
+   <!-- Chartjs -->
    {{-- <script src="{{asset('Componentadmin/plugins/chart.js/Chart.bundle.min.js')}}"></script>
    <!-- Circle progress -->
    <script src="{{asset('Componentadmin/plugins/circle-progress/circle-progress.min.js')}}"></script>

@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <!-- Favicon icon -->
     {{-- <link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
@@ -19,7 +20,19 @@
         href="{{asset('Componentadmin/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css')}}">
     <!-- Custom Stylesheet -->
     <link href="{{asset('Componentadmin/css/style.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    {{-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"> --}}
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.semanticui.min.css"> --}}
+    <style>
+        .swal-text{
+            text-align: center;
+        }
+    </style>
     @yield('style')
+    @yield('uper_script')
+    <script src="{{asset('js/vue.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </head>
 
@@ -282,7 +295,7 @@
                     </li>
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts Website</span>
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Konten Website</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('landingpage')}}">Quick Setup</a></li>
@@ -307,29 +320,33 @@
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="iconify " data-icon="medical-icon:i-inpatient" data-inline="false"> </span> <span class="nav-text">Pasien</span>
+                            <span class="iconify " data-icon="medical-icon:i-inpatient" data-inline="false"> </span>
+                            <span class="nav-text">Pasien</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('masterpasien')}}">master pasien</a></li>
                             <li><a href="{{route('regpasien')}}">registrasi pasien</a></li>
                             <li><a href="{{route('tampiladmin')}}">appointment pasien</a></li>
+                            <li><a href="{{route('pasienterhapus')}}">deleted pasien</a></li>
                         </ul>
                     </li>
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="iconify" data-icon="maki:doctor-15" data-inline="false"></span> <span class="nav-text">Dokter</span>
+                            <span class="iconify" data-icon="maki:doctor-15" data-inline="false"></span> <span
+                                class="nav-text">Dokter</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('masterdokter')}}">Master Dokter</a></li>
                             <li><a href="{{route('tambahdokter')}}">tambah dokter</a></li>
-                            <li><a href="{{route('konsumen')}}">jadwal dokter</a></li>
+                            <li><a href="{{route('jadwaldokter')}}">jadwal dokter</a></li>
                         </ul>
                     </li>
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="iconify" data-icon="bx:bxs-report" data-inline="false"></span> <span class="nav-text">Rekap Pemeriksaan</span>
+                            <span class="iconify" data-icon="bx:bxs-report" data-inline="false"></span> <span
+                                class="nav-text">Data Rekam Medis</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('AllUsers')}}">seluruh pengguna</a></li>
@@ -340,7 +357,20 @@
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="iconify" data-icon="gg:pill" data-inline="false"></span> <span class="nav-text">Stock Obat</span>
+                            <span class="iconify" data-icon="bx:bxs-report" data-inline="false"></span> <span
+                                class="nav-text">Kamar</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('kamar')}}">master kamar</a></li>
+                            <li><a href="{{route('tambah_kamar')}}">tambah kamar</a></li>
+                            <li><a href="{{route('tampiladmin')}}">Admin</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <span class="iconify" data-icon="gg:pill" data-inline="false"></span> <span
+                                class="nav-text">Stock Obat</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('AllUsers')}}">seluruh pengguna</a></li>
@@ -355,66 +385,89 @@
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('AllUsers')}}">seluruh pengguna</a></li>
-                            <li><a href="{{route('konsumen')}}">Konsumen</a></li>
-                            <li><a href="{{route('tampiladmin')}}">Admin</a></li>
-                        </ul>
-                    </li> --}}
+                    <li><a href="{{route('konsumen')}}">Konsumen</a></li>
+                    <li><a href="{{route('tampiladmin')}}">Admin</a></li>
+                </ul>
+                </li> --}}
 
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="iconify" data-icon="cil:hospital" data-inline="false"></span> <span class="nav-text">Rawat Inap</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('AllUsers')}}">seluruh pengguna</a></li>
-                            <li><a href="{{route('konsumen')}}">Konsumen</a></li>
-                            <li><a href="{{route('tampiladmin')}}">Admin</a></li>
-                        </ul>
-                    </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <span class="iconify" data-icon="cil:hospital" data-inline="false"></span> <span
+                            class="nav-text">Rawat Inap</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('AllUsers')}}">seluruh pengguna</a></li>
+                        <li><a href="{{route('konsumen')}}">Konsumen</a></li>
+                        <li><a href="{{route('tampiladmin')}}">Admin</a></li>
+                    </ul>
+                </li>
 
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="iconify" data-icon="medical-icon:i-care-staff-area" data-inline="false"></span> <span class="nav-text">Pegawai</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('AllUsers')}}">seluruh pengguna</a></li>
-                            <li><a href="{{route('konsumen')}}">Konsumen</a></li>
-                            <li><a href="{{route('tampiladmin')}}">Admin</a></li>
-                        </ul>
-                    </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <span class="iconify" data-icon="bx:bx-plus-medical" data-inline="false"></span>
+                        <span class="nav-text">Poli</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('AllUsers')}}">master poli</a></li>
+                    </ul>
+                </li>
 
-                    <li class="nav-label">Others</li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <span class="iconify" data-icon="medical-icon:i-care-staff-area" data-inline="false"></span>
+                        <span class="nav-text">Pegawai</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('AllUsers')}}">pegawai medis</a></li>
+                        <li><a href="{{route('konsumen')}}">pegawai non-medis</a></li>
+                        <li><a href="{{route('tampiladmin')}}">Admin</a></li>
+                    </ul>
+                </li>
 
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="menu-icon icon-bag"></i> <span class="nav-text">Permintaan Barang</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('listproduk')}}">list Produk</a></li>
-                            <li><a href="{{route('tambahproduk')}}">Tambah Produk</a></li>
-                            <li><a href="{{route('produkjunk')}}">trash</a></li>
-                        </ul>
-                    </li>
+                <li class="nav-label">Others</li>
 
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-settings menu-icon"></i> <span class="nav-text">Pegaturan</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="{{route('AllUsers')}}">maintenace mode</a></li>
-                            <li><a href="{{route('konsumen')}}">Konsumen</a></li>
-                            <li><a href="{{route('tampiladmin')}}">Admin</a></li>
-                            <li>
-                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">
-                                    Bahasa
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Indonesia</a>
-                                    <a class="dropdown-item" href="#">English</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="menu-icon icon-bag"></i> <span class="nav-text">Permintaan Barang</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('listproduk')}}">list Produk</a></li>
+                        <li><a href="{{route('tambahproduk')}}">Tambah Produk</a></li>
+                        <li><a href="{{route('produkjunk')}}">trash</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="menu-icon icon-bag"></i> <span class="nav-text">Attribute</span>
+                    </a>
+                    <ul aria-expanded="false">
+                         <li><a href="{{route('spesialis')}}">Spesialis dan Jabatan</a></li>
+                        <li><a href="{{route('tambahproduk')}}">Tambah Produk</a></li>
+                        <li><a href="{{route('produkjunk')}}">trash</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <i class="icon-settings menu-icon"></i> <span class="nav-text">Pegaturan</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('AllUsers')}}">maintenace mode</a></li>
+                        <li><a href="{{route('konsumen')}}">Konsumen</a></li>
+                        <li><a href="{{route('tampiladmin')}}">Admin</a></li>
+                        <li>
+                            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Bahasa
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Indonesia</a>
+                                <a class="dropdown-item" href="#">English</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
 
                 </ul>
             </div>

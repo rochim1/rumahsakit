@@ -15,8 +15,7 @@
 body {
   font-family: "Muli-Regular";
   font-size: 15px;
-  margin: 0;
-  color: #fff; }
+  margin: 0; }
 
 input, textarea, select, button {
   font-family: "Muli-SemiBold"; }
@@ -32,7 +31,13 @@ ul {
   margin-bottom: 0; }
 
 a {
-  text-decoration: none; }
+  text-decoration: none; 
+color: #007bff;
+}
+a:hover {
+    text-decoration: none;
+    color: #1adaeb;
+}
 
 :focus {
   outline: none; }
@@ -46,13 +51,13 @@ a {
     width: 30.1%; }
 
 .image-holder {
-  background: url("../images/registration-form-8.jpg") no-repeat;
+  background: url("../images/registration-form-9.png") no-repeat;
   background-size: cover; }
   .image-holder img {
     display: none; }
 
 .form-inner {
-  background: #78322a;
+  background: #fafafa;
   padding-top: 16.36vh;
   padding-left: 4vw;
   padding-right: 4vw; }
@@ -80,17 +85,17 @@ label {
   position: relative; }
 
 .form-control {
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(26, 218, 235, 0.5);
   border-radius: 5px;
   display: block;
   width: 100%;
   height: 45px;
   background: none;
   padding: 0 19px;
-  color: #fff;
+  color: #333;
   font-size: 17px; }
   .form-control.error {
-    border-color: #fd677a !important;
+    border-color: #13629b !important;
     background: url("../images/error.png") no-repeat center right 19px; }
   .form-control.valid {
     background: url("../images/valid.png") no-repeat center right 19px; }
@@ -111,8 +116,7 @@ button {
   align-items: center;
   justify-content: center;
   padding: 0;
-  background: #fff;
-  color: #d9534f;
+  background: #1adaeb;
   text-transform: uppercase;
   font-size: 17px;
   overflow: hidden;
@@ -131,7 +135,7 @@ button {
     bottom: 0;
     left: 0;
     right: 0;
-    background: #fd677a;
+    background: #13629b;
     -webkit-transform: scaleX(0);
     transform: scaleX(0);
     -webkit-transform-origin: 50%;
@@ -161,19 +165,20 @@ button {
   justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.5);
   font-size: 19px;
-  color: #fff;
+  color: #aaa;
   transition: all 0.5s ease;
   margin-right: 19px; }
   .socials-icon:hover {
     background: #fff;
     border: 1px solid transparent;
-    color: #d9534f; }
+    color: ##13629b;
+    }
   .socials-icon:last-child {
     margin-right: 0; }
 
 p {
   font-family: "Muli-SemiBold";
-  color: #ffff66;
+  color: #007bff;
   margin-bottom: 22px; }
 
 @media (max-width: 1500px) {

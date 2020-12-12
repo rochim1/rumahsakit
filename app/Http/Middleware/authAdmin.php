@@ -20,7 +20,10 @@ class authAdmin
             return $next($request);
         }
         else{
-            return redirect('/admin/login')->with('message',"anda tidak dapat mengakses page admin, silahkan login dahulu");
+            $alamat = \Request::path();
+            // $alamat = url()->current();
+            // todo cara Laravel redirect back to original destination after login
+            return redirect('/admin/login')->with('message',"anda tidak dapat mengakses page admin, silahkan login dahulu")->with('alamat', $alamat);
         }
     }
 }

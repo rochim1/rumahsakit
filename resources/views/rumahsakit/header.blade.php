@@ -84,13 +84,13 @@
                                                 </div>
                                             </li> --}}
                                             <li class="nav-item">
-                                                <a class="nav-link" href="services.html">layanan</a>
+                                                <a class="nav-link" href="{{route('layanan')}}">layanan</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="contact.html">Kontak</a>
+                                            <a class="nav-link" href="{{route('contact')}}">Kontak</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="blog.html">Login</a>
+                                            <a class="nav-link" href="{{route('login')}}">Login</a>
                                             </li>
                                         </ul>
                                         <!-- Appointment Button -->

@@ -6,8 +6,8 @@
 
                     <div class="col-12 col-sm-6 col-xl-3">
                         <div class="footer-widget-area">
-                            <div class="footer-logo">
-                                <img src="img/core-img/logo.png" alt="">
+                            <div class="footer-logo widget-title">
+                           <h6>RS. Harapan Bersama</h6>
                             </div>
                             <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer.</p>
                             <div class="footer-social-info">
@@ -22,13 +22,13 @@
                     <div class="col-12 col-sm-6 col-xl-3">
                         <div class="footer-widget-area">
                             <div class="widget-title">
-                                <h6>Latest News</h6>
+                                <h6>Berita Terbaru</h6>
                             </div>
                             <div class="widget-blog-post">
                                 <!-- Single Blog Post -->
                                 <div class="widget-single-blog-post d-flex">
                                     <div class="widget-post-thumbnail">
-                                        <img src="img/blog-img/ln1.jpg" alt="">
+                                    <img src="{{asset('rs/img/blog-img/ln1.jpg')}}" alt="">
                                     </div>
                                     <div class="widget-post-content">
                                         <a href="#">Better Health Care</a>
@@ -38,7 +38,7 @@
                                 <!-- Single Blog Post -->
                                 <div class="widget-single-blog-post d-flex">
                                     <div class="widget-post-thumbnail">
-                                        <img src="img/blog-img/ln2.jpg" alt="">
+                                    <img src="{{asset('rs/img/blog-img/ln2.jpg')}}" alt="">
                                     </div>
                                     <div class="widget-post-content">
                                         <a href="#">A new drug is tested</a>
@@ -48,7 +48,7 @@
                                 <!-- Single Blog Post -->
                                 <div class="widget-single-blog-post d-flex">
                                     <div class="widget-post-thumbnail">
-                                        <img src="img/blog-img/ln3.jpg" alt="">
+                                    <img src="{{asset('rs/img/blog-img/ln3.jpg')}}" alt="">
                                     </div>
                                     <div class="widget-post-content">
                                         <a href="#">Health department advice</a>
@@ -62,13 +62,13 @@
                     <div class="col-12 col-sm-6 col-xl-3">
                         <div class="footer-widget-area">
                             <div class="widget-title">
-                                <h6>Contact Form</h6>
+                                <h6>Form Contact - Kritik & Saran</h6>
                             </div>
                             <div class="footer-contact-form">
                                 <form action="#" method="post">
-                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="footer-name" id="footer-name" placeholder="Name">
+                                    <input type="text" class="form-control border-top-0 border-right-0 border-left-0" name="footer-name" id="footer-name" placeholder="Nama">
                                     <input type="email" class="form-control border-top-0 border-right-0 border-left-0" name="footer-email" id="footer-email" placeholder="Email">
-                                    <textarea name="message" class="form-control border-top-0 border-right-0 border-left-0" id="footerMessage" placeholder="Message"></textarea>
+                                    <textarea name="message" class="form-control border-top-0 border-right-0 border-left-0" id="footerMessage" placeholder="Pesan"></textarea>
                                     <button type="submit" class="btn medilife-btn">Contact Us <span>+</span></button>
                                 </form>
                             </div>
@@ -78,15 +78,15 @@
                     <div class="col-12 col-sm-6 col-xl-3">
                         <div class="footer-widget-area">
                             <div class="widget-title">
-                                <h6>News Letter</h6>
+                                <h6>Langganan Berita</h6>
                             </div>
 
                             <div class="footer-newsletter-area">
                                 <form action="#">
-                                    <input type="email" class="form-control border-0 mb-0" name="newsletterEmail" id="newsletterEmail" placeholder="Your Email Here">
+                                    <input type="email" class="form-control border-0 mb-0" name="newsletterEmail" id="newsletterEmail" placeholder="Email Anda">
                                     <button type="submit">Subscribe</button>
                                 </form>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer.</p>
+                                <p>Dapatkan Informasi terbaru mengenai kesehatan dan kegiatan rumah sakit.</p>
                             </div>
                         </div>
                     </div>
@@ -124,6 +124,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="{{asset('rs/js/plugins.js')}}"></script>
     <script src="{{asset('rs/js/active.js')}}"></script>
 
+    @yield('script')
 </body>
 
 </html>

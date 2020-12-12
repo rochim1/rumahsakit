@@ -16,7 +16,7 @@ class usersSeeder extends Seeder
         	'alamat' => 'Yogyakarta',
         	'telpon' => '082154441119',
         	'email' => 'mamadanjar@gmail.com',
-        	'password' => '12345678',
+        	'password' => 'Zettaku123',
         	'created_at' => date("Y-m-d H:i:s"),
         	'updated_at' => date("Y-m-d H:i:s")
         ]);
