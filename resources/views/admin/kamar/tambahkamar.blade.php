@@ -46,11 +46,11 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form v-on:submit.prevent>
-                                                <div class="form-group">
-                                                    <label>nama kamar - kelas</label>
-                                                    <div class="row">
-                                                        <div class="col-md-4 input-group">
+                                            <form v-on:submit.prevent class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>nama kamar</label>
+                                                        <div class="input-group">
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"
                                                                     id="inputGroupPrepend3">KM-</span>
@@ -64,29 +64,36 @@
                                                                 class="form-control" type="text"
                                                                 placeholder="{{$nmrKmr}}" value="{{$nmrKmr}}">
                                                         </div>
-                                                        <div class="col-md-8">
-                                                            <select v-model="form_kamar.kelas" class="form-control"
-                                                                placeholder="">
-                                                                @foreach ($dataKelas as $item)
-                                                                <option value="{{$item->id_kelas}}">{{$item->kelas}}
-                                                                </option>
-                                                                @endforeach
-                                                            </select>
-                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="form-group">
+                                                        <label>kelas</label>
+                                                        <select v-model="form_kamar.kelas" class="form-control"
+                                                            placeholder="">
+                                                            @foreach ($dataKelas as $item)
+                                                            <option value="{{$item->id_kelas}}">{{$item->kelas}}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
 
-                                                <div class="form-group">
-                                                    <label>nama bangsal</label>
-                                                    {{-- <input type="text" v-model="form_kamar.bangsal"> --}}
-                                                    <select v-model="form_kamar.bangsal" class="form-control"
-                                                        placeholder="">
-                                                        @foreach ($dataBangsal as $item)
-                                                        <option value="{{$item->id_bangsal}}">{{$item->bangsal}}
-                                                        </option>
-                                                        @endforeach
-                                                    </select>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>nama bangsal</label>
+                                                        {{-- <input type="text" v-model="form_kamar.bangsal"> --}}
+                                                        <select v-model="form_kamar.bangsal" class="form-control"
+                                                            placeholder="">
+                                                            @foreach ($dataBangsal as $item)
+                                                            <option value="{{$item->id_bangsal}}">{{$item->bangsal}}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
+
                                             </form>
                                         </div>
                                         <div class="modal-footer">
@@ -116,6 +123,7 @@
                                         <th>kelas</th>
                                         <th>bangsal</th>
                                         <th>status</th>
+                                        <th>detail</th>
                                     </tr>
                                 </thead>
                                 @php
@@ -139,13 +147,10 @@
                                                 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">enable</div>
                                         </div>
                                     </td>
+                                    <td>
+                                        <a href="tes" v-on:click.stop="" name="detail_kamar" class="btn btn-primary btn-sm">detail</a>
+                                    </td>
                                 </tr>
-                                {{-- @foreach ($datakamar as $item)
-                                <tr v-on:click="editKamar({{$item->id_kamar}})">
-                                <td>{{$no++}}</td>
-                                <td>{{$item->kamar}}</td>
-                                </tr>
-                                @endforeach --}}
                                 </tbody>
                             </table>
                         </div>
@@ -176,13 +181,13 @@
                                             <form v-on:submit.prevent class="row">
                                                 <div class="col-md-8 form-group">
                                                     <label>nama bangsal</label>
-                                                    <input id="inputbangsal" v-model="bangsal" type="text"
+                                                    <input id="inputbangsal" v-model="form_bangsal.bangsal" type="text"
                                                         class="form-control" placeholder="">
                                                 </div>
 
                                                 <div class="col-md-4 form-group">
                                                     <label>lantai</label>
-                                                    <input id="inputtingkat" v-model="tingkat" type="text"
+                                                    <input id="inputtingkat" v-model="form_bangsal.tingkat" type="text"
                                                         class="form-control" placeholder="">
                                                 </div>
                                             </form>
@@ -204,7 +209,7 @@
                             </div>
                         </div>
 
-                        <div class="list-group" v-for="item in dataBangsal">
+                        <div class="list-group" v-for="item in form_bangsal.dataBangsal">
                             <span style="display: flex" class="row list-group-item list-group-item-action">
                                 <span class="col-md-8">
                                     @{{item.bangsal}}
@@ -242,10 +247,17 @@
                                             <form v-on:submit.prevent>
                                                 <div class="form-group">
                                                     <label>nama kelas</label>
-                                                    <input id="inputkelas" v-model="kelas" type="text"
+                                                    <input id="inputkelas" v-model="form_kelas.kelas" type="text"
                                                         class="form-control" placeholder="">
                                                     <small id="emailHelp" class="form-text text-muted">semoga dengan ini
                                                         layanan kesehatan dirumah sakit menjadi lebih baik.</small>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>fasilitas</label>
+                                                    <textarea class="form-control" v-model="form_kelas.fasilitas" name="fasilitas">
+
+                                                    </textarea>
                                                 </div>
                                             </form>
                                         </div>
@@ -266,23 +278,21 @@
                             </div>
                         </div>
 
-                        <div class="list-group">
-
-                            @foreach ($dataKelas as $item)
+                        <div class="list-group" v-for="item in form_kelas.dataKelas">
                             <span style="display: flex" class="row list-group-item list-group-item-action">
                                 <span class="col-md-8">
-                                    {{$item->kelas}}
+                                    @{{item.kelas}}
                                 </span>
                                 <span class="col-md-4">
-                                    <a href="javascript:;" v-on:click="get_dokter(item.id_dokter)"> <span
+                                    <a href="javascript:;" v-on:click="editkelas(item.id_kelas)"> <span
                                             class="icon-pencil"></span></a> |
                                     <a href="" v-on:click="hapus_dokter(item.id_dokter, $event)">
                                         <span class="icon-trash text-danger"></span>
                                     </a>
                                 </span>
                             </span>
-                            @endforeach
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -315,17 +325,25 @@
                     bangsal: '',
                 },
 
-                kelas: '',
-                dataKelas: '',
+                form_kelas: {
+                    id_kelas: '',
+                    kelas: '',
+                    fasilitas: '',
+                    dataKelas: '',
+                },
 
-                bangsal: '',
-                tingkat: '',
-                dataBangsal: '',
+                form_bangsal: {
+                    id_bangsal: '',
+                    bangsal: '',
+                    tingkat: '',
+                    dataBangsal: '',
+                },
 
                 dataTable: null,
                 data_kamar: [],
             },
             mounted: function () {
+                this.tampil_kelas();
                 this.tampil_kamar();
                 this.tampil_bangsal();
             },
@@ -365,6 +383,10 @@
                         .catch(err => {
 
                         })
+                    this.form_kamar.id_kamar = '';
+                    this.form_kamar.kamar = '';
+                    this.form_kamar.kelas = '';
+                    this.form_kamar.bangsal = '';
                     $('#exampleModalLabel').html("tambah kamar");
                     $('#submit_kamar').removeClass("collapse");
                     $('#edit_kamar').addClass("collapse");
@@ -452,26 +474,15 @@
                 },
 
                 // //// kelas
-
                 tampil_kelas: function () {
                     const self = this;
                     if (self.dataTable) {
-                        self.data_kelas = '';
-                        self.dataTable.destroy(); //digunakan agar bisa reinit table
+                        self.form_kelas.dataKelas = '';
                     }
-                    axios.get('/tampil_kelas').then(response => {
+                    axios.get('/dataKelas').then(response => {
                             self.isFirstDataLoaded = true;
                             if (response) {
-                                self.data_kelas = response.data;
-
-                                Vue.nextTick(function () {
-                                    // save a reference to the DataTable
-                                    self.dataTable = $('#tablekelas').DataTable({
-                                        "paging": true,
-                                        "info": false,
-                                        // etc
-                                    });
-                                });
+                                self.form_kelas.dataKelas = response.data;
                             } else {
                                 alert(response);
                             }
@@ -481,7 +492,9 @@
                         });
                 },
                 tambah_kelas: function () {
-                    $('#olahBangsalLabel').html("tambah kelas");
+                    this.form_kelas.kelas = '';
+                    this.form_kelas.fasilitas = '';
+                    $('#olahKelasLabel').html("tambah kelas");
                     $('#submit_kelas').removeClass("collapse");
                     $('#edit_kelas').addClass("collapse");
                     $('#hapus_kelas').addClass("collapse");
@@ -489,7 +502,7 @@
                 simpan_kelas: function () {
                     const self = this;
                     var data = new FormData();
-                    $.each(this.form_kelas, function (index, value) {
+                    $.each(self.form_kelas, function (index, value) {
                         data.append(index, value);
                     });
                     namakelas = $('#inputkelas').val();
@@ -498,7 +511,7 @@
                     axios.post('/simpan_kelas', data)
                         .then(resp => {
                             swal("sukses", resp.data.message, "success");
-                            $('#exampleModal').modal('hide');
+                            $('#olahkelas').modal('hide');
                             $('.modal-backdrop').remove();
                             this.tampil_kelas();
                         })
@@ -509,40 +522,36 @@
                 },
                 editkelas: function (id) {
                     const vm = this;
-                    $('#olahBangsalLabel').html("kelola kelas");
+                    $('#olahKelasLabel').html("kelola kelas");
                     $('#submit_kelas').addClass("collapse");
                     $('#edit_kelas').removeClass("collapse");
                     $('#hapus_kelas').removeClass("collapse");
-                    $('#exampleModal').modal('show');
-                    axios.post('ambil_kelas/' + id).then(
+                    $('#olahKelas').modal('show');
+                    axios.get('ambil_kelas/' + id).then(
                             Respon => {
-                                $('#inputkelas').val(Respon.data[0].nama_kelas);
-                                vm.form_kelas.id_kelas = Respon.data[0].id_kelas;
-                                vm.form_kelas.kelas = Respon.data[0].kelas;
-                                vm.form_kelas.bangsal = Respon.data[0].kelas;
+                                vm.form_kelas.id_kelas = Respon.data.id_kelas;
+                                vm.form_kelas.kelas = Respon.data.kelas;
+                                vm.form_kelas.fasilitas = Respon.data.fasilitas;
+                                vm.form_kelas.tingkat = Respon.data.lantai;
                             })
                         .catch(
                             err => {
                                 swal("Gagal tampil detail kelas!",
-                                    "hub administrator", "error");
+                                    err.response, "error");
                             }
                         );
 
                 },
                 edit_kelas: function () {
                     var data = new FormData;
-
-                    $.each(this.form_kelas, function (index, value) {
+                    var vm = this;
+                    $.each(vm.form_kelas, function (index, value) {
                         data.append(index, value);
                     });
-                    namakelas = $('#inputkelas').val();
-                    data.append('nama_kelas', namakelas);
-
-                    axios.post('/edit_kelas/' + this.id_kelas, data).then(Resp => {
-                            swal("Sukses!",
-                                Resp.data.message, "success");
-                            $('#exampleModal').modal('hide');
-                            this.tampil_kelas();
+                    axios.post('/edit_kelas/' + vm.form_kelas.id_kelas, data).then(Resp => {
+                            swal("Sukses!", Resp.data.message, "success");
+                            $('#olahkelas').modal('hide');
+                            vm.tampil_kelas();
                         })
                         .catch(
                             err => {
@@ -558,22 +567,22 @@
                         Respon => {
                             swal("Sukses!",
                                 Respon.data.message, "success");
-                            $('#exampleModal').modal('hide');
+                            $('#olahkelas').modal('hide');
                             this.tampil_kelas();
                         });
-                    $('#exampleModal').modal('hide');
+                    $('#olahkelas').modal('hide');
                 },
+
                 // //// bagsal
                 tampil_bangsal: function () {
                     const self = this;
                     if (self.dataTable) {
-                        self.dataBangsal = '';
-                        self.dataTable.destroy(); //digunakan agar bisa reinit table
+                        self.form_bangsal.dataBangsal = '';
                     }
                     axios.get('/dataBangsal').then(response => {
                             self.isFirstDataLoaded = true;
                             if (response) {
-                                self.dataBangsal = response.data;
+                                self.form_bangsal.dataBangsal = response.data;
                             } else {
                                 alert(response);
                             }
@@ -583,6 +592,9 @@
                         });
                 },
                 tambah_bangsal: function () {
+                    this.form_bangsal.id_bangsal = '';
+                    this.form_bangsal.bangsal = '';
+                    this.form_bangsal.tingkat = '';
                     $('#olahBangsalLabel').html("tambah bangsal");
                     $('#submit_bangsal').removeClass("collapse");
                     $('#edit_bangsal').addClass("collapse");
@@ -591,7 +603,7 @@
                 simpan_bangsal: function () {
                     const self = this;
                     var data = new FormData();
-                    $.each(this.form_bangsal, function (index, value) {
+                    $.each(self.form_bangsal, function (index, value) {
                         data.append(index, value);
                     });
                     namabangsal = $('#inputbangsal').val();
@@ -600,7 +612,7 @@
                     axios.post('/simpan_bangsal', data)
                         .then(resp => {
                             swal("sukses", resp.data.message, "success");
-                            $('#exampleModal').modal('hide');
+                            $('#olahBangsal').modal('hide');
                             $('.modal-backdrop').remove();
                             this.tampil_bangsal();
                         })
@@ -611,38 +623,36 @@
                 },
                 editbangsal: function (id) {
                     const vm = this;
-                    
+
                     $('#olahBangsalLabel').html("kelola bangsal");
                     $('#submit_bangsal').addClass("collapse");
                     $('#edit_bangsal').removeClass("collapse");
                     $('#hapus_bangsal').removeClass("collapse");
                     $('#olahBangsal').modal('show');
-                    axios.get('ambil_bangsal/'+ id).then(
+                    axios.get('ambil_bangsal/' + id).then(
                             Respon => {
-                                vm.bangsal = Respon.data.bangsal;
+                                vm.form_bangsal.id_bangsal = Respon.data.id_bangsal;
+                                vm.form_bangsal.bangsal = Respon.data.bangsal;
+                                vm.form_bangsal.tingkat = Respon.data.lantai;
                             })
                         .catch(
                             err => {
                                 swal("Gagal tampil detail bangsal!",
-                                    err.response , "error");
+                                    err.response, "error");
                             }
                         );
 
                 },
                 edit_bangsal: function () {
                     var data = new FormData;
-
-                    $.each(this.form_bangsal, function (index, value) {
+                    var vm = this;
+                    $.each(vm.form_bangsal, function (index, value) {
                         data.append(index, value);
                     });
-                    namabangsal = $('#inputbangsal').val();
-                    data.append('nama_bangsal', namabangsal);
-
-                    axios.post('/edit_bangsal/' + this.id_bangsal, data).then(Resp => {
-                            swal("Sukses!",
-                                Resp.data.message, "success");
-                            $('#exampleModal').modal('hide');
-                            this.tampil_bangsal();
+                    axios.post('/edit_bangsal/' + vm.form_bangsal.id_bangsal, data).then(Resp => {
+                            swal("Sukses!", Resp.data.message, "success");
+                            $('#olahBangsal').modal('hide');
+                            vm.tampil_bangsal();
                         })
                         .catch(
                             err => {
@@ -658,14 +668,11 @@
                         Respon => {
                             swal("Sukses!",
                                 Respon.data.message, "success");
-                            $('#exampleModal').modal('hide');
+                            $('#olahBangsal').modal('hide');
                             this.tampil_bangsal();
                         });
-                    $('#exampleModal').modal('hide');
+                    $('#olahBangsal').modal('hide');
                 },
-
-
-
             }
         })
 

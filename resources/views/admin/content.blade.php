@@ -551,3 +551,6 @@
             <!-- #/ container -->
 </div>
 @endsection
+@section('script')
+    <script src="{{asset('Componentadmin/js/dashboard/dashboard-1.js')}}"></script>
+@endsection

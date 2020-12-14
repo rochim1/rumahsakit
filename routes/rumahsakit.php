@@ -84,6 +84,15 @@ Route::group(['middleware' => 'authAdmin'], function () {
 
     Route::get('/dataBangsal', 'rscontroller@dataBangsal')->name('dataBangsal');
     Route::get('/ambil_bangsal/{id}', 'rscontroller@ambil_bangsal')->name('ambil_bangsal');
+    Route::post('/simpan_bangsal', 'rscontroller@simpan_bangsal')->name('simpan_bangsal');
+    Route::post('/edit_bangsal/{id}', 'rscontroller@edit_bangsal')->name('edit_bangsal');
+    Route::post('/hapus_bangsal/{id}', 'rscontroller@hapus_bangsal')->name('hapus_bangsal');
+
+    Route::get('/dataKelas', 'rscontroller@dataKelas')->name('dataKelas');
+    Route::get('/ambil_kelas/{id}', 'rscontroller@ambil_kelas')->name('ambil_kelas');
+    Route::post('/simpan_kelas', 'rscontroller@simpan_kelas')->name('simpan_kelas');
+    Route::post('/edit_kelas/{id}', 'rscontroller@edit_kelas')->name('edit_kelas');
+    Route::post('/hapus_kelas/{id}', 'rscontroller@hapus_kelas')->name('hapus_kelas');
     // Route::get('/bangsal', 'rscontroller@dataBangsal')->name('dataBangsal');
 
     // Route::get('/tampil_jabatan', 'rscontroller@dataJabatan_json')->name('tampil_jabatan');

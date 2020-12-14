@@ -48,8 +48,6 @@
    <script src="{{asset('Componentadmin/plugins/chartist/js/chartist.min.js')}}"></script>
    <script src="{{asset('Componentadmin/plugins/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js')}}">
    </script> --}}
-
-   <script src="{{asset('Componentadmin/js/dashboard/dashboard-1.js')}}"></script>
    @yield('script')
 
    </body>

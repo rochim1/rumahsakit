@@ -419,4 +419,63 @@ class rscontroller extends Controller
         $dataBangsal = DB::table('bangsal')->where('id_bangsal',$id)->first();
         return response()->json($dataBangsal);
     }
+
+    public function edit_bangsal(Request $request , $id){
+        DB::table('bangsal')->where('id_bangsal', $id)->update([
+            "bangsal" => $request->bangsal,
+        ]);
+        return response()->json(["status" => "success", "message" => "data berhasil ditambahkan"]);
+    }
+
+    public function hapus_bangsal($id)
+    {
+        DB::table('bangsal')->where('id_bangsal', $id)->delete();
+        return response()->json(["status" => "success", "message" => "data berhasil dihapus"]);
+    }
+
+    public function simpan_bangsal(Request $request)
+    {
+        DB::table('bangsal')->insert([
+            "bangsal" =>    $request->bangsal,
+        ]);
+        return response()->json(["status" => "success", "message" => "data berhasil ditambahkan"]);
+    }
+
+
+
+
+
+
+
+
+
+
+    public function ambil_kelas($id){
+        $datakelas = DB::table('kelas')->where('id_kelas',$id)->first();
+        return response()->json($datakelas);
+    }
+
+    public function edit_kelas(Request $request , $id){
+        DB::table('kelas')->where('id_kelas', $id)->update([
+            "kelas" => $request->kelas,
+            "lantai" => $request->tingkat,
+        ]);
+        return response()->json(["status" => "success", "message" => "data berhasil ditambahkan"]);
+    }
+
+    public function hapus_kelas($id)
+    {
+        DB::table('kelas')->where('id_kelas', $id)->delete();
+        return response()->json(["status" => "success", "message" => "data berhasil dihapus"]);
+    }
+
+    public function simpan_kelas(Request $request)
+    {
+        DB::table('kelas')->insert([
+            "kelas" =>    $request->kelas,
+            "fasilitas" =>    $request->fasilitas,
+            "lantai" =>     $request->tingkat,
+        ]);
+        return response()->json(["status" => "success", "message" => "data berhasil ditambahkan"]);
+    }
 }
