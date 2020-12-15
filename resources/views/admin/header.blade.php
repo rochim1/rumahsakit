@@ -373,9 +373,8 @@
                                 class="nav-text">Stock Obat</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="{{route('AllUsers')}}">seluruh pengguna</a></li>
-                            <li><a href="{{route('konsumen')}}">Konsumen</a></li>
-                            <li><a href="{{route('tampiladmin')}}">Admin</a></li>
+                            <li><a href="{{route('obat')}}">master obat</a></li>
+                            <li><a href="{{route('tambah_obat')}}">tambah obat</a></li>
                         </ul>
                     </li>
 

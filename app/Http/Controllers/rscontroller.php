@@ -133,6 +133,12 @@ class rscontroller extends Controller
         $dataKamar = DB::table('kamar')->select()->get();
         return response()->json($dataKamar);
     }
+
+    public function dataObat_json()
+    {
+        $dataObat = DB::table('obat')->select()->get();
+        return response()->json($dataObat);
+    }
     public function dataJabatan_json()
     {
         $dataJabatan = DB::table('jabatan')->select()->get();
@@ -441,15 +447,6 @@ class rscontroller extends Controller
         return response()->json(["status" => "success", "message" => "data berhasil ditambahkan"]);
     }
 
-
-
-
-
-
-
-
-
-
     public function ambil_kelas($id){
         $datakelas = DB::table('kelas')->where('id_kelas',$id)->first();
         return response()->json($datakelas);
@@ -477,5 +474,16 @@ class rscontroller extends Controller
             "lantai" =>     $request->tingkat,
         ]);
         return response()->json(["status" => "success", "message" => "data berhasil ditambahkan"]);
+    }
+
+    public function obat()
+    {
+        $dataObat = DB::table('obat')->select()->get();
+        return view('admin.obat.masterobat', compact('dataObat'));
+    }
+    public function tambah_obat()
+    {
+        $dataObat = DB::table('obat')->select()->get();
+        return view('admin.obat.tambahobat', compact('dataObat'));
     }
 }

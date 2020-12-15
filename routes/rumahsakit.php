@@ -27,7 +27,6 @@ Route::get('/daftarkelurahan/{id_kelurahan}', 'kota@getKelurahan');
 Route::get('/daftarkabupaten/{id_kabupaten}', 'kota@getKabupaten');
 Route::get('/daftarkecamatan/{id_kecamatan}', 'kota@getKecamatan');
 
-
 // route untuk todolist :
 Route::post('/todolist/create', 'todolistController@postCreate');
 Route::get('/todolist/list', 'todolistController@getList');
@@ -93,10 +92,11 @@ Route::group(['middleware' => 'authAdmin'], function () {
     Route::post('/simpan_kelas', 'rscontroller@simpan_kelas')->name('simpan_kelas');
     Route::post('/edit_kelas/{id}', 'rscontroller@edit_kelas')->name('edit_kelas');
     Route::post('/hapus_kelas/{id}', 'rscontroller@hapus_kelas')->name('hapus_kelas');
-    // Route::get('/bangsal', 'rscontroller@dataBangsal')->name('dataBangsal');
 
-    // Route::get('/tampil_jabatan', 'rscontroller@dataJabatan_json')->name('tampil_jabatan');
-    // Route::post('/ambil_jabatan/{id}', 'rscontroller@ambil_jabatan')->name('ambil_jabatan');
-    // Route::post('/edit_jabatan/{id}', 'rscontroller@edit_jabatan')->name('edit_jabatan');
-    // Route::post('/hapus_jabatan/{id}', 'rscontroller@hapus_jabatan')->name('hapus_jabatan');
+    Route::get('/obat', 'rscontroller@obat')->name('obat');
+    Route::get('/tambah_obat', 'rscontroller@tambah_obat')->name('tambah_obat');
+    Route::get('/tampil_obat', 'rscontroller@dataObat_json')->name('tampil_obat');
+
+
+
 });

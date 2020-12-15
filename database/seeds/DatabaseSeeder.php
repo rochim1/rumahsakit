@@ -13,14 +13,15 @@ class DatabaseSeeder extends Seeder
     {
         // mendefinisikan seeder yang akan dijalankan
         // user admin
-        $this->call(usersSeeder::class);
-        $this->call(pasien_seeder::class);
-        $this->call(spesialis::class);
-        $this->call(dokterSeed::class);
-        $this->call(jadwal_jamSeeder::class);
-        $this->call(jabatan::class);
-        $this->call(bangsal::class);
-        $this->call(kelas::class);
-        $this->call(kamar::class);
+        // $this->call(usersSeeder::class);
+        // $this->call(pasien_seeder::class);
+        // $this->call(spesialis::class);
+        // $this->call(dokterSeed::class);
+        // $this->call(jadwal_jamSeeder::class);
+        // $this->call(jabatan::class);
+        // $this->call(bangsal::class);
+        // $this->call(kelas::class);
+        // $this->call(kamar::class);
+        $this->call(obat::class);
     }
 }

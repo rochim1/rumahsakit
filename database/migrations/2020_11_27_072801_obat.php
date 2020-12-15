@@ -17,11 +17,12 @@ class Obat extends Migration
             $table->id('id_obat');
             $table->string('nama_obat');
             $table->string('kategori_obat');
-            $table->string('kadaluarsa')->nullable();
+            $table->date('kadaluarsa')->nullable();
             $table->string('satuan')->nullable();
-            $table->integer('harga_obat');
+            $table->float('harga_obat');
             $table->longText('deskripsi_obat')->nullable();
             $table->integer('stock');
+            $table->bigInteger('suplier')->nullable();
             $table->timestamp('add_at')->useCurrent();
         });
     }
