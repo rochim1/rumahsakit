@@ -19,7 +19,69 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <h4>daftar obat</h4>
+                        <div class="d-flex justify-content-between">
+                            <h4>daftar obat</h4>
+                            <a id="tambah_obat" v-on:click="tambah_obat" href="javascript();" data-placement="top"
+                                title="tambah obat" class="tambah" data-toggle="modal"
+                                data-target="#exampleModal"><span style="font-size: 20px; font-weight: bold"
+                                    class="icon-plus"></span></a>
+
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">tambah obat</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form v-on:submit.prevent class="row">
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>nama obat</label>
+                                                            <input v-model="form_obat.nama_obat" id="inputobat"
+                                                                class="form-control" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="form-group">
+                                                        <label>kategori</label>
+                                                        <select name="" class="form-control" id="">
+                                                            @foreach ($dataKategori as $item)
+                                                            <option value=""></option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>nama bangsal</label>
+
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Close</button>
+                                            <button id="submit_obat" type="button" v-on:click="simpan_obat"
+                                                class="btn btn-primary">tambah</button>
+                                            <button id="hapus_obat" type="button" v-on:click="hapus_obat"
+                                                class="collapse btn btn-danger"><span class="icon-trash"></span>
+                                                hapus</button>
+                                            <button id="edit_obat" type="button" v-on:click="edit_obat"
+                                                class="collapse btn btn-primary"><span class="icon-pencil"></span>
+                                                edit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table id="tableobat" class="table table-hover table-bordered zero-configuration">
                                 <thead>
@@ -46,12 +108,6 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h4>tambah obat</h4>
-
-                    </div>
-                </div>
                 <div class="card">
                     <div class="card-body">
                         <h4>tambah kategori</h4>

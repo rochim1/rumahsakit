@@ -16,9 +16,9 @@ class Obat extends Migration
         Schema::create('obat', function (Blueprint $table) {
             $table->id('id_obat');
             $table->string('nama_obat');
-            $table->string('kategori_obat');
+            $table->unsignedBigInteger('kategori_obat');
             $table->date('kadaluarsa')->nullable();
-            $table->string('satuan')->nullable();
+            $table->unsignedBigInteger('satuan')->nullable();
             $table->float('harga_obat');
             $table->longText('deskripsi_obat')->nullable();
             $table->integer('stock');

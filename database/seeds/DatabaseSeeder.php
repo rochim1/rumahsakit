@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(bangsal::class);
         // $this->call(kelas::class);
         // $this->call(kamar::class);
+        // $this->call(satuanobat::class);
+        $this->call(kategoriobat::class);
         $this->call(obat::class);
     }
 }
