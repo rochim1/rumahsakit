@@ -28,6 +28,9 @@
         .swal-text{
             text-align: center;
         }
+        button, .btn{
+            color: white;
+        }
     </style>
     @yield('style')
     @yield('uper_script')
@@ -326,7 +329,7 @@
                         <ul aria-expanded="false">
                             <li><a href="{{route('masterpasien')}}">master pasien</a></li>
                             <li><a href="{{route('regpasien')}}">registrasi pasien</a></li>
-                            <li><a href="{{route('tampiladmin')}}">appointment pasien</a></li>
+                            <li><a href="#">appointment pasien</a></li>
                             <li><a href="{{route('pasienterhapus')}}">deleted pasien</a></li>
                         </ul>
                     </li>
@@ -370,11 +373,12 @@
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                             <span class="iconify" data-icon="gg:pill" data-inline="false"></span> <span
-                                class="nav-text">Stock Obat</span>
+                                class="nav-text">Obat dan Tindakan</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('obat')}}">master obat</a></li>
                             <li><a href="{{route('tambah_obat')}}">tambah obat</a></li>
+                            <li><a href="{{route('tambah_obat')}}">tambah tindakan</a></li>
                         </ul>
                     </li>
 
@@ -415,6 +419,18 @@
                     <a class="has-arrow" href="javascript:void()" aria-expanded="false">
                         <span class="iconify" data-icon="medical-icon:i-care-staff-area" data-inline="false"></span>
                         <span class="nav-text">Pegawai</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('AllUsers')}}">pegawai medis</a></li>
+                        <li><a href="{{route('konsumen')}}">pegawai non-medis</a></li>
+                        <li><a href="{{route('tampiladmin')}}">Admin</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <span class="iconify" data-icon="medical-icon:i-care-staff-area" data-inline="false"></span>
+                        <span class="nav-text">Suplier</span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{route('AllUsers')}}">pegawai medis</a></li>

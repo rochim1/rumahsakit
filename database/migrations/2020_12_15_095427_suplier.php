@@ -17,7 +17,7 @@ class Suplier extends Migration
             $table->bigIncrements('id_suplier');
             $table->string('nama_suplier');
             $table->string('telp_suplier')->nullable();
-            $table->('email_suplier')->unique()->nullable();;
+            $table->string('email_suplier')->unique()->nullable();
             $table->string('alamat_suplier')->nullable();
             $table->timestamps();
         });

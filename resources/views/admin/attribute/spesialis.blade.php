@@ -265,7 +265,7 @@
                     });
             },
             tambah_spesialis: function () {
-                $('#inputSpesialis').val('');
+                this.spesialis = '';
                 $('#exampleModalLabel').html("tambah spesialis");
                 $('#submit_spesialis').removeClass("collapse");
                 $('#edit_spesialis').addClass("collapse");
@@ -365,7 +365,8 @@
                     });
             },
             tambah_jabatan: function () {
-                $('#inputjabatan').val('');
+                // $('#inputjabatan').val('');
+                this.jabatan = '';
                 $('#exampleModalLabel1').html("tambah jabatan");
                 $('#submit_jabatan').removeClass("collapse");
                 $('#edit_jabatan').addClass("collapse");

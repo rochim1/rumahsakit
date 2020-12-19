@@ -96,7 +96,20 @@ Route::group(['middleware' => 'authAdmin'], function () {
     Route::get('/obat', 'rscontroller@obat')->name('obat');
     Route::get('/tambah_obat', 'rscontroller@tambah_obat')->name('tambah_obat');
     Route::get('/tampil_obat', 'rscontroller@dataObat_json')->name('tampil_obat');
+    Route::post('/ambil_obat/{id}', 'rscontroller@ambil_obat')->name('ambil_obat');
+    Route::post('/edit_obat/{id}', 'rscontroller@edit_obat')->name('edit_obat');
+    Route::post('/simpan_obat', 'rscontroller@simpan_obat')->name('simpan_obat');
+    Route::post('/hapus_obat/{id}', 'rscontroller@hapus_obat')->name('hapus_obat');
 
+    Route::get('/tampil_kategoriobat', 'rscontroller@kategoriobat')->name('tampil_kategoriobat');
+    Route::post('/ambil_kategori/{id}', 'rscontroller@ambil_kategori')->name('ambil_kategori');
+    Route::post('/edit_kategori/{id}', 'rscontroller@edit_kategori')->name('edit_kategori');
+    Route::post('/simpan_kategori', 'rscontroller@simpan_kategori')->name('simpan_kategori');
+    Route::post('/hapus_kategori/{id}', 'rscontroller@hapus_kategori')->name('hapus_kategori');
 
-
+    Route::get('/tampil_satuanobat', 'rscontroller@satuanobat')->name('tampil_satuanobat');
+    Route::post('/ambil_satuan/{id}', 'rscontroller@ambil_satuan')->name('ambil_satuan');
+    Route::post('/edit_satuan/{id}', 'rscontroller@edit_satuan')->name('edit_satuan');
+    Route::post('/simpan_satuan', 'rscontroller@simpan_satuan')->name('simpan_satuan');
+    Route::post('/hapus_satuan/{id}', 'rscontroller@hapus_satuan')->name('hapus_satuan');
 });

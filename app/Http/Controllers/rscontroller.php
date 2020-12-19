@@ -127,6 +127,17 @@ class rscontroller extends Controller
         $dataSpesialis = DB::table('spesialis')->select()->get();
         return response()->json($dataSpesialis);
     }
+    public function kategoriobat()
+    {
+        $kategoriobat = DB::table('kategoriobat')->select()->get();
+        return response()->json($kategoriobat);
+    }
+
+    public function satuanobat()
+    {
+        $satuan = DB::table('satuan_obat')->select()->get();
+        return response()->json($satuan);
+    }
 
     public function dataKamar_json()
     {
@@ -137,7 +148,8 @@ class rscontroller extends Controller
     public function dataObat_json()
     {
         $dataObat = DB::table('obat')->select()->get();
-        return response()->json($dataObat);
+        // return response()->json($dataObat);
+        return $dataObat;
     }
     public function dataJabatan_json()
     {
@@ -454,8 +466,9 @@ class rscontroller extends Controller
 
     public function edit_kelas(Request $request , $id){
         DB::table('kelas')->where('id_kelas', $id)->update([
-            "kelas" => $request->kelas,
-            "lantai" => $request->tingkat,
+            "kelas" =>    $request->kelas,
+            "fasilitas" =>    $request->fasilitas,
+            "harga" =>    $request->harga,
         ]);
         return response()->json(["status" => "success", "message" => "data berhasil ditambahkan"]);
     }
@@ -471,7 +484,7 @@ class rscontroller extends Controller
         DB::table('kelas')->insert([
             "kelas" =>    $request->kelas,
             "fasilitas" =>    $request->fasilitas,
-            "lantai" =>     $request->tingkat,
+            "harga" =>    $request->harga,
         ]);
         return response()->json(["status" => "success", "message" => "data berhasil ditambahkan"]);
     }
@@ -479,11 +492,115 @@ class rscontroller extends Controller
     public function obat()
     {
         $dataObat = DB::table('obat')->select()->get();
-        return view('admin.obat.masterobat', compact('dataObat'));
+        $dataKategori = DB::table('kategoriobat')->select()->get();
+        $dataSatuan = DB::table('satuan_obat')->select()->get();
+        return view('admin.obat.masterobat', compact('dataObat', 'dataKategori','dataSatuan'));
     }
     public function tambah_obat()
     {
+        $dataKategori = DB::table('kategoriobat')->select()->get();
+        $dataSatuan = DB::table('satuan_obat')->select()->get();
         $dataObat = DB::table('obat')->select()->get();
-        return view('admin.obat.tambahobat', compact('dataObat'));
+        return view('admin.obat.tambahobat', compact('dataObat', 'dataKategori','dataSatuan'));
     }
+    public function ambil_obat($id)
+    {
+        $dataobat = DB::table('obat')->where('id_obat', $id)->first();
+        return response()->json($dataobat);
+    }
+    public function edit_obat(Request $request , $id)
+    {
+        DB::table('obat')->where('id_obat', $id)->insert([
+            'nama_obat' => $request->nama_obat,
+            'kategori_obat' => $request->kategori,
+            'kadaluarsa' => $request->kadaluarsa,
+            'satuan' => $request->satuan,
+            'harga_obat' => $request->harga_obat,
+            'deskripsi_obat' => $request->deskripsi_obat,
+            'stock' => $request->stock,
+            "updated_at" => Carbon::now(),
+        ]);
+        return response()->json(["status" => "success", "message" => "data obat berhasil diupdate"]);
+    }
+    public function simpan_obat(Request $request)
+    {
+        DB::table('obat')->insert([
+            'nama_obat' => $request->nama_obat,
+            'kategori_obat' => $request->kategori,
+            'kadaluarsa' => $request->kadaluarsa,
+            'satuan' => $request->satuan,
+            'harga_obat' => $request->harga_obat,
+            'deskripsi_obat' => $request->deskripsi_obat,
+            'stock' => $request->stock,
+            "created_at" => Carbon::now(),
+        ]);
+        return response()->json(["status" => "success", "message" => "data obat berhasil ditambahkan"]);
+    }
+    public function hapus_obat($id)
+    {
+        DB::table('obat')->where('id_obat', $id)->delete();
+        return response()->json(["status" => "success", "message" => "data berhasil dihapus"]);
+    }
+
+
+    public function ambil_kategori($id)
+    {
+        $datakategori = DB::table('kategoriobat')->where('id_katObat', $id)->first();
+        return response()->json($datakategori);
+    }
+    public function edit_kategori(Request $request, $id)
+    {
+        DB::table('kategoriobat')->where('id_katObat', $id)->insert([
+            'nama_kategori' => $request->nama_kategori,
+            'keterangan' => $request->deskripsi_kategori,
+            "updated_at" => Carbon::now(),
+        ]);
+        return response()->json(["status" => "success", "message" => "data kategori berhasil diupdate"]);
+    }
+    public function simpan_kategori(Request $request)
+    {
+        DB::table('kategoriobat')->insert([
+            'nama_kategori' => $request->kategori,
+            'keterangan' => $request->deskripsi_kategori,
+            "created_at" => Carbon::now(),
+        ]);
+        return response()->json(["status" => "success", "message" => "data kategori berhasil ditambahkan"]);
+    }
+
+    public function hapus_kategori($id)
+    {
+        DB::table('kategoriobat')->where('id_katObat', $id)->delete();
+        return response()->json(["status" => "success", "message" => "data berhasil dihapus"]);
+    }
+
+    public function ambil_satuan($id)
+    {
+        $datasatuan = DB::table('satuan_obat')->where('id_katObat', $id)->first();
+        return response()->json($datasatuan);
+    }
+    public function edit_satuan(Request $request, $id)
+    {
+        DB::table('satuan_obat')->where('id_katObat', $id)->insert([
+            'nama_satuan' => $request->nama_satuan,
+            'keterangan' => $request->deskripsi_satuan,
+            "updated_at" => Carbon::now(),
+        ]);
+        return response()->json(["status" => "success", "message" => "data satuan berhasil diupdate"]);
+    }
+    public function simpan_satuan(Request $request)
+    {
+        DB::table('satuan_obat')->insert([
+            'nama_satuan' => $request->satuan,
+            'keterangan' => $request->deskripsi_satuan,
+            "created_at" => Carbon::now(),
+        ]);
+        return response()->json(["status" => "success", "message" => "data satuan berhasil ditambahkan"]);
+    }
+
+    public function hapus_satuan($id)
+    {
+        DB::table('satuan_obat')->where('id_katObat', $id)->delete();
+        return response()->json(["status" => "success", "message" => "data berhasil dihapus"]);
+    }
+
 }

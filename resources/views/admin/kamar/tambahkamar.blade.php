@@ -148,7 +148,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="tes" v-on:click.stop="" name="detail_kamar" class="btn btn-primary btn-sm">detail</a>
+                                        <a href="tes" v-on:click.stop="" name="detail_kamar"
+                                            class="btn btn-primary btn-sm">detail</a>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -187,7 +188,7 @@
 
                                                 <div class="col-md-4 form-group">
                                                     <label>lantai</label>
-                                                    <input id="inputtingkat" v-model="form_bangsal.tingkat" type="text"
+                                                    <input id="inputtingkat" v-model="form_bangsal.tingkat" type="number"
                                                         class="form-control" placeholder="">
                                                 </div>
                                             </form>
@@ -197,7 +198,8 @@
                                                 data-dismiss="modal">Close</button>
                                             <button id="submit_bangsal" type="button" v-on:click="simpan_bangsal"
                                                 class="btn btn-primary">tambah</button>
-                                            <button id="hapus_bangsal" type="button" v-on:click="hapus_bangsal"
+                                            <button id="hapus_bangsal" type="button"
+                                                v-on:click="hapus_bangsal(form_bangsal.id_bangsal)"
                                                 class="collapse btn btn-danger"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_bangsal" type="button" v-on:click="edit_bangsal"
@@ -217,7 +219,7 @@
                                 <span class="col-md-4">
                                     <a href="javascript:;" v-on:click="editbangsal(item.id_bangsal)"> <span
                                             class="icon-pencil"></span></a> |
-                                    <a href="" v-on:click="hapus_dokter(item.id_dokter, $event)">
+                                    <a href="javascript:;" v-on:click="hapus_bangsal(item.id_bangsal)">
                                         <span class="icon-trash text-danger"></span>
                                     </a>
                                 </span>
@@ -238,7 +240,7 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="olahKelasLabel">tambah kamar</h5>
+                                            <h5 class="modal-title" id="olahKelasLabel">tambah kelas</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -249,13 +251,18 @@
                                                     <label>nama kelas</label>
                                                     <input id="inputkelas" v-model="form_kelas.kelas" type="text"
                                                         class="form-control" placeholder="">
-                                                    <small id="emailHelp" class="form-text text-muted">semoga dengan ini
-                                                        layanan kesehatan dirumah sakit menjadi lebih baik.</small>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>harga kelas</label>
+                                                    <input id="inputharga" v-model="form_kelas.harga" type="number"
+                                                        class="form-control" placeholder="">
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label>fasilitas</label>
-                                                    <textarea class="form-control" v-model="form_kelas.fasilitas" name="fasilitas">
+                                                    <textarea class="form-control" v-model="form_kelas.fasilitas"
+                                                        name="fasilitas">
 
                                                     </textarea>
                                                 </div>
@@ -266,7 +273,8 @@
                                                 data-dismiss="modal">Close</button>
                                             <button id="submit_kelas" type="button" v-on:click="simpan_kelas"
                                                 class="btn btn-primary">tambah</button>
-                                            <button id="hapus_kelas" type="button" v-on:click="hapus_kelas"
+                                            <button id="hapus_kelas" type="button"
+                                                v-on:click="hapus_kelas(form_kelas.id_kelas)"
                                                 class="collapse btn btn-danger"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_kelas" type="button" v-on:click="edit_kelas"
@@ -286,7 +294,7 @@
                                 <span class="col-md-4">
                                     <a href="javascript:;" v-on:click="editkelas(item.id_kelas)"> <span
                                             class="icon-pencil"></span></a> |
-                                    <a href="" v-on:click="hapus_dokter(item.id_dokter, $event)">
+                                    <a href="javascript:;" v-on:click="hapus_kelas(item.id_kelas)">
                                         <span class="icon-trash text-danger"></span>
                                     </a>
                                 </span>
@@ -297,388 +305,435 @@
                 </div>
             </div>
         </div>
-        </div>
-        <!-- #/ container -->
     </div>
-    @endsection
-    @section('script')
-    {{-- model lama --}}
-    {{-- <script src="{{asset('Componentadmin/plugins/tables/js/jquery.dataTables.min.js')}}"></script> --}}
-    <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="{{asset('Componentadmin/plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
-    {{-- <script src="{{asset('Componentadmin/plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
-    --}}
-    {{-- model lama --}}
-    {{-- <script>
+    <!-- #/ container -->
+</div>
+@endsection
+@section('script')
+{{-- model lama --}}
+{{-- <script src="{{asset('Componentadmin/plugins/tables/js/jquery.dataTables.min.js')}}"></script> --}}
+<script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="{{asset('Componentadmin/plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
+{{-- <script src="{{asset('Componentadmin/plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
+--}}
+{{-- model lama --}}
+{{-- <script>
     $(document).ready( function () {
     $('#tableKamar').DataTable();
 } );
 </script> --}}
-    <script>
-        let vue = new Vue({
-            el: "#kamar",
-            data: {
-                isFirstDataLoaded: false,
-                form_kamar: {
-                    id_kamar: '',
-                    kamar: '',
-                    kelas: '',
-                    bangsal: '',
-                },
-
-                form_kelas: {
-                    id_kelas: '',
-                    kelas: '',
-                    fasilitas: '',
-                    dataKelas: '',
-                },
-
-                form_bangsal: {
-                    id_bangsal: '',
-                    bangsal: '',
-                    tingkat: '',
-                    dataBangsal: '',
-                },
-
-                dataTable: null,
-                data_kamar: [],
+<script>
+    let vue = new Vue({
+        el: "#kamar",
+        data: {
+            isFirstDataLoaded: false,
+            form_kamar: {
+                id_kamar: '',
+                kamar: '',
+                kelas: '',
+                bangsal: '',
             },
-            mounted: function () {
-                this.tampil_kelas();
-                this.tampil_kamar();
-                this.tampil_bangsal();
-            },
-            methods: {
-                tampil_kamar: function () {
-                    const self = this;
-                    if (self.dataTable) {
-                        self.data_kamar = '';
-                        self.dataTable.destroy(); //digunakan agar bisa reinit table
-                    }
-                    axios.get('/tampil_kamar').then(response => {
-                            self.isFirstDataLoaded = true;
-                            if (response) {
-                                self.data_kamar = response.data;
 
-                                Vue.nextTick(function () {
-                                    // save a reference to the DataTable
-                                    self.dataTable = $('#tableKamar').DataTable({
-                                        "paging": true,
-                                        "info": false,
-                                        // etc
-                                    });
+            form_kelas: {
+                id_kelas: '',
+                kelas: '',
+                fasilitas: '',
+                harga: '',
+                dataKelas: '',
+            },
+
+            form_bangsal: {
+                id_bangsal: '',
+                bangsal: '',
+                tingkat: '',
+                dataBangsal: '',
+            },
+
+            dataTable: null,
+            data_kamar: [],
+        },
+        mounted: function () {
+            this.tampil_kelas();
+            this.tampil_kamar();
+            this.tampil_bangsal();
+        },
+        methods: {
+            tampil_kamar: function () {
+                const self = this;
+                if (self.dataTable) {
+                    self.data_kamar = '';
+                    self.dataTable.destroy(); //digunakan agar bisa reinit table
+                }
+                axios.get('/tampil_kamar').then(response => {
+                        self.isFirstDataLoaded = true;
+                        if (response) {
+                            self.data_kamar = response.data;
+
+                            Vue.nextTick(function () {
+                                // save a reference to the DataTable
+                                self.dataTable = $('#tableKamar').DataTable({
+                                    "paging": true,
+                                    "info": false,
+                                    // etc
                                 });
-                            } else {
-                                alert(response);
-                            }
-                        })
-                        .catch(err => {
-                            swal("gagal", err.message, "error");
-                        });
-                },
-                tambah_kamar: function () {
-                    axios.get('/prever_namakamar').then(resp => {
-                            console.log(resp.data);
-                            this.form_kamar.kamar = resp.data;
-                        })
-                        .catch(err => {
-
-                        })
-                    this.form_kamar.id_kamar = '';
-                    this.form_kamar.kamar = '';
-                    this.form_kamar.kelas = '';
-                    this.form_kamar.bangsal = '';
-                    $('#exampleModalLabel').html("tambah kamar");
-                    $('#submit_kamar').removeClass("collapse");
-                    $('#edit_kamar').addClass("collapse");
-                    $('#hapus_kamar').addClass("collapse");
-                },
-                simpan_kamar: function () {
-                    const self = this;
-                    var data = new FormData();
-                    $.each(this.form_kamar, function (index, value) {
-                        data.append(index, value);
+                            });
+                        } else {
+                            alert(response);
+                        }
+                    })
+                    .catch(err => {
+                        swal("gagal", err.message, "error");
                     });
-                    namakamar = $('#inputkamar').val();
-                    data.append('nama_kamar', namakamar);
+            },
+            tambah_kamar: function () {
+                const vm = this;
+                axios.get('/prever_namakamar').then(resp => {
+                        console.log(resp.data);
+                        this.form_kamar.kamar = resp.data;
+                    })
+                    .catch(err => {
 
-                    axios.post('/simpan_kamar', data)
-                        .then(resp => {
-                            swal("sukses", resp.data.message, "success");
-                            $('#exampleModal').modal('hide');
-                            $('.modal-backdrop').remove();
-                            this.tampil_kamar();
-                        })
-                        .catch(err => {
-                            console.log(err.response.data);
-                            swal("gagal", err.response.data.message, "error");
-                        });
-                },
-                editKamar: function (id) {
-
-                    const vm = this;
-                    vm.form_kamar.id_kamar = id;
-                    $('#exampleModalLabel').html("kelola kamar");
-                    $('#submit_kamar').addClass("collapse");
-                    $('#edit_kamar').removeClass("collapse");
-                    $('#hapus_kamar').removeClass("collapse");
-                    $('#exampleModal').modal('show');
-                    axios.post('ambil_kamar/' + id).then(
-                            Respon => {
-
-                                vm.form_kamar.id_kamar = Respon.data.id_kamar;
-                                vm.form_kamar.kamar = Respon.data.nama_kamar;
-                                vm.form_kamar.kelas = Respon.data.kelas; //berisi id kelas
-                                vm.form_kamar.bangsal = Respon.data.bangsal; //berisi id bangsal
-                            })
-                        .catch(
-                            err => {
-                                swal("Gagal tampil detail kamar!",
-                                    "hub administrator", "error");
-                            }
-                        );
-
-                },
-                edit_kamar: function () {
-                    var data = new FormData;
-
-                    $.each(this.form_kamar, function (index, value) {
-                        data.append(index, value);
                     });
-                    namakamar = $('#inputkamar').val();
-                    data.append('nama_kamar', namakamar);
+                $.each(vm.form_kamar, function (index, value) {
+                    vm.form_kamar[index] = '';
+                });
+                $('#exampleModalLabel').html("tambah kamar");
+                $('#submit_kamar').removeClass("collapse");
+                $('#edit_kamar').addClass("collapse");
+                $('#hapus_kamar').addClass("collapse");
+            },
+            simpan_kamar: function () {
+                const self = this;
+                var data = new FormData();
+                $.each(this.form_kamar, function (index, value) {
+                    data.append(index, value);
+                });
+                namakamar = $('#inputkamar').val();
+                data.append('nama_kamar', namakamar);
 
-                    axios.post('/edit_kamar/' + this.form_kamar.id_kamar, data).then(Resp => {
-                            swal("Sukses!",
-                                Resp.data.message, "success");
-                            $('#exampleModal').modal('hide');
-                            this.tampil_kamar();
-                        })
-                        .catch(
-                            err => {
-                                swal("Gagal!",
-                                    err.response.data.message, "error");
-                            }
-                        );
+                axios.post('/simpan_kamar', data)
+                    .then(resp => {
+                        swal("sukses", resp.data.message, "success");
+                        $('#exampleModal').modal('hide');
+                        $('.modal-backdrop').remove();
+                        this.tampil_kamar();
+                    })
+                    .catch(err => {
+                        console.log(err.response.data);
+                        swal("gagal", err.response.data.message, "error");
+                    });
+            },
+            editKamar: function (id) {
 
-                },
-                hapus_kamar: function () {
-                    const self = this;
-                    axios.post('hapus_kamar/' + this.form_kamar.id_kamar).then(
+                const vm = this;
+                vm.form_kamar.id_kamar = id;
+                $('#exampleModalLabel').html("kelola kamar");
+                $('#submit_kamar').addClass("collapse");
+                $('#edit_kamar').removeClass("collapse");
+                $('#hapus_kamar').removeClass("collapse");
+                $('#exampleModal').modal('show');
+                axios.post('ambil_kamar/' + id).then(
                         Respon => {
-                            swal("Sukses!",
-                                Respon.data.message, "success");
-                            $('#exampleModal').modal('hide');
-                            this.tampil_kamar();
-                        });
-                    $('#exampleModal').modal('hide');
-                },
 
-                // //// kelas
-                tampil_kelas: function () {
-                    const self = this;
-                    if (self.dataTable) {
-                        self.form_kelas.dataKelas = '';
-                    }
-                    axios.get('/dataKelas').then(response => {
-                            self.isFirstDataLoaded = true;
-                            if (response) {
-                                self.form_kelas.dataKelas = response.data;
-                            } else {
-                                alert(response);
-                            }
+                            vm.form_kamar.id_kamar = Respon.data.id_kamar;
+                            vm.form_kamar.kamar = Respon.data.nama_kamar;
+                            vm.form_kamar.kelas = Respon.data.kelas; //berisi id kelas
+                            vm.form_kamar.bangsal = Respon.data.bangsal; //berisi id bangsal
                         })
-                        .catch(err => {
-                            swal("gagal", err.message, "error");
-                        });
-                },
-                tambah_kelas: function () {
-                    this.form_kelas.kelas = '';
-                    this.form_kelas.fasilitas = '';
-                    $('#olahKelasLabel').html("tambah kelas");
-                    $('#submit_kelas').removeClass("collapse");
-                    $('#edit_kelas').addClass("collapse");
-                    $('#hapus_kelas').addClass("collapse");
-                },
-                simpan_kelas: function () {
-                    const self = this;
-                    var data = new FormData();
-                    $.each(self.form_kelas, function (index, value) {
-                        data.append(index, value);
+                    .catch(
+                        err => {
+                            swal("Gagal tampil detail kamar!",
+                                "hub administrator", "error");
+                        }
+                    );
+
+            },
+            edit_kamar: function () {
+                var data = new FormData;
+
+                $.each(this.form_kamar, function (index, value) {
+                    data.append(index, value);
+                });
+                namakamar = $('#inputkamar').val();
+                data.append('nama_kamar', namakamar);
+
+                axios.post('/edit_kamar/' + this.form_kamar.id_kamar, data).then(Resp => {
+                        swal("Sukses!",
+                            Resp.data.message, "success");
+                        $('#exampleModal').modal('hide');
+                        this.tampil_kamar();
+                    })
+                    .catch(
+                        err => {
+                            swal("Gagal!",
+                                err.response.data.message, "error");
+                        }
+                    );
+
+            },
+            hapus_kamar: function () {
+                swal("yakin anda akan menghapus", {
+                        buttons: {
+                            cancel: "batal",
+                            hapus: true,
+                        },
+                    })
+                    .then((value) => {
+                        switch (value) {
+                            case "hapus":
+                                const self = this;
+                                axios.post('hapus_kamar/' + this.form_kamar.id_kamar).then(
+                                    Respon => {
+                                        swal("Sukses!",
+                                            Respon.data.message, "success");
+                                        $('#exampleModal').modal('hide');
+                                        this.tampil_kamar();
+                                    });
+                                $('#exampleModal').modal('hide');
+                                break;
+                            default:
+                                return 0;
+                        }
+
                     });
-                    namakelas = $('#inputkelas').val();
-                    data.append('nama_kelas', namakelas);
 
-                    axios.post('/simpan_kelas', data)
-                        .then(resp => {
-                            swal("sukses", resp.data.message, "success");
-                            $('#olahkelas').modal('hide');
-                            $('.modal-backdrop').remove();
-                            this.tampil_kelas();
-                        })
-                        .catch(err => {
-                            console.log(err.response.data);
-                            swal("gagal", err.response.data.message, "error");
-                        });
-                },
-                editkelas: function (id) {
-                    const vm = this;
-                    $('#olahKelasLabel').html("kelola kelas");
-                    $('#submit_kelas').addClass("collapse");
-                    $('#edit_kelas').removeClass("collapse");
-                    $('#hapus_kelas').removeClass("collapse");
-                    $('#olahKelas').modal('show');
-                    axios.get('ambil_kelas/' + id).then(
-                            Respon => {
-                                vm.form_kelas.id_kelas = Respon.data.id_kelas;
-                                vm.form_kelas.kelas = Respon.data.kelas;
-                                vm.form_kelas.fasilitas = Respon.data.fasilitas;
-                                vm.form_kelas.tingkat = Respon.data.lantai;
-                            })
-                        .catch(
-                            err => {
-                                swal("Gagal tampil detail kelas!",
-                                    err.response, "error");
-                            }
-                        );
+            },
 
-                },
-                edit_kelas: function () {
-                    var data = new FormData;
-                    var vm = this;
-                    $.each(vm.form_kelas, function (index, value) {
-                        data.append(index, value);
+            // //// kelas
+            tampil_kelas: function () {
+                const self = this;
+                if (self.dataTable) {
+                    self.form_kelas.dataKelas = '';
+                }
+                axios.get('/dataKelas').then(response => {
+                        self.isFirstDataLoaded = true;
+                        if (response) {
+                            self.form_kelas.dataKelas = response.data;
+                        } else {
+                            alert(response);
+                        }
+                    })
+                    .catch(err => {
+                        swal("gagal", err.message, "error");
                     });
-                    axios.post('/edit_kelas/' + vm.form_kelas.id_kelas, data).then(Resp => {
-                            swal("Sukses!", Resp.data.message, "success");
-                            $('#olahkelas').modal('hide');
-                            vm.tampil_kelas();
-                        })
-                        .catch(
-                            err => {
-                                swal("Gagal!",
-                                    err.response.data.message, "error");
-                            }
-                        );
+            },
+            tambah_kelas: function () {
+                this.form_kelas.kelas = '';
+                this.form_kelas.fasilitas = '';
+                $('#olahKelasLabel').html("tambah kelas");
+                $('#submit_kelas').removeClass("collapse");
+                $('#edit_kelas').addClass("collapse");
+                $('#hapus_kelas').addClass("collapse");
+            },
+            simpan_kelas: function () {
+                const self = this;
+                var data = new FormData();
+                $.each(self.form_kelas, function (index, value) {
+                    data.append(index, value);
+                });
+                namakelas = $('#inputkelas').val();
+                data.append('nama_kelas', namakelas);
 
-                },
-                hapus_kelas: function () {
-                    const self = this;
-                    axios.post('hapus_kelas/' + this.form_kelas.id_kelas).then(
+                axios.post('/simpan_kelas', data)
+                    .then(resp => {
+                        swal("sukses", resp.data.message, "success");
+                        $('#olahKelas').modal('hide');
+                        $('.modal-backdrop').remove();
+                        this.tampil_kelas();
+                    })
+                    .catch(err => {
+                        console.log(err.response.data);
+                        swal("gagal", err.response.data.message, "error");
+                    });
+            },
+            editkelas: function (id) {
+                const vm = this;
+                $('#olahKelasLabel').html("kelola kelas");
+                $('#submit_kelas').addClass("collapse");
+                $('#edit_kelas').removeClass("collapse");
+                $('#hapus_kelas').removeClass("collapse");
+                $('#olahKelas').modal('show');
+                axios.get('ambil_kelas/' + id).then(
                         Respon => {
-                            swal("Sukses!",
-                                Respon.data.message, "success");
-                            $('#olahkelas').modal('hide');
-                            this.tampil_kelas();
-                        });
-                    $('#olahkelas').modal('hide');
-                },
-
-                // //// bagsal
-                tampil_bangsal: function () {
-                    const self = this;
-                    if (self.dataTable) {
-                        self.form_bangsal.dataBangsal = '';
-                    }
-                    axios.get('/dataBangsal').then(response => {
-                            self.isFirstDataLoaded = true;
-                            if (response) {
-                                self.form_bangsal.dataBangsal = response.data;
-                            } else {
-                                alert(response);
-                            }
+                            vm.form_kelas.id_kelas = Respon.data.id_kelas;
+                            vm.form_kelas.kelas = Respon.data.kelas;
+                            vm.form_kelas.fasilitas = Respon.data.fasilitas;
+                            vm.form_kelas.harga = Respon.data.harga;
                         })
-                        .catch(err => {
-                            swal("gagal", err.message, "error");
-                        });
-                },
-                tambah_bangsal: function () {
-                    this.form_bangsal.id_bangsal = '';
-                    this.form_bangsal.bangsal = '';
-                    this.form_bangsal.tingkat = '';
-                    $('#olahBangsalLabel').html("tambah bangsal");
-                    $('#submit_bangsal').removeClass("collapse");
-                    $('#edit_bangsal').addClass("collapse");
-                    $('#hapus_bangsal').addClass("collapse");
-                },
-                simpan_bangsal: function () {
-                    const self = this;
-                    var data = new FormData();
-                    $.each(self.form_bangsal, function (index, value) {
-                        data.append(index, value);
+                    .catch(
+                        err => {
+                            swal("Gagal tampil detail kelas!",
+                                err.response, "error");
+                        }
+                    );
+
+            },
+            edit_kelas: function () {
+                var data = new FormData;
+                var vm = this;
+                $.each(vm.form_kelas, function (index, value) {
+                    data.append(index, value);
+                });
+                axios.post('/edit_kelas/' + vm.form_kelas.id_kelas, data).then(Resp => {
+                        swal("Sukses!", Resp.data.message, "success");
+                        $('#olahKelas').modal('hide');
+                        vm.tampil_kelas();
+                    })
+                    .catch(
+                        err => {
+                            swal("Gagal!",
+                                err.response.data.message, "error");
+                        }
+                    );
+
+            },
+            hapus_kelas: function (id) {
+                swal("yakin anda akan menghapus", {
+                        buttons: {
+                            cancel: "batal",
+                            hapus: true,
+                        },
+                    })
+                    .then((value) => {
+                        switch (value) {
+                            case "hapus":
+                                const self = this;
+                                axios.post('hapus_kelas/' + id).then(
+                                    Respon => {
+                                        swal("Sukses!",
+                                            Respon.data.message, "success");
+                                        $('#olahKelas').modal('hide');
+                                        this.tampil_kelas();
+                                    });
+                                $('#olahKelas').modal('hide');
+                                break;
+                            default:
+                                return 0;
+                        }
+
                     });
-                    namabangsal = $('#inputbangsal').val();
-                    data.append('nama_bangsal', namabangsal);
+            },
 
-                    axios.post('/simpan_bangsal', data)
-                        .then(resp => {
-                            swal("sukses", resp.data.message, "success");
-                            $('#olahBangsal').modal('hide');
-                            $('.modal-backdrop').remove();
-                            this.tampil_bangsal();
-                        })
-                        .catch(err => {
-                            console.log(err.response.data);
-                            swal("gagal", err.response.data.message, "error");
-                        });
-                },
-                editbangsal: function (id) {
-                    const vm = this;
-
-                    $('#olahBangsalLabel').html("kelola bangsal");
-                    $('#submit_bangsal').addClass("collapse");
-                    $('#edit_bangsal').removeClass("collapse");
-                    $('#hapus_bangsal').removeClass("collapse");
-                    $('#olahBangsal').modal('show');
-                    axios.get('ambil_bangsal/' + id).then(
-                            Respon => {
-                                vm.form_bangsal.id_bangsal = Respon.data.id_bangsal;
-                                vm.form_bangsal.bangsal = Respon.data.bangsal;
-                                vm.form_bangsal.tingkat = Respon.data.lantai;
-                            })
-                        .catch(
-                            err => {
-                                swal("Gagal tampil detail bangsal!",
-                                    err.response, "error");
-                            }
-                        );
-
-                },
-                edit_bangsal: function () {
-                    var data = new FormData;
-                    var vm = this;
-                    $.each(vm.form_bangsal, function (index, value) {
-                        data.append(index, value);
+            // //// bagsal
+            tampil_bangsal: function () {
+                const self = this;
+                if (self.dataTable) {
+                    self.form_bangsal.dataBangsal = '';
+                }
+                axios.get('/dataBangsal').then(response => {
+                        self.isFirstDataLoaded = true;
+                        if (response) {
+                            self.form_bangsal.dataBangsal = response.data;
+                        } else {
+                            alert(response);
+                        }
+                    })
+                    .catch(err => {
+                        swal("gagal", err.message, "error");
                     });
-                    axios.post('/edit_bangsal/' + vm.form_bangsal.id_bangsal, data).then(Resp => {
-                            swal("Sukses!", Resp.data.message, "success");
-                            $('#olahBangsal').modal('hide');
-                            vm.tampil_bangsal();
-                        })
-                        .catch(
-                            err => {
-                                swal("Gagal!",
-                                    err.response.data.message, "error");
-                            }
-                        );
+            },
+            tambah_bangsal: function () {
+                this.form_bangsal.id_bangsal = '';
+                this.form_bangsal.bangsal = '';
+                this.form_bangsal.tingkat = '';
+                $('#olahBangsalLabel').html("tambah bangsal");
+                $('#submit_bangsal').removeClass("collapse");
+                $('#edit_bangsal').addClass("collapse");
+                $('#hapus_bangsal').addClass("collapse");
+            },
+            simpan_bangsal: function () {
+                const self = this;
+                var data = new FormData();
+                $.each(self.form_bangsal, function (index, value) {
+                    data.append(index, value);
+                });
+                namabangsal = $('#inputbangsal').val();
+                data.append('nama_bangsal', namabangsal);
 
-                },
-                hapus_bangsal: function () {
-                    const self = this;
-                    axios.post('hapus_bangsal/' + this.form_bangsal.id_bangsal).then(
+                axios.post('/simpan_bangsal', data)
+                    .then(resp => {
+                        swal("sukses", resp.data.message, "success");
+                        $('#olahBangsal').modal('hide');
+                        $('.modal-backdrop').remove();
+                        this.tampil_bangsal();
+                    })
+                    .catch(err => {
+                        console.log(err.response.data);
+                        swal("gagal", err.response.data.message, "error");
+                    });
+            },
+            editbangsal: function (id) {
+                const vm = this;
+
+                $('#olahBangsalLabel').html("kelola bangsal");
+                $('#submit_bangsal').addClass("collapse");
+                $('#edit_bangsal').removeClass("collapse");
+                $('#hapus_bangsal').removeClass("collapse");
+                $('#olahBangsal').modal('show');
+                axios.get('ambil_bangsal/' + id).then(
                         Respon => {
-                            swal("Sukses!",
-                                Respon.data.message, "success");
-                            $('#olahBangsal').modal('hide');
-                            this.tampil_bangsal();
-                        });
-                    $('#olahBangsal').modal('hide');
-                },
-            }
-        })
+                            vm.form_bangsal.id_bangsal = Respon.data.id_bangsal;
+                            vm.form_bangsal.bangsal = Respon.data.bangsal;
+                            vm.form_bangsal.tingkat = Respon.data.lantai;
+                        })
+                    .catch(
+                        err => {
+                            swal("Gagal tampil detail bangsal!",
+                                err.response, "error");
+                        }
+                    );
 
-    </script>
-    {{-- <script src="{{asset('Componentadmin/plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
-    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.semanticui.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script> --}}
-    @endsection
+            },
+            edit_bangsal: function () {
+                var data = new FormData;
+                var vm = this;
+                $.each(vm.form_bangsal, function (index, value) {
+                    data.append(index, value);
+                });
+                axios.post('/edit_bangsal/' + vm.form_bangsal.id_bangsal, data).then(Resp => {
+                        swal("Sukses!", Resp.data.message, "success");
+                        $('#olahBangsal').modal('hide');
+                        vm.tampil_bangsal();
+                    })
+                    .catch(
+                        err => {
+                            swal("Gagal!",
+                                err.response.data.message, "error");
+                        }
+                    );
+
+            },
+            hapus_bangsal: function (id) {
+                swal("yakin anda akan menghapus", {
+                        buttons: {
+                            cancel: "batal",
+                            hapus: true,
+                        },
+                    })
+                    .then((value) => {
+                        switch (value) {
+                            case "hapus":
+                                const self = this;
+                                axios.post('hapus_bangsal/' + id).then(
+                                    Respon => {
+                                        swal("Sukses!",
+                                            Respon.data.message, "success");
+                                        $('#olahBangsal').modal('hide');
+                                        this.tampil_bangsal();
+                                    });
+                                $('#olahBangsal').modal('hide');
+                                break;
+                            default:
+                                return 0;
+                        }
+
+                    });
+            },
+        }
+    })
+
+</script>
+{{-- <script src="{{asset('Componentadmin/plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.semanticui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script> --}}
+@endsection
