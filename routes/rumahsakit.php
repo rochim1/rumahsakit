@@ -112,4 +112,14 @@ Route::group(['middleware' => 'authAdmin'], function () {
     Route::post('/edit_satuan/{id}', 'rscontroller@edit_satuan')->name('edit_satuan');
     Route::post('/simpan_satuan', 'rscontroller@simpan_satuan')->name('simpan_satuan');
     Route::post('/hapus_satuan/{id}', 'rscontroller@hapus_satuan')->name('hapus_satuan');
+
+    // Route::get('/tindakan', 'rscontroller@tindakan')->name('tindakan');
+    Route::get('/tambah_tindakan', 'rscontroller@tambah_tindakan')->name('tambah_tindakan');
+    Route::get('/tampil_tindakan', 'rscontroller@datatindakandokter')->name('tampil_tindakan');
+    Route::get('/filter_tindakan/{id_spesialis}', 'rscontroller@filtertindakan')->name('tampil_tindakan');
+    Route::post('/ambil_tindakan/{id}', 'rscontroller@ambil_tindakan')->name('ambil_tindakan');
+    Route::post('/simpan_tindakan', 'rscontroller@simpan_tindakan')->name('simpan_tindakan');
+    Route::post('/edit_tindakan/{id}', 'rscontroller@edit_tindakan')->name('edit_tindakan');
+    // Route::post('/simpan_tindakan', 'rscontroller@simpan_tindakan')->name('simpan_tindakan');
+    // Route::post('/hapus_tindakan/{id}', 'rscontroller@hapus_tindakan')->name('hapus_tindakan');
 });

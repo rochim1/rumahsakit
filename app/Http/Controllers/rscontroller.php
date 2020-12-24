@@ -122,6 +122,13 @@ class rscontroller extends Controller
         return $dataSpesialis;
         // return response()->json(dd($dataSpesialis));
     }
+    public function datatindakandokter()
+    {
+        $datatindakandokter = DB::table('tindakan_kedokteran')->join('spesialis', 'tindakan_kedokteran.id_spesialis', '=', 'spesialis.id_spesialis')->select('tindakan_kedokteran.*', 'spesialis.spesialis as nama_spesialis')->get();
+        return $datatindakandokter;
+        // return response()->json(dd($datatindakandokter));
+    }
+
     public function dataSpesialis_json()
     {
         $dataSpesialis = DB::table('spesialis')->select()->get();
@@ -469,6 +476,7 @@ class rscontroller extends Controller
             "kelas" =>    $request->kelas,
             "fasilitas" =>    $request->fasilitas,
             "harga" =>    $request->harga,
+            "updated_at" => Carbon::now(),
         ]);
         return response()->json(["status" => "success", "message" => "data berhasil ditambahkan"]);
     }
@@ -485,6 +493,7 @@ class rscontroller extends Controller
             "kelas" =>    $request->kelas,
             "fasilitas" =>    $request->fasilitas,
             "harga" =>    $request->harga,
+            "created_at" =>    Carbon::now(),
         ]);
         return response()->json(["status" => "success", "message" => "data berhasil ditambahkan"]);
     }
@@ -580,11 +589,11 @@ class rscontroller extends Controller
     }
     public function edit_satuan(Request $request, $id)
     {
-        DB::table('satuan_obat')->where('id_katObat', $id)->insert([
+        DB::table('satuan_obat')->where('id_katObat', $id)->update([
             'nama_satuan' => $request->nama_satuan,
             'keterangan' => $request->deskripsi_satuan,
             "updated_at" => Carbon::now(),
-        ]);
+            ]);
         return response()->json(["status" => "success", "message" => "data satuan berhasil diupdate"]);
     }
     public function simpan_satuan(Request $request)
@@ -593,7 +602,7 @@ class rscontroller extends Controller
             'nama_satuan' => $request->satuan,
             'keterangan' => $request->deskripsi_satuan,
             "created_at" => Carbon::now(),
-        ]);
+            ]);
         return response()->json(["status" => "success", "message" => "data satuan berhasil ditambahkan"]);
     }
 
@@ -602,5 +611,46 @@ class rscontroller extends Controller
         DB::table('satuan_obat')->where('id_katObat', $id)->delete();
         return response()->json(["status" => "success", "message" => "data berhasil dihapus"]);
     }
-
+    public function tambah_tindakan()
+    {
+        $dataSpesialis = $this->dataSpesialis();
+        $dataKategori = DB::table('kategoriobat')->select()->get();
+        $dataSatuan = DB::table('satuan_obat')->select()->get();
+        $dataObat = DB::table('obat')->select()->get();
+        return view('admin.obat.tambahtindakan', compact('dataSpesialis','dataObat', 'dataKategori', 'dataSatuan'));
+    }
+    public function ambil_tindakan($id)
+    {
+        $ambilTindakan = DB::table('tindakan_kedokteran')->where('id_tinDokter', $id)->first();
+        // return $ambilTindakan;
+        return response()->json($ambilTindakan);
+    }
+    public function filtertindakan($id_spesialis)
+    {
+        $ambilTindakan = DB::table('tindakan_kedokteran')->where('id_spesialis', $id_spesialis)->get();
+        // return $ambilTindakan;
+        return response()->json($ambilTindakan);
+    }
+    public function simpan_tindakan(Request $request)
+    {
+        DB::table('tindakan_kedokteran')->insert([
+            'id_spesialis' => $request->spesialis,
+            'nama_tindakan' => $request->nama_tindakan,
+            'harga_tindakan' => $request->harga_tindakan,
+            'keterangan_tindakan' => $request->deskripsi_tindakan,
+            "created_at" => Carbon::now(),
+        ]);
+        return response()->json(["status" => "success", "message" => "data kategori berhasil ditambahkan"]);
+    }
+    public function edit_tindakan(Request $request, $id)
+    {
+        DB::table('tindakan_kedokteran')->where('id_tinDokter', $id)->update([
+            'id_spesialis' => $request->spesialis,
+            'nama_tindakan' => $request->nama_tindakan,
+            'harga_tindakan' => $request->harga_tindakan,
+            'keterangan_tindakan' => $request->deskripsi_tindakan,
+            "updated_at" => Carbon::now(),
+        ]);
+        return response()->json(["status" => "success", "message" => "data satuan berhasil diupdate"]);
+    }
 }

@@ -11,6 +11,15 @@
 @endsection
 @section('content')
 <div id="obat" class="content-body">
+    <div class="row page-titles mx-0">
+        <div class="col p-md-0">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">tambah obat</a></li>
+            </ol>
+        </div>
+    </div>
     <!-- row -->
     <div class="container-fluid">
 
@@ -128,7 +137,7 @@
                                     <th>satuan</th>
                                     <th>kategori</th>
                                     <th>harga</th>
-                                    <th>keloa</th>
+                                    <th>kelola</th>
                                 </thead>
                                 <tbody>
                                     <tr v-on:click="editobat(item.id_obat)" :id="'row-'+item.id_obat"

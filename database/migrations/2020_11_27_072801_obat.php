@@ -23,7 +23,8 @@ class Obat extends Migration
             $table->longText('deskripsi_obat')->nullable();
             $table->integer('stock');
             // $table->bigInteger('suplier')->nullable();
-            $table->timestamp('add_at')->useCurrent();
+            // $table->timestamp('add_at')->useCurrent();
+            $table->timestamps();
         });
     }
 

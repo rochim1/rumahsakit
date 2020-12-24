@@ -378,7 +378,7 @@
                         <ul aria-expanded="false">
                             <li><a href="{{route('obat')}}">master obat</a></li>
                             <li><a href="{{route('tambah_obat')}}">tambah obat</a></li>
-                            <li><a href="{{route('tambah_obat')}}">tambah tindakan</a></li>
+                            <li><a href="{{route('tambah_tindakan')}}">tambah tindakan</a></li>
                         </ul>
                     </li>
 

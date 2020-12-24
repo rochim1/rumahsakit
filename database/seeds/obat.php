@@ -25,7 +25,7 @@ class obat extends Seeder
                 "harga_obat" => $harga[$rand_keys_harga],
                 "deskripsi_obat" => "obat dipergunakan dengan baik ya",
                 "stock" =>  50,
-                "add_at" => Carbon::now(),
+                "created_at" => Carbon::now(),
             ]);
         }
     }

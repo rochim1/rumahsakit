@@ -288,13 +288,15 @@
                         $('#listdata').addClass('collapse');
                         }
                         var form_data = new FormData();
+
                         form_data.append("pencarian", pencarian);
                         form_data.append("poli", this.form.poli);
                         form_data.append("berdasarkan", this.form.berdasarkan);
+
                         axios.post('/caridokter', form_data).then(Resp=>{
                             // alert(Resp.data.message);
                             vm.dataDokter = Resp.data.message;
-                            // console.log();
+                            console.log();
                         });
                     },
                     poli: function () {
