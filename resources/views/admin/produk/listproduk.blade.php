@@ -34,9 +34,9 @@
                                                 <label>deskripsi</label>
                                                 <input type="text" class="form-control" placeholder="deskripsi produk">
                                             </div>
-                                        
+
                                             <button type="submit" class="btn btn-dark">Sign in</button>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                                 <i class="fa fa-download" aria-hidden="true"></i>
                                 <div>Select a file or drag here</div>
                                 <div id="notimage" class="hidden">Please select an image</div>
-                                <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+                                <span id="file-upload-btn" class="btn btn-primary gradient-1">Select a file</span>
                                 </div>
                                 <div id="response" class="hidden">
                                 <div id="messages"></div>
@@ -68,7 +68,7 @@
                 </div>
             </div>
         </div>
-    </div>  
+    </div>
 </div>
 <script>
 function ekUpload(){
@@ -128,7 +128,7 @@ function ekUpload(){
     output(
       '<strong>' + encodeURI(file.name) + '</strong>'
     );
-    
+
     // var fileType = file.type;
     // console.log(fileType);
     var imageName = file.name;

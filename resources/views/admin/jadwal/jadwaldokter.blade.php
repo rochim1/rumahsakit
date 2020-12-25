@@ -121,7 +121,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <a id="tableDokter" href="javascript();" data-placement="top" title="tambah kamar"
-                                        class="tambah btn-primary btn" data-toggle="modal"
+                                        class="tambah btn-primary gradient-1 btn" data-toggle="modal"
                                         data-target="#exampleModal">list dokter
                                     </a>
 
@@ -143,6 +143,7 @@
 
                                                 </div>
                                                 <div class="modal-body">
+                                                    <div class="alert alert-warning">the table isnt syncronous (realtime), refresh if not find the data</div>
                                                     <div class="table-responsive">
                                                         <table id="tabledokterlist"
                                                             class="w-100 table table-hover table-bordered zero-configuration">
@@ -266,7 +267,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-sm-10">
-                                        <button type="submit" v-on:click="buatjadwal" class="btn btn-primary">Buat
+                                        <button type="submit" v-on:click="buatjadwal" class="btn btn-primary gradient-1">Buat
                                             Jadwal</button>
                                     </div>
                                 </div>
@@ -303,8 +304,8 @@
                                             <tr v-for="(item, index) in jadwalterisi" v-bind:key="item.id">
                                                 <td>@{{index+1}}</td>
                                                 <td>@{{item.hari}}</td>
-                                                <td>@{{item.id_jam}}</td>
-                                                <td>@{{item.id_jam}}</td>
+                                                <td>@{{item.jam_mulai}}</td>
+                                                <td>@{{item.jam_selesai}}</td>
                                                 <td>aksi</td>
 
                                             </tr>
@@ -611,8 +612,12 @@
                     this.jabatan = Resp.data.jabatan;
                     this.agama = Resp.data.agama;
                     this.alamat = Resp.data.alamat;
-                    this.foto = "storage/fotoDokter/" + vm.nama + "-" + vm.NIK + "/" +
-                        Respon.data.foto;
+                    if (Resp.data.foto) {
+                    this.foto = "storage/fotoDokter/" + this.nama + "-" + Resp.data.NIK + "/" +
+                        Resp.data.foto;
+                    }else{
+                        this.foto = "{{asset('/images/index.png')}}";
+                    }
                     this.jadwal();
                 }).catch(error => {
                     swal("Gagal ambil data detail Dokter!", "hub administrator", "error");

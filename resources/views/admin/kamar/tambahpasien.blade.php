@@ -40,7 +40,7 @@
                                         type="text" class="form-control" readonly value="">
                                 </div>
                                 <div class="col-sm-2">
-                                    <button type="button" v-on:click="generate" class="btn btn-primary">refresh</button>
+                                    <button type="button" v-on:click="generate" class="btn btn-primary gradient-1">refresh</button>
                                 </div>
                             </div>
 
@@ -178,7 +178,7 @@
 
                             <div class="form-row mt-2">
                                 <div class="col-sm-10 offset-sm-2">
-                                    <button type="submit" class="btn btn-primary">Daftar</button>
+                                    <button type="submit" class="btn btn-primary gradient-1">Daftar</button>
                                     <button v-on:click="clear" type="reset" class="btn btn-whatsapp">Clear</button>
                                     <button v-on:click="printFormMedis" class="btn btn-danger">Cancel</button>
                                 </div>
@@ -243,7 +243,7 @@
                             </div>
                             <div class="col-md-4">
                                 <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
+                                <button type="button" class="btn btn-primary gradient-1" data-toggle="modal"
                                     data-target="#exampleModalCenter">
                                     tambah
                                 </button>
@@ -266,7 +266,7 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
                                                     data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                <button type="button" class="btn btn-primary gradient-1">Save changes</button>
                                             </div>
                                         </div>
                                     </div>
@@ -287,8 +287,8 @@
                                 <input type="text" class="form-control" readonly>
                             </div>
                             <div class="form-group col-md-4">
-                                <button class="btn btn-primary">rawat inap</button>
-                                <button class="btn btn-primary">rawat jalan</button>
+                                <button class="btn btn-primary gradient-1">rawat inap</button>
+                                <button class="btn btn-primary gradient-1">rawat jalan</button>
                                 <button class="btn btn-success text-white float-right">lab</button>
                             </div>
                         </div>

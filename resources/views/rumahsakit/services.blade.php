@@ -37,7 +37,7 @@
                     <div class="service-content">
                         <h5>Rawat Jalan</h5>
                         <p>Kami menyediakan fasilias Rawat jalan Lengkap untuk memenuhi kebutuhan masyarakat</p>
-                        <button type="button" class="btn btn-primary m-3" data-toggle="modal"
+                        <button type="button" class="btn btn-primary gradient-1 m-3" data-toggle="modal"
                             data-target="#exampleModal">
                             Lihat Daftar Poli
                         </button>
@@ -143,7 +143,7 @@
                     <div class="service-content">
                         <h5>Rawat Inap</h5>
                         <p>Layanan inap yang kami sediakan antara lain </p>
-                        <button type="button" class="btn btn-primary m-3" data-toggle="modal" data-target="#exampleModal1">
+                        <button type="button" class="btn btn-primary gradient-1 m-3" data-toggle="modal" data-target="#exampleModal1">
                             Lihat Rawat Inap
                         </button>
 

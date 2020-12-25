@@ -27,7 +27,7 @@ class doktervalidupdate extends FormRequest
             'nama' => 'required',
             'jenis_kelamin' => 'required',
             'NIK' => 'required|min:20',
-            'nomor_str' => 'nullable|min:10',
+            'nomor_str' => 'nullable|min:20',
             'email' => 'sometimes|email',
             'telpon' => 'required|min:8',
             'tanggal_lahir' => 'required',

@@ -70,12 +70,12 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
                                             <button id="submit_spesialis" type="button" v-on:click="simpan_spesialis"
-                                                class="btn btn-primary">tambah</button>
+                                                class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_spesialis" type="button" v-on:click="hapus_spesialis"
                                                 class="collapse btn btn-danger"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_spesialis" type="button" v-on:click="edit_spesialis"
-                                                class="collapse btn btn-primary"><span class="icon-pencil"></span>
+                                                class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>
                                                 edit</button>
                                         </div>
                                     </div>
@@ -150,12 +150,12 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
                                             <button id="submit_jabatan" type="button" v-on:click="simpan_jabatan"
-                                                class="btn btn-primary">tambah</button>
+                                                class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_jabatan" type="button" v-on:click="hapus_jabatan"
                                                 class="collapse btn btn-danger"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_jabatan" type="button" v-on:click="edit_jabatan"
-                                                class="collapse btn btn-primary"><span class="icon-pencil"></span>
+                                                class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>
                                                 edit</button>
                                         </div>
                                     </div>

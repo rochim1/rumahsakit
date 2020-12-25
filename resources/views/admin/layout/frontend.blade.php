@@ -171,7 +171,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
@@ -201,7 +201,7 @@
                                                 <input type="text" nama="linkfb" class="form-control"
                                                     id="exampleInputPassword1" placeholder="link">
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary gradient-1">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -227,7 +227,7 @@
                                                 <input type="text" nama="linkfb" class="form-control"
                                                     id="exampleInputPassword1" placeholder="link">
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary gradient-1">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -253,7 +253,7 @@
                                                 <input type="text" nama="linkfb" class="form-control"
                                                     id="exampleInputPassword1" placeholder="link">
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary gradient-1">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -279,7 +279,7 @@
                                                 <input type="text" nama="linkfb" class="form-control"
                                                     id="exampleInputPassword1" placeholder="link">
                                             </div>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary gradient-1">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -310,7 +310,7 @@
                                 <input type="text" nama="linkfb" class="form-control" id="exampleInputPassword1"
                                     placeholder="link">
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary gradient-1">Submit</button>
                         </form>
                     </div>
                 </div>

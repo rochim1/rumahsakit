@@ -176,8 +176,8 @@
                                 </a>
                             </span>
                         </div>
-                        <img v-bind:src="foto" class="mb-3 img-thumbnail mx-auto d-block img img-circle mt-3" width="200px"
-                            style="height: 200px">
+                        <img v-bind:src="foto" class="mb-3 img-thumbnail mx-auto d-block img img-circle mt-3"
+                            width="200px" style="height: 200px">
                         <div class="list-group">
                             <span class="row list-group-item list-group-item-action">
                                 <span class="col-md-8">
@@ -256,7 +256,6 @@
     <!-- #/ container -->
 </div>
 <script>
-
     let vue = new Vue({
         el: "#dokter",
         data: {
@@ -283,7 +282,12 @@
                         Respon => {
                             vm.id_dokter = Respon.data.id_dokter;
                             vm.nama = Respon.data.nama_dokter;
-                            vm.jenis_kelamin = Respon.data.jenis_kelamin;
+                            // vm.jenis_kelamin = Respon.data.jenis_kelamin;
+                            if (Respon.data.jenis_kelamin == 'L') {
+                                vm.jenis_kelamin = "laki-laki";
+                            } else {
+                                vm.jenis_kelamin = "perempuan";
+                            };
                             vm.NIK = Respon.data.NIK;
                             vm.nomor_str = Respon.data.nomor_str;
                             vm.email = Respon.data.email;
@@ -294,13 +298,17 @@
                             vm.jabatan = Respon.data.jabatan;
                             vm.agama = Respon.data.agama;
                             vm.alamat = Respon.data.alamat;
-                            vm.foto = "storage/fotoDokter/" + vm.nama + "-" + vm.NIK + "/" +
-                        Respon.data.foto;
+                            if (Respon.data.foto) {
+                                vm.foto = "storage/fotoDokter/" + vm.nama + "-" + vm.NIK + "/" +
+                                    Respon.data.foto;
+                            } else {
+                                vm.foto = "{{asset('/images/index.png')}}";
+                            }
                         })
                     .catch(
                         err => {
                             swal("Gagal tampil detail Dokter!",
-                            "hub administrator", "error");
+                                "hub administrator", "error");
                         }
                     )
 

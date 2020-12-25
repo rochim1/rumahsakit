@@ -37,7 +37,7 @@
                                         </thead>
                                         <tbody>
                                           @php
-                                              $no =1 
+                                              $no =1
                                           @endphp
                                           @foreach ($admin as $item)
                                             <tr>
@@ -48,7 +48,7 @@
                                                 <td>{{$item->telpon}}</td>
                                                 <td>{{$item->email}}</td>
                                                 <td>
-                                                    <button class="btn btn-primary">detail</button> 
+                                                    <button class="btn btn-primary gradient-1">detail</button>
                                                     <button class="btn btn-alert">edit</button>
                                                     <button class="btn btn-danger">delete</button>
                                                 </td>
@@ -78,7 +78,7 @@
                                         </thead>
                                         <tbody>
                                           @php
-                                              $no =1 
+                                              $no =1
                                           @endphp
                                           @foreach ($konsumen as $item)
                                             <tr>

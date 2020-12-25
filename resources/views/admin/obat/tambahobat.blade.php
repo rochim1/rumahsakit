@@ -117,12 +117,12 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
                                             <button id="submit_obat" type="button" v-on:click="simpan_obat"
-                                                class="btn btn-primary">tambah</button>
+                                                class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_obat" type="button" v-on:click="hapus_obat"
                                                 class="collapse btn btn-danger"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_obat" type="button" v-on:click="edit_obat"
-                                                class="collapse btn btn-primary"><span class="icon-pencil"></span>
+                                                class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>
                                                 edit</button>
                                         </div>
                                     </div>
@@ -195,12 +195,12 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
                                             <button id="submit_kategori" type="button" v-on:click="simpan_kategori"
-                                                class="btn btn-primary">tambah</button>
+                                                class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_kategori" type="button" v-on:click="hapus_kategori"
                                                 class="collapse btn btn-danger"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_kategori" type="button" v-on:click="edit_kategori"
-                                                class="collapse btn btn-primary"><span class="icon-pencil"></span>
+                                                class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>
                                                 edit</button>
                                         </div>
                                     </div>
@@ -262,12 +262,12 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
                                             <button id="submit_satuan" type="button" v-on:click="simpan_satuan"
-                                                class="btn btn-primary">tambah</button>
+                                                class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_satuan" type="button" v-on:click="hapus_satuan"
                                                 class="collapse btn btn-danger"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_satuan" type="button" v-on:click="edit_satuan"
-                                                class="collapse btn btn-primary"><span class="icon-pencil"></span>
+                                                class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>
                                                 edit</button>
                                         </div>
                                     </div>

@@ -287,9 +287,9 @@
 
                             <div id="tombol" class="form-row mt-2">
                                 <div class="col-sm-10 d-flex align-items-start">
-                                    <button id="tombol_daftar" type="submit" class="btn btn-primary">Daftar</button>
+                                    <button id="tombol_daftar" type="submit" class="btn btn-primary gradient-1">Daftar</button>
                                     <button id="tombol_update" v-on:click="update_dokter(id_dokter, $event)"
-                                        class="collapse btn btn-primary">Update</button>
+                                        class="collapse btn btn-primary gradient-1">Update</button>
                                     <button v-on:click="clear" id="tombol_clear" type="reset"
                                         class="btn btn-warning text-white ml-2 mr-3">Clear</button>
                                     <button type="reset" id="tombol_cencel" v-on:click="cencel"
@@ -652,8 +652,8 @@
 @endsection
 @section('script')
 <script src="{{asset('Componentadmin/plugins/moment/moment.js')}}"></script>
-<script
+{{-- <script
     src="{{asset('Componentadmin/plugins/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js')}}">
-</script>
-<script src="{{asset('Componentadmin/js/plugins-init/form-pickers-init.js')}}"></script>
+</script> --}}
+{{-- <script src="{{asset('Componentadmin/js/plugins-init/form-pickers-init.js')}}"></script> --}}
 @endsection

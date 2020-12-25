@@ -221,14 +221,14 @@ class rscontroller extends Controller
     }
 
     public function recent_dokter(){
-    //    $datadoker =  DB::table('dokter')->latest('id_dokter', 'asc')->take(5)->get(); //ini memakai db builder
+         //    $datadoker =  DB::table('dokter')->latest('id_dokter', 'asc')->take(5)->get(); //ini memakai db builder
        $datadoker = dokterModel::orderBy('id_dokter', 'desc')->take(5)->whereNull('deleted_at')->get();
        return response()->json($datadoker);
     }
     public function hapus_dokter($id){
        dokterModel::where('id_dokter', $id)->delete();
-    //    $datadoker =  DB::table('dokter')->where('id_dokter', $id);
-    //     $datadoker->update(['deleted_at' => Carbon::now()]);
+        //    $datadoker =  DB::table('dokter')->where('id_dokter', $id);
+        //     $datadoker->update(['deleted_at' => Carbon::now()]);
         return response()->json([
             "status" => "success", "message" => "data berhasil dihapus"
         ]);
@@ -247,7 +247,7 @@ class rscontroller extends Controller
         if ($request->hasFile('foto')) {
             $datafoto = $request->file('foto');
             $namafoto = $datafoto->getClientOriginalName();
-// script upload foto cukup begini , foto yang dikirim wajib di upload walau nama sama siapa tahu gambar berbeda
+            // script upload foto cukup begini , foto yang dikirim wajib di upload walau nama sama siapa tahu gambar berbeda
             $isExists = Storage::exists('fotoDokter/'.$nama_folder.'/'.$namafoto_lama);
             if ($isExists) {
                 Storage::delete('fotoDokter/'.$nama_folder.'/'.$namafoto_lama);
@@ -265,7 +265,7 @@ class rscontroller extends Controller
             "NIK" => $request->NIK,
             "agama" => $request->agama,
             "jabatan" => $request->jabatan,
-            "nomor_str" => $request->nama,
+            "nomor_str" => $request->nomor_str,
             "email" => $request->email,
             "jenis_kelamin" => $request->jenis_kelamin,
             "universitas" => $request->universitas,
@@ -342,7 +342,9 @@ class rscontroller extends Controller
         return response()->json($jadwaldokter);
     }
     public function ambil_jadwal($id){
-        $jadwaldokter = DB::table('jadwaldokter')->where('id_dokter',$id)->get();
+        $jadwaldokter = DB::table('jadwaldokter AS jd')
+        ->join('jadwaljam AS jj','jj.id','=','jd.id_jam')
+        ->where('jd.id_dokter',$id)->get();
         return response()->json($jadwaldokter);
     }
     public function hapus_spesialis($id){

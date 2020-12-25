@@ -109,12 +109,12 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
                                             <button id="submit_kamar" type="button" v-on:click="simpan_kamar"
-                                                class="btn btn-primary">tambah</button>
+                                                class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_kamar" type="button" v-on:click="hapus_kamar"
                                                 class="collapse btn btn-danger"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_kamar" type="button" v-on:click="edit_kamar"
-                                                class="collapse btn btn-primary"><span class="icon-pencil"></span>
+                                                class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>
                                                 edit</button>
                                         </div>
                                     </div>
@@ -158,7 +158,7 @@
                                     </td>
                                     <td>
                                         <a href="tes" v-on:click.stop="" name="detail_kamar"
-                                            class="btn btn-primary btn-sm">detail</a>
+                                            class="btn btn-primary gradient-1 btn-sm">detail</a>
                                     </td>
                                 </tr>
                                 </tbody>
@@ -206,13 +206,13 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
                                             <button id="submit_bangsal" type="button" v-on:click="simpan_bangsal"
-                                                class="btn btn-primary">tambah</button>
+                                                class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_bangsal" type="button"
                                                 v-on:click="hapus_bangsal(form_bangsal.id_bangsal)"
                                                 class="collapse btn btn-danger"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_bangsal" type="button" v-on:click="edit_bangsal"
-                                                class="collapse btn btn-primary"><span class="icon-pencil"></span>
+                                                class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>
                                                 edit</button>
                                         </div>
                                     </div>
@@ -281,13 +281,13 @@
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Close</button>
                                             <button id="submit_kelas" type="button" v-on:click="simpan_kelas"
-                                                class="btn btn-primary">tambah</button>
+                                                class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_kelas" type="button"
                                                 v-on:click="hapus_kelas(form_kelas.id_kelas)"
                                                 class="collapse btn btn-danger"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_kelas" type="button" v-on:click="edit_kelas"
-                                                class="collapse btn btn-primary"><span class="icon-pencil"></span>
+                                                class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>
                                                 edit</button>
                                         </div>
                                     </div>

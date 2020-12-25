@@ -108,13 +108,13 @@
                                                         data-dismiss="modal">Close</button>
                                                     <button id="submit_tindakan" type="button"
                                                         v-on:click="simpan_tindakan"
-                                                        class="btn btn-primary">tambah</button>
+                                                        class="btn btn-primary gradient-1">tambah</button>
                                                     <button id="hapus_tindakan" type="button"
                                                         v-on:click="hapus_tindakan"
                                                         class="collapse btn btn-danger"><span class="icon-trash"></span>
                                                         hapus</button>
                                                     <button id="edit_tindakan" type="button" v-on:click="edit_tindakan"
-                                                        class="collapse btn btn-primary"><span
+                                                        class="collapse btn btn-primary gradient-1"><span
                                                             class="icon-pencil"></span>
                                                         edit</button>
                                                 </div>

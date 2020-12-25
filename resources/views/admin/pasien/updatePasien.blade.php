@@ -182,7 +182,7 @@
 
                             <div class="form-row mt-2">
                                 <div class="col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Daftar</button>
+                                    <button type="submit" class="btn btn-primary gradient-1">Daftar</button>
                                     <button v-on:click="clear" type="reset" class="btn btn-whatsapp">Clear</button>
                                     <button v-on:click="apiKota" class="btn btn-danger">Cancel</button>
                                 </div>
