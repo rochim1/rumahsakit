@@ -234,7 +234,7 @@ class rscontroller extends Controller
         ]);
     }
     public function tampil_dokter($id){
-        $data = DB::table('dokter')->where('id_dokter',$id)->get();
+        $data = DB::table('dokter')->where('id_dokter',$id)->first();
         return response()->json($data);
     }
     public function updateDokter(doktervalidupdate $request, $id){
@@ -285,9 +285,10 @@ class rscontroller extends Controller
     }
 
     public function jadwaldokter(){
+        $datadokter = dokterModel::select('id_dokter','nama_dokter','spesialis')->get();
         $dataSpesialis = $this->dataSpesialis();
         $datajam = DB::table('jadwaljam')->select()->get();
-        return view('admin.jadwal.jadwaldokter', compact('dataSpesialis','datajam'));
+        return view('admin.jadwal.jadwaldokter', compact('dataSpesialis','datajam','datadokter'));
     }
 
     public function caridokter(Request $request){
@@ -301,7 +302,7 @@ class rscontroller extends Controller
         }else if ($berdasarkan == 'Id_dokter') {
             $hasil =  DB::table('dokter')->where('spesialis',$poli)->where('id_dokter', 'like', '%'.$pencarian.'%')->whereNull('deleted_at')->get();
         }
-
+        // $hasil =  DB::table('dokter')->select()->get();
         return response()->json([
             "status" => "success", "message" => $hasil
         ]);
@@ -330,6 +331,19 @@ class rscontroller extends Controller
     public function ambil_spesialis($id){
         $spesialis = DB::table('spesialis')->where('id_spesialis',$id)->get();
         return response()->json($spesialis);
+    }
+    public function ambil_jadwaldokter(){
+        // $jadwaldokter = DB::table('jadwaldokter')->select()->get();
+        $jadwaldokter = DB::table('jadwaldokter AS j')->join('dokter AS d', 'd.id_dokter', '=','j.id_dokter')
+        ->join('spesialis AS s', 's.id_spesialis','=','d.spesialis')
+        ->join('jadwaljam AS jj','jj.id','=','j.id_jam')
+        ->select('j.*', 'd.nama_dokter', 'd.spesialis' ,'s.spesialis AS nama_spesialis','jj.jam_mulai', 'jj.jam_selesai')->get();
+
+        return response()->json($jadwaldokter);
+    }
+    public function ambil_jadwal($id){
+        $jadwaldokter = DB::table('jadwaldokter')->where('id_dokter',$id)->get();
+        return response()->json($jadwaldokter);
     }
     public function hapus_spesialis($id){
         DB::table('spesialis')->where('id_spesialis',$id)->delete();
@@ -652,5 +666,22 @@ class rscontroller extends Controller
             "updated_at" => Carbon::now(),
         ]);
         return response()->json(["status" => "success", "message" => "data satuan berhasil diupdate"]);
+    }
+    public function buatjadwal(Request $request, $id)
+    {
+        $datahari = array('senin','selasa','rabu','kamis','jumat','sabtu','minggu');
+        foreach ($datahari as $key => $value) {
+            if ($request->$value) {
+                DB::table('jadwaldokter')->insert([
+                'id_dokter' => $id,
+                'id_jam' => $request->jam,
+                'hari' => $value,
+                'keterangan' => $request->harga_tindakan,
+                "created_at" => Carbon::now(),
+        ]);
+            }
+        }
+
+        return response()->json(["status" => "success", "message" => "berhasil tambah jadwal dokter"]);
     }
 }

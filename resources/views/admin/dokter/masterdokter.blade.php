@@ -273,28 +273,29 @@
             jabatan: '',
             agama: '',
             alamat: '',
-            foto: '',
+
+            foto: "{{asset('/images/index.png')}}",
         },
         methods: {
             detaildokter: function (id) {
                 const vm = this;
                 axios.get('/tampil_dokter/' + id).then(
                         Respon => {
-                            vm.id_dokter = Respon.data[0].id_dokter;
-                            vm.nama = Respon.data[0].nama_dokter;
-                            vm.jenis_kelamin = Respon.data[0].jenis_kelamin;
-                            vm.NIK = Respon.data[0].NIK;
-                            vm.nomor_str = Respon.data[0].nomor_str;
-                            vm.email = Respon.data[0].email;
-                            vm.telpon = Respon.data[0].telpon;
-                            vm.tanggal_lahir = Respon.data[0].tanggal_lahir;
-                            vm.spesialis = Respon.data[0].spesialis;
-                            vm.universitas = Respon.data[0].universitas;
-                            vm.jabatan = Respon.data[0].jabatan;
-                            vm.agama = Respon.data[0].agama;
-                            vm.alamat = Respon.data[0].alamat;
+                            vm.id_dokter = Respon.data.id_dokter;
+                            vm.nama = Respon.data.nama_dokter;
+                            vm.jenis_kelamin = Respon.data.jenis_kelamin;
+                            vm.NIK = Respon.data.NIK;
+                            vm.nomor_str = Respon.data.nomor_str;
+                            vm.email = Respon.data.email;
+                            vm.telpon = Respon.data.telpon;
+                            vm.tanggal_lahir = Respon.data.tanggal_lahir;
+                            vm.spesialis = Respon.data.spesialis;
+                            vm.universitas = Respon.data.universitas;
+                            vm.jabatan = Respon.data.jabatan;
+                            vm.agama = Respon.data.agama;
+                            vm.alamat = Respon.data.alamat;
                             vm.foto = "storage/fotoDokter/" + vm.nama + "-" + vm.NIK + "/" +
-                        Respon.data[0].foto;
+                        Respon.data.foto;
                         })
                     .catch(
                         err => {

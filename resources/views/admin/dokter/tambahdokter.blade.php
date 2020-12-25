@@ -566,26 +566,26 @@
                 this.errors.destroy();
                 const vm = this;
                 axios.get("{{url('/tampil_dokter')}}/" + id).then(Respon => {
-                    vm.id_dokter = Respon.data[0].id_dokter;
-                    vm.form.nama = Respon.data[0].nama_dokter;
-                    vm.form.jenis_kelamin = Respon.data[0].jenis_kelamin;
-                    vm.form.NIK = Respon.data[0].NIK;
-                    vm.form.nomor_str = Respon.data[0].nomor_str;
-                    vm.form.email = Respon.data[0].email;
-                    vm.form.telpon = Respon.data[0].telpon;
-                    vm.form.tanggal_lahir = Respon.data[0].tanggal_lahir;
-                    vm.form.spesialis = Respon.data[0].spesialis;
-                    vm.form.universitas = Respon.data[0].universitas;
-                    vm.form.jabatan = Respon.data[0].jabatan;
-                    vm.form.agama = Respon.data[0].agama;
-                    vm.form.alamat = Respon.data[0].alamat;
-                    // vm.form.foto = Respon.data[0].foto; //membuat error validasi bila foto tak diisi
+                    vm.id_dokter = Respon.data.id_dokter;
+                    vm.form.nama = Respon.data.nama_dokter;
+                    vm.form.jenis_kelamin = Respon.data.jenis_kelamin;
+                    vm.form.NIK = Respon.data.NIK;
+                    vm.form.nomor_str = Respon.data.nomor_str;
+                    vm.form.email = Respon.data.email;
+                    vm.form.telpon = Respon.data.telpon;
+                    vm.form.tanggal_lahir = Respon.data.tanggal_lahir;
+                    vm.form.spesialis = Respon.data.spesialis;
+                    vm.form.universitas = Respon.data.universitas;
+                    vm.form.jabatan = Respon.data.jabatan;
+                    vm.form.agama = Respon.data.agama;
+                    vm.form.alamat = Respon.data.alamat;
+                    // vm.form.foto = Respon.data.foto; //membuat error validasi bila foto tak diisi
 
                     vm.fotoData = "storage/fotoDokter/" + vm.form.nama + "-" + vm.form.NIK + "/" +
-                        Respon.data[0].foto;
+                        Respon.data.foto;
 
                     $('#judul').html('Update Data Dokter <br> <small>dengan id: ' +
-                        Respon.data[0].id_dokter + '</small>');
+                        Respon.data.id_dokter + '</small>');
                     $('#tombol_daftar').addClass('collapse');
                     $('#tombol_update').removeClass('collapse');
                     $('#tombol_cencel').removeClass('collapse');

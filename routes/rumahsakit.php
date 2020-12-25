@@ -49,15 +49,18 @@ Route::group(['middleware' => 'authAdmin'], function () {
     Route::get('/recent_dokter', 'rscontroller@recent_dokter')->name('recent_dokter');
     Route::get('/recentupdate_dokter', 'rscontroller@recentupdate_dokter')->name('recentupdate_dokter');
     Route::get('/tampil_dokter/{id}', 'rscontroller@tampil_dokter')->name('tampil_dokter');
+    Route::get('/ambil_dokter/{id}', 'rscontroller@tampil_dokter')->name('tampil_dokterjadwal'); //untuk di view jadwal dokter
     Route::post('/update_dokter/{id}', 'rscontroller@updateDokter')->name('updateDokter');
     Route::delete('/hapus_dokter/{id}', 'rscontroller@hapus_dokter')->name('hapus_dokter');
     Route::get('/master_dokter', 'rscontroller@masterdokter')->name('masterdokter');
-    Route::get('/jadwal_dokter', 'rscontroller@masterdokter')->name('jadwaldokter');
     Route::get('/tambah_dokter', 'rscontroller@tambahdokter')->name('tambahdokter');
     Route::post('/caridokter', 'rscontroller@caridokter')->name('caridokter');
 
+    Route::post('/buatjadwal/{id}', 'rscontroller@buatjadwal')->name('buatjadwal');
     Route::get('/jadwaldokter', 'rscontroller@jadwaldokter')->name('jadwaldokter');
+    Route::get('/ambil_jadwal/{id}', 'rscontroller@ambil_jadwal')->name('ambil_jadwal');
     Route::get('/spesialis', 'rscontroller@spesialis')->name('spesialis');
+    Route::get('/ambiljadwaldokter', 'rscontroller@ambil_jadwaldokter')->name('ambil_jadwaldokter');
 
     Route::post('/simpan_spesialis', 'rscontroller@simpan_spesialis')->name('simpan_spesialis');
     Route::get('/tampil_spesialis', 'rscontroller@dataSpesialis_json')->name('tampil_spesialis');

@@ -21,7 +21,7 @@ class JadwalDokter extends Migration
             $table->bigInteger('id_jam')->unsigned();
             $table->foreign('id_jam')->references('id')->on('jadwaljam')->onUpdate('cascade')->onDelete('cascade');
             $table->string('hari');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->timestamps();
         });
     }
