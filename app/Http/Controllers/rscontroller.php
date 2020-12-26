@@ -70,31 +70,31 @@ class rscontroller extends Controller
         //     $flight->save();
     }
     public function daftarPasien(Request $request){
-        $content = $request->get('content');
-        $hasil = json_decode($content);
-        $alamat_detail = 'kelurahan ' . $hasil->{'kelurahan'} . ', kecamatan ' . $hasil->{'kecamatan'} . ', kabupaten ' . $hasil->{'kabupaten'}.', kota ' . $hasil->{'kota'} ;
+        $alamat_detail = 'kelurahan ' . $request->{'kelurahan'} . ', kecamatan ' . $request->{'kecamatan'} . ', kabupaten ' . $request->{'kabupaten'}.', kota ' . $request->{'kota'} ;
         $password = rand();
 
         DB::table('pasien')->insert([
-            'rekam_medis' => $hasil->{'rekamMedis'},
-            'nama' => $hasil->{'nama_baru'},
-            'jenisKelamin' => $hasil->{'jenis_kelamin'},
-            'NIK' => $hasil->{'NIK'},
-            'warga_negara' => $hasil->{'warganegara'},
-            'agama' => $hasil->{'agama'},
-            'tanggal_lahir' => $hasil->{'tgl_lahir'},
-            'umur_daftar' => $hasil->{'umur'},
-            'lebih_bulan' => $hasil->{'bulan'},
-            'email' => $hasil->{'email'},
-            'alamat' => $hasil->{'alamat'}.' alamat detail : '.$alamat_detail ,
-            'kelurahan' => $hasil->{'kelurahan'},
-            'kecamatan' => $hasil->{'kecamatan'},
-            'kabupaten' => $hasil->{'kabupaten'},
-            'provinsi' => $hasil->{'kota'},
-            'telpon' => $hasil->{'telp'},
-            // 'asuransi' => $hasil->{'asuransi'},
+            'rekam_medis' => $request->rekamMedis,
+            'nama' => $request->nama_baru,
+            'jenisKelamin' => $request->jenis_kelamin,
+            'NIK' => $request->NIK,
+            'warga_negara' => $request->warganegara,
+            'agama' => $request->agama,
+            'tanggal_lahir' => $request->tgl_lahir,
+
+            'umur_daftar' => str_replace(' tahun','',$request->umur),
+            'lebih_bulan' => str_replace('bulan', '', $request->bulan),
+
+            'email' => $request->email,
+            'alamat' => $request->alamat.' alamat detail : '.$alamat_detail ,
+            'kelurahan' => $request->kelurahan,
+            'kecamatan' => $request->kecamatan,
+            'kabupaten' => $request->kabupaten,
+            'provinsi' => $request->kota,
+            'telpon' => $request->telp,
+            // 'asuransi' => $request->asuransi,
             // asuransi di pindah ke table tambahan
-            'pekerjaan' => $hasil->{'pekerjaan'},
+            'pekerjaan' => $request->pekerjaan,
             // 'email_verified_at' =>
             'password' => $password,
             // 'remember_token' =>
@@ -104,7 +104,7 @@ class rscontroller extends Controller
         ]);
 
         return response()->json([
-            "status"=>"success","message"=> ["nama"=> $hasil->{'nama_baru'},"rekam"=> $hasil->{'rekamMedis'}]
+            "status"=>"success","message"=> ["nama"=> $request->nama_baru,"rekam"=> $request->rekamMedis]
         ]);
     }
 
