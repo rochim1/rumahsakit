@@ -28,10 +28,12 @@ class rscontroller extends Controller
         return $hasil;
     }
     public function regpasien(){
-        // $id_pasien = pasien::latest()->first()->id_pasien;
-        // $id = strval($id_pasien);
+        $pekerjaanPasien = DB::table('pekerjaan_pasien')->select()->get();
+        $asuransi = DB::table('asuransi')->select()->get();
+        $cacat = DB::table('cacatfisik')->select()->get();
+        $bahasa = DB::table('bahasa')->select()->get();
         $id_pasien = $this->rekmed();
-        return view('admin.pasien.tambahpasien', compact('id_pasien'));
+        return view('admin.pasien.tambahpasien', compact('id_pasien','cacat','asuransi', 'bahasa','pekerjaanPasien'));
     }
 
     public function randomPassword() {
@@ -48,7 +50,7 @@ class rscontroller extends Controller
     }
 
     public function attr_pasien(){
-        DB::table('')
+        // DB::table('')
         return view('admin.pasien.attr_pasien');
     }
     public function updatePasien($id_pasien){

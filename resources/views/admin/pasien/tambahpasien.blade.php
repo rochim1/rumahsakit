@@ -117,9 +117,9 @@
                                 <div class="form-group col-md-4">
                                     <select v-model="data_form.pekerjaan" class="form-control" name="pekerjaan" id="jk">
                                         <option value="">--- pekerjaan pasien---</option>
-                                        <option value="Pekerja">Pekerja</option>
-                                        <option value="siswa/Mahasiswa">siswa/Mahasiswa</option>
-                                        <option value="lain-lain">lain</option>
+                                        @foreach ($pekerjaanPasien as $item)
+                                        <option value="{{$item->id}}">{{$item->pekerjaan_pasien}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -181,9 +181,11 @@
 
                             <div class="form-row mt-2">
                                 <div class="col-sm-10 offset-sm-2">
-                                    <button type="button" v-on:click="simpanpasien" class="btn btn-primary gradient-1">Daftar</button>
+                                    <button type="button" v-on:click="simpanpasien"
+                                        class="btn btn-primary gradient-1">Daftar</button>
                                     <button type="reset" v-on:click="clear" class="btn btn-whatsapp">Clear</button>
-                                    <button type="button"v-on:click="printFormMedis" class="btn btn-danger gradient-2">Cancel</button>
+                                    <button type="button" v-on:click="printFormMedis"
+                                        class="btn btn-danger gradient-2">Cancel</button>
                                 </div>
                             </div>
                         </form>
@@ -216,65 +218,82 @@
                                     v-model="data_form.idasuransi">
                             </div>
                             <div class="form-group">
-                                <label>cacat fisik</label>
-                                <input name="cacatfisik" type="text" class="form-control"
-                                    v-model="data_form.cacatfisik">
-                            </div>
-                            <div class="form-group">
                                 <label>bahasa</label>
-                                <input name="bahasa" type="text" class="form-control" v-model="data_form.bahasa">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">tambahakan informasi keluarga</h4>
-                        <div class="row">
-                            <div class="col-md-8">
-                                <select name="infokeluarga" v-model="data_form.infokeluarga" class="form-control" id="">
-                                    <option value="1">ayah</option>
-                                    <option value="2">ibu</option>
-                                    <option value="3">anak</option>
-                                    <option value="4">keluarga</option>
+                                <select name="bahasa" type="text" class="form-control" v-model="data_form.bahasa">
+                                    @foreach ($bahasa as $item)
+                                    <option value="{{$item->id}}">{{$item->nama_bahasa}}</option>
+                                    @endforeach
                                 </select>
                             </div>
-                            <div class="col-md-4">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary gradient-1" data-toggle="modal"
-                                    data-target="#exampleModalCenter">
-                                    tambah
-                                </button>
+                            <div class="form-group">
+                                <label>cacat fisik</label>
+                                <select name="cacatfisik" class="form-control" v-model="data_form.cacatfisik">
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                ...
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary gradient-1">Save
-                                                    changes</button>
+                                    @foreach ($cacat as $item)
+                                    <option value="{{$item->id_cacatfisik}}">{{$item->nama_cacat}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>ciri fisik</label>
+                                <textarea v-model="cirifisik" class="form-control"></textarea>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <select name="infokeluarga" v-model="data_form.infokeluarga" class="form-control"
+                                        id="">
+                                        <option value="0">--tambah info keluarga--</option>
+                                        <option value="1">ayah</option>
+                                        <option value="2">ibu</option>
+                                        <option value="3">anak</option>
+                                        <option value="4">keluarga</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="m-0 btn btn-primary gradient-1" data-toggle="modal"
+                                        data-target="#exampleModalCenter">
+                                        tambah
+                                    </button>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ...
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-primary gradient-1">Save
+                                                        changes</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
+
+                {{-- <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">tambahakan informasi keluarga</h4>
+
+                    </div>
+                </div> --}}
             </div>
         </div>
         <script>
@@ -311,6 +330,7 @@
                         cacatfisik: '',
                         bahasa: '',
                         infokeluarga: '',
+                        cirifisik: '',
                     }
                 },
                 mounted() {
@@ -451,8 +471,8 @@
                     clear: function () {
                         const vm = this;
                         $.each(this.data_form, function (index, value) {
-                                vm.data_form[index] = '';
-                            });
+                            vm.data_form[index] = '';
+                        });
                     },
                     simpanpasien: function () {
                         if (this.data_form.rekamMedis) {
@@ -461,21 +481,21 @@
                             $.each(this.data_form, function (index, value) {
                                 data.append(index, value);
                             });
-                                axios.post("{{route('daftarPasien')}}", data)
-                                    .then(Respon => {
-                                        console.log(Respon.data.message.nama);
-                                        swal("Berhasil Input Pasien!",
-                                            Respon.data.message.nama +
-                                            " dengan No.RM : " +
-                                            Respon.data.message.rekam, "success");
-                                            this.clear();
-                                            this.generate();
-                                    })
-                                    .catch(err => {
-                                        swal("Gagal Input Pasien!",
-                                            "periksa form atau segera hubungi administrator",
-                                            "error");
-                                    });
+                            axios.post("{{route('daftarPasien')}}", data)
+                                .then(Respon => {
+                                    console.log(Respon.data.message.nama);
+                                    swal("Berhasil Input Pasien!",
+                                        Respon.data.message.nama +
+                                        " dengan No.RM : " +
+                                        Respon.data.message.rekam, "success");
+                                    this.clear();
+                                    this.generate();
+                                })
+                                .catch(err => {
+                                    swal("Gagal Input Pasien!",
+                                        "periksa form atau segera hubungi administrator",
+                                        "error");
+                                });
                         } else {
                             swal("Gagal Input Pasien!", "generate no rekam medis", "error");
                         }
