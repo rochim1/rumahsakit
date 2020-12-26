@@ -116,6 +116,9 @@ class rscontroller extends Controller
         $jumlahPasien = pasien::all()->count();;
         return view('admin.pasien.masterpasien', compact('pasien','jumlahAsuransi','jumlahPasien','jumlahTanpaAsuransi', 'jumlahRawatInap'));
     }
+    public function hapus_pasien(){
+        //todo
+    }
     public function dataSpesialis()
     {
         $dataSpesialis = DB::table('spesialis')->select()->get();

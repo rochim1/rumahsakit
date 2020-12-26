@@ -29,7 +29,7 @@ class Dokter extends Migration
             $table->string('status_dokter')->nullable();
             $table->unsignedBigInteger('spesialis');
 
-            $table->foreign('spesialis')->references('id_spesialis')->on('spesialis');
+            $table->foreign('spesialis')->references('id_spesialis')->on('spesialis')->onUpdate('cascade')->onDelete('cascade');
 
             $table->string('alamat')->nullable();
             $table->string('foto')->nullable();

@@ -449,7 +449,10 @@
                         // kedepan nomor RM akan dirapikan dan berurutan
                     },
                     clear: function () {
-
+                        const vm = this;
+                        $.each(this.data_form, function (index, value) {
+                                vm.data_form[index] = '';
+                            });
                     },
                     simpanpasien: function () {
                         if (this.data_form.rekamMedis) {
@@ -465,6 +468,8 @@
                                             Respon.data.message.nama +
                                             " dengan No.RM : " +
                                             Respon.data.message.rekam, "success");
+                                            this.clear();
+                                            this.generate();
                                     })
                                     .catch(err => {
                                         swal("Gagal Input Pasien!",

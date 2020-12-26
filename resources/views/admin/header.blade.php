@@ -331,6 +331,7 @@
                             <li><a href="{{route('regpasien')}}">registrasi pasien</a></li>
                             <li><a href="#">appointment pasien</a></li>
                             <li><a href="{{route('pasienterhapus')}}">deleted pasien</a></li>
+                            <li><a href="{{route('attr_pasien')}}">attribut pasien</a></li>
                         </ul>
                     </li>
 

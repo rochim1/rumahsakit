@@ -24,7 +24,7 @@ class dokterSeed extends Seeder
     // "Poli Syaraf","Poli Telinga Hidung Tenggorokan","Poli Tumbuh Kembang","Poli Umum",);
 
 
-       for ($i=0; $i < 10; $i++) {
+       for ($i=0; $i < 100; $i++) {
             $rand_keys = array_rand($input, 1);
             // $rand_spesialis = array_rand($input_spesialis, 1);
             DB::table('dokter')->insert([

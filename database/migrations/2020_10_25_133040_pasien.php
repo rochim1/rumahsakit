@@ -18,7 +18,7 @@ class Pasien extends Migration
             $table->string('rekam_medis');
             $table->string('nama')->comment('nama user');
             $table->string('jenisKelamin');
-            $table->string('NIK');
+            $table->string('NIK')->unique();
             $table->string('warga_negara');
             $table->string('agama');
             $table->string('status_pasien')->nullable()->comment("status untuk saat ini apakah sedang dirawat atau tidak"); //rawat inap / rawat jalan
@@ -28,10 +28,11 @@ class Pasien extends Migration
             $table->string('email')->unique()->nullable();
             $table->text('telpon');
             $table->string('alamat')->nullable();
-            $table->text('kelurahan');
-            $table->text('kecamatan');
-            $table->text('kabupaten');
-            $table->text('provinsi');
+
+            $table->text('kelurahan')->nullable();
+            $table->text('kecamatan')->nullable();
+            $table->text('kabupaten')->nullable();
+            $table->text('provinsi')->nullable();
 
             $table->text('asuransi')->nullable();
             $table->text('id_asuransi')->nullable();

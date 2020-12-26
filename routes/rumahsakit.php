@@ -40,7 +40,8 @@ Route::group(['middleware' => 'authAdmin'], function () {
     // Route::post('/daftar_pasien', 'rscontroller@daftarPasien')->name('updatePasien');
     Route::get('/edit_pasien/{id}', 'rscontroller@editPasien')->name('editPasien');
     Route::get('/register_pasien', 'rscontroller@regpasien')->name('regpasien');
-    Route::get('/deletedPasien', 'rscontroller@regpasien')->name('pasienterhapus');
+    Route::get('/attr_pasien', 'rscontroller@attr_pasien')->name('attr_pasien');
+    Route::get('/deletedPasien', 'rscontroller@hapus_pasien')->name('pasienterhapus');
     Route::get('/master_pasien', 'rscontroller@masterpasien')->name('masterpasien');
 
     Route::get('/rekammedis', 'rscontroller@rekmed')->name('rekammedis');
