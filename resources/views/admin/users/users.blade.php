@@ -50,7 +50,7 @@
                                                 <td>
                                                     <button class="btn btn-primary gradient-1">detail</button>
                                                     <button class="btn btn-alert">edit</button>
-                                                    <button class="btn btn-danger">delete</button>
+                                                    <button class="btn btn-danger gradient-2">delete</button>
                                                 </td>
                                             </tr>
                                            @endforeach
@@ -88,7 +88,7 @@
                                                 <td>{{$item->alamat}}</td>
                                                 <td>{{$item->telpon}}</td>
                                                 <td>{{$item->email}}</td>
-                                                <td><button class="btn btn-alert">edit</button> <button class="btn btn-danger">delete</button></td></td>
+                                                <td><button class="btn btn-alert">edit</button> <button class="btn btn-danger gradient-2">delete</button></td></td>
                                             </tr>
                                            @endforeach
                                     </table>

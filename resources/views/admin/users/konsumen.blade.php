@@ -23,7 +23,7 @@
                             <div class="card-body">
                                 <h4 class="card-title">Data Table</h4>
                                 <div class="table-responsive">
-                                    
+
 
                                     <table class="table table-striped table-bordered zero-configuration">
                                         <thead>
@@ -39,7 +39,7 @@
                                         </thead>
                                         <tbody>
                                           @php
-                                              $no =1 
+                                              $no =1
                                           @endphp
                                           @foreach ($konsumen as $item)
                                             <tr>
@@ -49,7 +49,7 @@
                                                 <td>{{$item->alamat}}</td>
                                                 <td>{{$item->telpon}}</td>
                                                 <td>{{$item->email}}</td>
-                                                <td><button class="btn btn-alert">edit</button> <button class="btn btn-danger">delete</button></td></td>
+                                                <td><button class="btn btn-alert">edit</button> <button class="btn btn-danger gradient-2">delete</button></td></td>
                                             </tr>
                                            @endforeach
                                     </table>

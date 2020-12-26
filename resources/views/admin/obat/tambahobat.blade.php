@@ -119,7 +119,7 @@
                                             <button id="submit_obat" type="button" v-on:click="simpan_obat"
                                                 class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_obat" type="button" v-on:click="hapus_obat"
-                                                class="collapse btn btn-danger"><span class="icon-trash"></span>
+                                                class="collapse btn btn-danger gradient-2"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_obat" type="button" v-on:click="edit_obat"
                                                 class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>
@@ -197,7 +197,7 @@
                                             <button id="submit_kategori" type="button" v-on:click="simpan_kategori"
                                                 class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_kategori" type="button" v-on:click="hapus_kategori"
-                                                class="collapse btn btn-danger"><span class="icon-trash"></span>
+                                                class="collapse btn btn-danger gradient-2"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_kategori" type="button" v-on:click="edit_kategori"
                                                 class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>
@@ -264,7 +264,7 @@
                                             <button id="submit_satuan" type="button" v-on:click="simpan_satuan"
                                                 class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_satuan" type="button" v-on:click="hapus_satuan"
-                                                class="collapse btn btn-danger"><span class="icon-trash"></span>
+                                                class="collapse btn btn-danger gradient-2"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_satuan" type="button" v-on:click="edit_satuan"
                                                 class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>

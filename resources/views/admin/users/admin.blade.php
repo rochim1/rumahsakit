@@ -37,7 +37,7 @@
                                         </thead>
                                         <tbody>
                                           @php
-                                              $no =1 
+                                              $no =1
                                           @endphp
                                           @foreach ($admin as $item)
                                             <tr>
@@ -47,7 +47,7 @@
                                                 <td>{{$item->alamat}}</td>
                                                 <td>{{$item->telpon}}</td>
                                                 <td>{{$item->email}}</td>
-                                                <td><button class="btn btn-alert">edit</button> <button class="btn btn-danger">delete</button></td></td>
+                                                <td><button class="btn btn-alert">edit</button> <button class="btn btn-danger gradient-2">delete</button></td></td>
                                             </tr>
                                            @endforeach
                                     </table>

@@ -293,7 +293,7 @@
                                     <button v-on:click="clear" id="tombol_clear" type="reset"
                                         class="btn btn-warning text-white ml-2 mr-3">Clear</button>
                                     <button type="reset" id="tombol_cencel" v-on:click="cencel"
-                                        class="collapse btn btn-danger ml-5 mr-3">Cencel</button>
+                                        class="collapse btn btn-danger gradient-2 ml-5 mr-3">Cencel</button>
                                     <div v-if="isLoading">
                                         <div class="lds-ellipsis">
                                             <div></div>

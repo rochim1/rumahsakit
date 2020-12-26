@@ -111,7 +111,7 @@
                                             <button id="submit_kamar" type="button" v-on:click="simpan_kamar"
                                                 class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_kamar" type="button" v-on:click="hapus_kamar"
-                                                class="collapse btn btn-danger"><span class="icon-trash"></span>
+                                                class="collapse btn btn-danger gradient-2"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_kamar" type="button" v-on:click="edit_kamar"
                                                 class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>
@@ -209,7 +209,7 @@
                                                 class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_bangsal" type="button"
                                                 v-on:click="hapus_bangsal(form_bangsal.id_bangsal)"
-                                                class="collapse btn btn-danger"><span class="icon-trash"></span>
+                                                class="collapse btn btn-danger gradient-2"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_bangsal" type="button" v-on:click="edit_bangsal"
                                                 class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>
@@ -284,7 +284,7 @@
                                                 class="btn btn-primary gradient-1">tambah</button>
                                             <button id="hapus_kelas" type="button"
                                                 v-on:click="hapus_kelas(form_kelas.id_kelas)"
-                                                class="collapse btn btn-danger"><span class="icon-trash"></span>
+                                                class="collapse btn btn-danger gradient-2"><span class="icon-trash"></span>
                                                 hapus</button>
                                             <button id="edit_kelas" type="button" v-on:click="edit_kelas"
                                                 class="collapse btn btn-primary gradient-1"><span class="icon-pencil"></span>

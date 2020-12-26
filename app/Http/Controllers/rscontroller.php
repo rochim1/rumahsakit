@@ -46,6 +46,10 @@ class rscontroller extends Controller
         $dataPasien = pasien::where('id_pasien',$id_pasien)->get();
         return view('admin.pasien.updatePasien', compact('dataPasien'));
     }
+
+    public function attr_pasien(){
+        return view()
+    }
     public function updatePasien($id_pasien){
         // $flight = pasien::find($id_pasien);
         // $flight->nama = ;

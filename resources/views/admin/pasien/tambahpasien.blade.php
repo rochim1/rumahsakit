@@ -183,7 +183,7 @@
                                 <div class="col-sm-10 offset-sm-2">
                                     <button type="button" v-on:click="simpanpasien" class="btn btn-primary gradient-1">Daftar</button>
                                     <button type="reset" v-on:click="clear" class="btn btn-whatsapp">Clear</button>
-                                    <button type="button"v-on:click="printFormMedis" class="btn btn-danger">Cancel</button>
+                                    <button type="button"v-on:click="printFormMedis" class="btn btn-danger gradient-2">Cancel</button>
                                 </div>
                             </div>
                         </form>

@@ -111,7 +111,7 @@
                                                         class="btn btn-primary gradient-1">tambah</button>
                                                     <button id="hapus_tindakan" type="button"
                                                         v-on:click="hapus_tindakan"
-                                                        class="collapse btn btn-danger"><span class="icon-trash"></span>
+                                                        class="collapse btn btn-danger gradient-2"><span class="icon-trash"></span>
                                                         hapus</button>
                                                     <button id="edit_tindakan" type="button" v-on:click="edit_tindakan"
                                                         class="collapse btn btn-primary gradient-1"><span
