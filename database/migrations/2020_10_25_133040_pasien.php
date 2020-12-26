@@ -39,6 +39,8 @@ class Pasien extends Migration
 
             $table->string('pekerjaan')->nullable();
             $table->string('status_nikah')->nullable();
+
+            $table->string('ciri_fisik')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             // dapat dikosongi (null)
             $table->string('password');

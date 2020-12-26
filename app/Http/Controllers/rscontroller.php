@@ -48,7 +48,8 @@ class rscontroller extends Controller
     }
 
     public function attr_pasien(){
-        return view()
+        DB::table('')
+        return view('admin.pasien.attr_pasien');
     }
     public function updatePasien($id_pasien){
         // $flight = pasien::find($id_pasien);

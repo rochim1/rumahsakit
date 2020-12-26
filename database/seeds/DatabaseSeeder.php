@@ -26,6 +26,10 @@ class DatabaseSeeder extends Seeder
         $this->call(kategoriobat::class);
         $this->call(obat::class);
         $this->call(tindakan_kedokteran::class);
+        $this->call(bahasa::class);
+        $this->call(kerjaPasien::class);
+        $this->call(kerjaOperasional::class);
+        $this->call(cacatfisik::class);
         // $this->call(suplier::class);
     }
 }
