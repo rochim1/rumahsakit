@@ -108,9 +108,9 @@
                     <div class="card-body">
                         <h4 id="judul" class="card-title pb-2">Buat Jadwal Dokter</h4>
                         <form @submit.prevent>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Filter Poli</label>
-                                <div class="col-sm-6">
+                            <div class=" form-row">
+                                <label class="col-sm-2 form-group  col-form-label">Filter Poli</label>
+                                <div class="col-sm-6 form-group ">
                                     <select v-model="form.poli" v-on:click="ready" v-on:blur="poli" class="form-control"
                                         name="poli" id="poli">
                                         <option value="">--Select Filter Poli--</option>
@@ -143,7 +143,8 @@
 
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div class="alert alert-warning">the table isnt syncronous (realtime), refresh if not find the data</div>
+                                                    <div class="alert alert-warning">the table isnt syncronous
+                                                        (realtime), refresh if not find the data</div>
                                                     <div class="table-responsive">
                                                         <table id="tabledokterlist"
                                                             class="w-100 table table-hover table-bordered zero-configuration">
@@ -186,9 +187,9 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Cari Dokter</label>
-                                <div class="col-sm-4">
+                            <div class=" form-row">
+                                <label class="col-sm-2 form-group  col-form-label">Cari Dokter</label>
+                                <div class="col-sm-4 form-group ">
                                     <select v-model="form.berdasarkan" v-on:blur="berdasarkan" class="form-control"
                                         name="berdasarkan" id="berdasarkan">
                                         <option value="">Cari berdasarkan</option>
@@ -207,10 +208,10 @@
                                 </div>
                             </div>
 
-                            <div class="border p-3">
-                                <div class="form-group row mb-3">
-                                    <label class="col-sm-2 col-form-label">Hari</label>
-                                    <div class="col-sm-10">
+                            <div class="border p-3 mt-2">
+                                <div class=" form-row mb-3">
+                                    <label class="col-sm-2 form-group  col-form-label">Hari</label>
+                                    <div class="col-sm-10 form-group ">
                                         <div class="form-check form-check-inline">
                                             <input v-model="jadwaljam.senin" class="form-check-input" type="checkbox"
                                                 id="senin" value="senin">
@@ -252,9 +253,9 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label class="col-md-2">Jam</label>
-                                    <div class="col-sm-10">
+                                <div class=" form-row">
+                                    <label class="form-group col-sm-2">Jam</label>
+                                    <div class="form-group col-sm-10">
                                         <select class="form-control" v-model="jadwaljam.jam" name="jam" id="jam">
                                             <option value="">pilih jam</option>
                                             @foreach ($datajam as $item)
@@ -265,9 +266,10 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
+                                <div class=" form-row">
                                     <div class="col-sm-10">
-                                        <button type="submit" v-on:click="buatjadwal" class="btn btn-primary gradient-1">Buat
+                                        <button type="submit" v-on:click="buatjadwal"
+                                            class="btn btn-primary gradient-1">Buat
                                             Jadwal</button>
                                     </div>
                                 </div>
@@ -275,16 +277,10 @@
                         </form>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="col-md-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Pie chart</h4>
-                                <canvas id="pieChart" width="400" height="250"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-7">
+                    <div class="col-md-12">
+
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">jadwal terisi</h4>
@@ -314,8 +310,10 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
+
             </div>
 
             <div class="col-md-4">
@@ -374,6 +372,25 @@
 
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">presentase jadwal dokter</h4>
+                        <canvas id="pieChart" width="400" height="250"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">presentase jadwal hari</h4>
+                        <canvas id="presentasiHari" width="400" height="250"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-8">
                 <div class="card">
@@ -449,6 +466,8 @@
 @section('script')
 <script src="{{asset('Componentadmin/plugins/tables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('Componentadmin/plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
+
+<script src="{{asset('Componentadmin/plugins/chart.js/Chart.bundle.min.js')}}"></script>
 {{-- <script src="{{asset('Componentadmin/plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script> --}}
 
 {{-- <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script> --}}
@@ -472,6 +491,15 @@
                 minggu: '',
                 jam: '',
             },
+            charthari: {
+                senin: '',
+                selasa: '',
+                rabu: '',
+                kamis: '',
+                jumat: '',
+                sabtu: '',
+                minggu: '',
+            },
             foto: "{{asset('/images/index.png')}}",
             dataDokter: [],
             panjang: '',
@@ -491,15 +519,102 @@
 
         },
         mounted: function () {
+            const vm = this;
             this.prepareTable();
+            var ctx = document.getElementById("pieChart");
+            ctx.height = 200;
+
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: [50, 30, 10, 10],
+                        backgroundColor: [
+                            "rgba(117, 113, 249,0.9)",
+                            "rgba(117, 113, 249,0.7)",
+                            "rgba(117, 113, 249,0.5)",
+                            "rgba(144,	104,	190,0.7)"
+                        ],
+                        hoverBackgroundColor: [
+                            "rgba(117, 113, 249,0.9)",
+                            "rgba(117, 113, 249,0.7)",
+                            "rgba(117, 113, 249,0.5)",
+                            "rgba(144,	104,	190,0.7)"
+                        ]
+
+                    }],
+                    labels: [
+                        "dokter",
+                        "terjadwal",
+                        "tidak terjadwal"
+                    ]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+            this.barChart();
+
         },
         methods: {
+            pie: function () {
+                axios.get('/pie_chart').then(resp => {
+
+                }).catch(error => {
+
+                });
+            },
+            barChart: function () {
+                const vm = this;
+                axios.get('/chart_hari').then(resp => {
+                    console.log(resp.data[0]);
+                    nomor = 0;
+                    $.each(this.charthari, function (index, value) {
+                        vm.charthari[index] = resp.data[nomor++];
+                    });
+                    Vue.nextTick(function () {
+                        var ctx = document.getElementById("presentasiHari");
+                        ctx.height = 200;
+                        var myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ["Senin", "Selasa", "Rabu", "Kamis",
+                                    "Jumat", "Sabtu", "Minggu"
+                                ],
+                                datasets: [{
+                                    label: "data presentase hari",
+                                    data: [vm.charthari.senin, vm.charthari
+                                        .selasa, vm.charthari.rabu,
+                                        vm.charthari.kamis, vm.charthari
+                                        .jumat, vm.charthari.sabtu,
+                                        vm.charthari.minggu
+                                    ],
+                                    borderColor: "rgba(117, 113, 249, 0.9)",
+                                    borderWidth: "0",
+                                    backgroundColor: "rgba(117, 113, 249, 0.5)"
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    });
+                }).catch(error => {
+                    swal("gagal", error.message, "error");
+                });
+            },
             prepareTable: function () {
                 this.tampil_tablejadwal();
                 $('#tabledokterlist').DataTable();
             },
             tampil_tablejadwal: function () {
-                 const self = this;
+                const self = this;
                 if (self.dataTableJadwal) {
                     self.data_jadwal = '';
                     self.dataTableJadwal.destroy(); //digunakan agar bisa reinit table
@@ -613,9 +728,9 @@
                     this.agama = Resp.data.agama;
                     this.alamat = Resp.data.alamat;
                     if (Resp.data.foto) {
-                    this.foto = "storage/fotoDokter/" + this.nama + "-" + Resp.data.NIK + "/" +
-                        Resp.data.foto;
-                    }else{
+                        this.foto = "storage/fotoDokter/" + this.nama + "-" + Resp.data.NIK + "/" +
+                            Resp.data.foto;
+                    } else {
                         this.foto = "{{asset('/images/index.png')}}";
                     }
                     this.jadwal();
@@ -638,6 +753,7 @@
                 $.each(this.form, function (index, value) {
                     form_data.append(index, value);
                 });
+
                 $.each(this.jadwaljam, function (index, value) {
                     form_data.append(index, value);
                 });
@@ -655,6 +771,7 @@
                     this.jadwaljam.minggu = "";
                     this.jadwaljam.jam = "";
                     this.jadwal();
+                    this.barChart();
                 }).catch(error => {
                     swal("gagal", "gagal buat jadwal dokter",
                         "error");
@@ -666,7 +783,7 @@
                     axios.get('/ambil_jadwal/' + this.id_dokter).then(response => {
                             if (response) {
                                 self.jadwalterisi = response.data;
-
+                                // todo
                             } else {
                                 alert(response);
                             }

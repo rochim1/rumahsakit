@@ -123,6 +123,8 @@ Route::group(['middleware' => 'authAdmin'], function () {
     Route::post('/ambil_tindakan/{id}', 'rscontroller@ambil_tindakan')->name('ambil_tindakan');
     Route::post('/simpan_tindakan', 'rscontroller@simpan_tindakan')->name('simpan_tindakan');
     Route::post('/edit_tindakan/{id}', 'rscontroller@edit_tindakan')->name('edit_tindakan');
+
     // Route::post('/simpan_tindakan', 'rscontroller@simpan_tindakan')->name('simpan_tindakan');
     // Route::post('/hapus_tindakan/{id}', 'rscontroller@hapus_tindakan')->name('hapus_tindakan');
+    Route::get('/chart_hari', 'chart@chart_hari')->name('chart_hari');
 });
