@@ -34,10 +34,11 @@ class Pasien extends Migration
             $table->text('kabupaten')->nullable();
             $table->text('provinsi')->nullable();
 
-            $table->text('asuransi')->nullable();
+            $table->unsignedBigInteger('asuransi')->nullable();
             $table->text('id_asuransi')->nullable();
 
-            $table->string('pekerjaan')->nullable();
+            $table->unsignedBigInteger('pekerjaan')->nullable();
+
             $table->string('status_nikah')->nullable();
 
             $table->string('ciri_fisik')->nullable();

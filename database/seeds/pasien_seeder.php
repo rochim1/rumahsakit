@@ -18,16 +18,20 @@ class pasien_seeder extends Seeder
     {
         // faker untuk indonesia
         $faker = Faker::create('id_ID');
+        $asuransi = array(1,2,3,4);
+        $warga = array('WNA','WNI');
         // menggunakan faker , dokumentasi : https://github.com/fzaninotto/Faker
         // insert data ke table pegawai menggunakan Faker
-        for ($i = 1; $i <= 134; $i++) {
+        for ($i = 1; $i <= 434; $i++) {
+            $rand_keys = array_rand($asuransi, 1);
+            $rand_keyswarga = array_rand($warga, 1);
             DB::table('pasien')->insert([
             'rekam_medis'=> "RM-". $faker->isbn10,
             'nama' => $faker->name,
             // 'jenisKelamin' => strval($faker->randomElements(array('L','P'),1)),
             'jenisKelamin' => 'P',
             'NIK' => $faker->isbn10 ,
-            'warga_negara' => 'WNA' ,
+            'warga_negara' => $warga[$rand_keyswarga] ,
             // 'agama' => $faker->randomElements(array ('islam','hindu','budha','kristen','islam','katolik'), 1),
             'agama' => "Islam",
             // 'status_pasien' => $faker->randomElements(array ('rawat jalan','rawat inap'), 1), //rawat inap / rawat jalan
@@ -38,14 +42,20 @@ class pasien_seeder extends Seeder
             'email' => $faker->email,
             'telpon' => $faker->e164PhoneNumber,
             'alamat' => $faker->address,
+
+            // 'kelurahan' => rand(),
+            // 'kecamatan' => $faker->stateAbbr,
+            // 'kabupaten' => $faker->state,
+            // 'provinsi' => $faker->city,
+
             'kelurahan' => $faker->address,
             'kecamatan' => $faker->stateAbbr,
-            'kabupaten' => $faker->state,
-            'provinsi' => $faker->city,
-            // 'asuransi' => $faker->randomElements(array ('non-asuransi','BPJS'), 1),
-            'asuransi' => "BPJS",
-            'asuransi' => "BPJS",
-            'pekerjaan' => $faker->jobTitle,
+            'kabupaten' => $faker->city,
+            'provinsi' => $faker->state,
+
+            'asuransi' => $asuransi[$rand_keys],
+            // 'pekerjaan' => $faker->jobTitle,
+            'pekerjaan' => rand(1,6),
             'email_verified_at' => Carbon::now()->format('Y-m-d H:i:s'),
             // dapat dikosongi (null)
             'password'=> $faker->password,

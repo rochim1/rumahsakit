@@ -25,6 +25,10 @@
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.semanticui.min.css"> --}}
     <style>
+        body, .form-control,input {
+            /* color: black; */
+            color: #212121;
+        }
         .swal-text{
             text-align: center;
         }

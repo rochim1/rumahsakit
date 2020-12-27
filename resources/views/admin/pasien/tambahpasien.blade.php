@@ -33,13 +33,14 @@
                     <div class="card-body">
                         <h4 class="card-title pb-2">Pendaftaran Pasien Baru</h4>
                         <form v-on:submit.prevent id="form_register">
-                            <div class="form-row" id="rekamMedis">
-                                <label class="col-sm-2 col-form-label">No. Rekam Medik</label>
-                                <div class="col-sm-8">
+
+                            <div class="form-row">
+                                <label class="form-group col-sm-2  col-form-label">No. Rekam Medik</label>
+                                <div class=" form-group col-sm-8">
                                     <input v-on:click.prevent id="rekammedis" v-model=" data_form.rekamMedis"
                                         type="text" class="form-control" readonly value="">
                                 </div>
-                                <div class="col-sm-2">
+                                <div class=" form-group col-sm-2">
                                     <button type="button" v-on:click="generate"
                                         class="btn btn-primary gradient-1">refresh</button>
                                 </div>
@@ -55,7 +56,6 @@
                                 </div>
 
                                 <div class="form-group col-sm-4">
-                                    {{-- <label for="jenis_kelamin">Jeis Kel.</label> --}}
                                     <select v-model="data_form.jenis_kelamin" class="form-control" name="jenis_kelamin"
                                         id="jk">
                                         <option value="">--- Jenis Kelamin ---</option>
@@ -182,10 +182,10 @@
                             <div class="form-row mt-2">
                                 <div class="col-sm-10 offset-sm-2">
                                     <button type="button" v-on:click="simpanpasien"
-                                        class="btn btn-primary gradient-1">Daftar</button>
-                                    <button type="reset" v-on:click="clear" class="btn btn-whatsapp">Clear</button>
+                                        class="btn form-group btn-primary gradient-1">Daftar</button>
+                                    <button type="reset" v-on:click="clear" class="btn form-group btn-whatsapp">Clear</button>
                                     <button type="button" v-on:click="printFormMedis"
-                                        class="btn btn-danger gradient-2">Cancel</button>
+                                        class="btn form-group btn-danger gradient-2">Cancel</button>
                                 </div>
                             </div>
                         </form>
@@ -208,6 +208,7 @@
                             <div class="form-group ">
                                 <label for="">cara pembayaran</label>
                                 <select v-model="data_form.asuransi" class="form-control" name="asuransi" id="jk">
+                                    <option value="">--- pilih asuransi ---</option>
                                     <option value="non-asuransi">--- Non-asuransi ---</option>
                                     <option value="BPJS">--- BPJS ---</option>
                                 </select>
@@ -220,6 +221,7 @@
                             <div class="form-group">
                                 <label>bahasa</label>
                                 <select name="bahasa" type="text" class="form-control" v-model="data_form.bahasa">
+                                    <option value="">pilih bahasa</option>
                                     @foreach ($bahasa as $item)
                                     <option value="{{$item->id}}">{{$item->nama_bahasa}}</option>
                                     @endforeach
@@ -228,7 +230,7 @@
                             <div class="form-group">
                                 <label>cacat fisik</label>
                                 <select name="cacatfisik" class="form-control" v-model="data_form.cacatfisik">
-
+                                    <option value="">cacat fisik</option>
                                     @foreach ($cacat as $item)
                                     <option value="{{$item->id_cacatfisik}}">{{$item->nama_cacat}}</option>
                                     @endforeach
@@ -237,23 +239,23 @@
 
                             <div class="form-group">
                                 <label>ciri fisik</label>
-                                <textarea v-model="cirifisik" class="form-control"></textarea>
+                                <textarea v-model="cirifisik" placeholder="ciri2 fisik" class="form-control"></textarea>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-8">
+                            <div class="row form-row">
+                                <div class="form-group col-md-8">
                                     <select name="infokeluarga" v-model="data_form.infokeluarga" class="form-control"
                                         id="">
-                                        <option value="0">--tambah info keluarga--</option>
+                                        <option value="">--tambah info keluarga--</option>
                                         <option value="1">ayah</option>
                                         <option value="2">ibu</option>
                                         <option value="3">anak</option>
                                         <option value="4">keluarga</option>
                                     </select>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="form-group col-md-4">
                                     <!-- Button trigger modal -->
-                                    <button type="button" class="m-0 btn btn-primary gradient-1" data-toggle="modal"
+                                    <button type="button" class=" m-0 btn btn-primary gradient-1" data-toggle="modal"
                                         data-target="#exampleModalCenter">
                                         tambah
                                     </button>
@@ -321,8 +323,8 @@
                         kecamatan: '',
                         kabupaten: '',
                         kota: '',
-
                         alamat: '',
+
                         foto: '',
 
                         asuransi: '',
@@ -331,6 +333,22 @@
                         bahasa: '',
                         infokeluarga: '',
                         cirifisik: '',
+                    },
+                    infoKel:{
+                        hubungan_kel:'',
+                        nama_kel:'',
+                        pekerjaan_kel:'',
+                        jenis_kel:'',
+                        telp_kel:'',
+                        email_kel:'',
+
+                        kelurahan: '',
+                        kecamatan: '',
+                        kabupaten: '',
+                        kota: '',
+                        alamat: '',
+
+                        alamat_kel:'',
                     }
                 },
                 mounted() {
@@ -389,7 +407,7 @@
                             id = $('#kota').html(
                                 '<option value="">--provinsi--</option>');
                             for (let index = 0; index < this.kota.length; index++) {
-                                id.append("<option value='" + this.kota[index].id +
+                                id.append("<option value='" + this.kota[index].nama +
                                     "'>" + this.kota[index].nama + '</option>');
                             }
                         });
@@ -412,7 +430,7 @@
                                 for (let index = 0; index < this.kabupaten
                                     .length; index++) {
                                     objkabupaten.append("<option value='" + this
-                                        .kabupaten[index].id + "'>" + this
+                                        .kabupaten[index].nama + "'>" + this
                                         .kabupaten[index].nama + "</option>")
                                 }
                             });
@@ -434,7 +452,7 @@
                                 for (let index = 0; index < this.kecamatan
                                     .length; index++) {
                                     objkecamatan.append("<option value='" + this
-                                        .kecamatan[index].id + "'>" + this
+                                        .kecamatan[index].nama + "'>" + this
                                         .kecamatan[index].nama + "</option>")
                                 }
                             });
@@ -455,7 +473,7 @@
                                 for (let index = 0; index < this.kelurahan
                                     .length; index++) {
                                     objkelurahan.append("<option value='" + this
-                                        .kelurahan[index].id + "'>" + this
+                                        .kelurahan[index].nama + "'>" + this
                                         .kelurahan[index].nama + "</option>")
                                 }
                             });

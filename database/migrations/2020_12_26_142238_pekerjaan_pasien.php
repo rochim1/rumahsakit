@@ -17,6 +17,10 @@ class PekerjaanPasien extends Migration
             $table->bigIncrements('id');
             $table->string('pekerjaan_pasien', 20);
         });
+
+        Schema::table('pasien', function (Blueprint $table) {
+            $table->foreign('pekerjaan')->references('id')->on('pekerjaan_pasien')->onUpdate('cascade')->onDelete('cascade');
+        });
     }
 
     /**

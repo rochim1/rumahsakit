@@ -18,10 +18,12 @@ class InformasiPasien extends Migration
             $table->unsignedBigInteger('id_pasien')->unsigned();
             $table->foreign('id_pasien')->references('id_pasien')->on('pasien')->onUpdate('cascade')->onDelete('cascade');
 
-            $table->string("asuransi")->nullable();
-            $table->string("id_asuransi")->nullable();
-            $table->string("cacat_fisik")->nullable();
-            $table->string("bahasa")->nullable();
+            // $table->string("asuransi")->nullable();
+            // $table->string("id_asuransi")->nullable();
+            $table->unsignedBigInteger("cacat_fisik")->nullable();
+            $table->foreign('cacat_fisik')->references('id_cacatfisik')->on('cacatfisik')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger("bahasa")->nullable();
+            $table->foreign('bahasa')->references('id')->on('bahasa')->onUpdate('cascade')->onDelete('cascade');
 
             $table->string("hubungan_keluarga")->nullable();
             $table->string("nama_keluarga")->nullable();
@@ -29,10 +31,10 @@ class InformasiPasien extends Migration
             $table->string("telpon")->nullable();
             $table->string("jenis_kelamin")->nullable();
 
-            $table->text('kelurahan', 30);
-            $table->text('kecamatan', 30);
-            $table->text('kabupaten', 30);
-            $table->text('provinsi', 30);
+            $table->text('kelurahan', 30)->nullable();
+            $table->text('kecamatan', 30)->nullable();
+            $table->text('kabupaten', 30)->nullable();
+            $table->text('provinsi', 30)->nullable();
             $table->string("alamat")->nullable();
 
             $table->timestamps();
