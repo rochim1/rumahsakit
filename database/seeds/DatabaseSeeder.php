@@ -14,7 +14,6 @@ class DatabaseSeeder extends Seeder
         // mendefinisikan seeder yang akan dijalankan
         // user admin
         $this->call(usersSeeder::class);
-        $this->call(pasien_seeder::class);
         $this->call(spesialis::class);
         $this->call(dokterSeed::class);
         $this->call(jadwal_jamSeeder::class);
@@ -28,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(tindakan_kedokteran::class);
         $this->call(bahasa::class);
         $this->call(kerjaPasien::class);
+        $this->call(pasien_seeder::class);
         $this->call(kerjaOperasional::class);
         $this->call(cacatfisik::class);
         $this->call(asuransi::class);

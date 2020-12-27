@@ -20,11 +20,13 @@ class pasien_seeder extends Seeder
         $faker = Faker::create('id_ID');
         $asuransi = array(1,2,3,4);
         $warga = array('WNA','WNI');
+        $status = array('rawat inap','rawat jalan', NULL);
         // menggunakan faker , dokumentasi : https://github.com/fzaninotto/Faker
         // insert data ke table pegawai menggunakan Faker
         for ($i = 1; $i <= 434; $i++) {
             $rand_keys = array_rand($asuransi, 1);
             $rand_keyswarga = array_rand($warga, 1);
+            $rand_keystatus = array_rand($status, 1);
             DB::table('pasien')->insert([
             'rekam_medis'=> "RM-". $faker->isbn10,
             'nama' => $faker->name,
@@ -35,18 +37,13 @@ class pasien_seeder extends Seeder
             // 'agama' => $faker->randomElements(array ('islam','hindu','budha','kristen','islam','katolik'), 1),
             'agama' => "Islam",
             // 'status_pasien' => $faker->randomElements(array ('rawat jalan','rawat inap'), 1), //rawat inap / rawat jalan
-            'status_pasien' => "rawat inap", //rawat inap / rawat jalan
+            'status_pasien' => $status[$rand_keystatus], //rawat inap / rawat jalan
             'tanggal_lahir'=> $faker->dateTime('now', null),
             'umur_daftar' => $faker->randomDigit,
             'lebih_bulan' => rand(0,12),
             'email' => $faker->email,
             'telpon' => $faker->e164PhoneNumber,
             'alamat' => $faker->address,
-
-            // 'kelurahan' => rand(),
-            // 'kecamatan' => $faker->stateAbbr,
-            // 'kabupaten' => $faker->state,
-            // 'provinsi' => $faker->city,
 
             'kelurahan' => $faker->address,
             'kecamatan' => $faker->stateAbbr,
