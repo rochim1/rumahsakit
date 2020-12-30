@@ -28,12 +28,13 @@ class rscontroller extends Controller
         return $hasil;
     }
     public function regpasien(){
+        $dataSpesialis = $this->dataSpesialis();
         $pekerjaanPasien = DB::table('pekerjaan_pasien')->select()->get();
         $asuransi = DB::table('asuransi')->select()->get();
         $cacat = DB::table('cacatfisik')->select()->get();
         $bahasa = DB::table('bahasa')->select()->get();
         $id_pasien = $this->rekmed();
-        return view('admin.pasien.tambahpasien', compact('id_pasien','cacat','asuransi', 'bahasa','pekerjaanPasien'));
+        return view('admin.pasien.tambahpasien', compact('id_pasien', 'dataSpesialis','cacat','asuransi', 'bahasa','pekerjaanPasien'));
     }
 
     public function randomPassword() {
@@ -77,10 +78,20 @@ class rscontroller extends Controller
         //     $flight->save();
     }
     public function daftarPasien(Request $request){
-        $alamat_detail = 'kelurahan ' . $request->{'kelurahan'} . ', kecamatan ' . $request->{'kecamatan'} . ', kabupaten ' . $request->{'kabupaten'}.', kota ' . $request->{'kota'} ;
+        $alamat_detail = 'kelurahan ' . $request->kelurahan . ', kecamatan ' . $request->kecamatan . ', kabupaten ' . $request->kabupaten.', kota ' . $request->kota ;
         $password = rand();
 
-        DB::table('pasien')->insert([
+        $id =  $request->rekamMedis;
+        $namafoto = '';
+        if ($request->hasFile('foto')) {
+            $datafoto = $request->file('foto');
+            $namafoto = $datafoto->getClientOriginalName() . '.' . $datafoto->getClientOriginalExtension();
+            // $namafoto = $datafoto->getClientOriginalName();
+            $request->file('foto')->storeAs('fotoPasien/' . $request->nama . '-' . $id, $namafoto);
+        }
+
+        // get last inserted id from db builder
+        $idpasien = DB::table('pasien')->insertGetId([
             'rekam_medis' => $request->rekamMedis,
             'nama' => $request->nama_baru,
             'jenisKelamin' => $request->jenis_kelamin,
@@ -110,8 +121,32 @@ class rscontroller extends Controller
             // 'deleted_at' =>
         ]);
 
+        DB::table('informasipasien')->insert([
+            "id_pasien" => $idpasien,
+            "bahasa" => $request->bahasa,
+            "ciri_fisik" => $request->cirifisik,
+            "cacat_fisik" => $request->cacatfisik,
+        ]);
+
+        if (isset($request->hubungan_kel)) {
+            DB::table('informasipasien')->where('id_pasien',$idpasien)->update([
+                "hubungan_keluarga" => $request->hubungan_kel,
+                "nama_keluarga" => $request->nama_kel,
+                "pekerjaan_keluarga" => $request->pekerjaan_kel,
+                "telpon" => $request->telp_kel,
+                "email" => $request->email_kel,
+                "jenis_kelamin" => $request->jenis_kel,
+                "kelurahan" => $request->kelurahan_kel,
+                "kecamatan" => $request->kecamatan_kel,
+                "kabupaten" => $request->kabupaten_kel,
+                "provinsi" => $request->kota_kel,
+                "alamat" => $request->alamat_kel,
+                "updated_at" => Carbon::now(),
+            ]);
+        }
+
         return response()->json([
-            "status"=>"success","message"=> ["nama"=> $request->nama_baru,"rekam"=> $request->rekamMedis]
+            "status"=>"success","message"=> ["nama"=> $idpasien,"rekam"=> $request->rekamMedis]
         ]);
     }
 

@@ -29,6 +29,10 @@
                     aria-controls="kedokteran" aria-selected="true">kedokteran</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" id="tindakan_laborat" data-toggle="tab" href="#laboratorium" role="tab"
+                    aria-controls="laboratorium" aria-selected="false">laboratorium</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" id="tindakan_keperawatan" data-toggle="tab" href="#keperawatan" role="tab"
                     aria-controls="keperawatan" aria-selected="false">keperawatan</a>
             </li>
@@ -186,6 +190,7 @@
                     </div>
                 </div>
             </div>
+            <div class="tab-pane fade" id="laboratorium" role="tabpanel" aria-labelledby="tindakan_laborat">...</div>
             <div class="tab-pane fade" id="keperawatan" role="tabpanel" aria-labelledby="tindakan_keperawatan">...</div>
             <div class="tab-pane fade" id="darurat" role="tabpanel" aria-labelledby="tindakan_darurat">...</div>
         </div>

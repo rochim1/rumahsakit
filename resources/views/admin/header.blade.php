@@ -25,16 +25,26 @@
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.semanticui.min.css"> --}}
     <style>
-        body, .form-control,input {
+        body,
+        .form-control,
+        input {
             /* color: black; */
             color: #212121;
         }
-        .swal-text{
+
+        ::placeholder {
+            color: #212121 !important;
+        }
+
+        .swal-text {
             text-align: center;
         }
-        button, .btn{
+
+        button,
+        .btn {
             color: white;
         }
+
     </style>
     @yield('style')
     @yield('uper_script')
@@ -462,7 +472,7 @@
                         <i class="menu-icon icon-bag"></i> <span class="nav-text">Attribute</span>
                     </a>
                     <ul aria-expanded="false">
-                         <li><a href="{{route('spesialis')}}">Spesialis dan Jabatan</a></li>
+                        <li><a href="{{route('spesialis')}}">Spesialis dan Jabatan</a></li>
                         <li><a href="{{route('tambahproduk')}}">Tambah Produk</a></li>
                         <li><a href="{{route('produkjunk')}}">trash</a></li>
                     </ul>

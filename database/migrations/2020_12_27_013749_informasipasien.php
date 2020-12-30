@@ -18,8 +18,7 @@ class InformasiPasien extends Migration
             $table->unsignedBigInteger('id_pasien')->unsigned();
             $table->foreign('id_pasien')->references('id_pasien')->on('pasien')->onUpdate('cascade')->onDelete('cascade');
 
-            // $table->string("asuransi")->nullable();
-            // $table->string("id_asuransi")->nullable();
+            $table->string("ciri_fisik")->nullable();
             $table->unsignedBigInteger("cacat_fisik")->nullable();
             $table->foreign('cacat_fisik')->references('id_cacatfisik')->on('cacatfisik')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger("bahasa")->nullable();
@@ -29,6 +28,7 @@ class InformasiPasien extends Migration
             $table->string("nama_keluarga")->nullable();
             $table->string("pekerjaan_keluarga")->nullable();
             $table->string("telpon")->nullable();
+            $table->string("email")->unique()->nullable();
             $table->string("jenis_kelamin")->nullable();
 
             $table->text('kelurahan', 30)->nullable();

@@ -14,6 +14,7 @@ class kota extends Controller
         // bisa pakai variabel data ataupun response sama saja
         $response = Http::get($url)->body();
         return response()->json($response);
+        // return $response;
     }
     public function getKabupaten($id_kota){
         $get = 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi='.$id_kota;

@@ -15,7 +15,7 @@ class Pasien extends Migration
     {
         Schema::create('pasien', function (Blueprint $table) {
             $table->id('id_pasien'); // sudah auto increment
-            $table->string('rekam_medis');
+            $table->string('rekam_medis')->unique();
             $table->string('nama')->comment('nama user');
             $table->string('jenisKelamin');
             $table->string('NIK')->unique();
@@ -35,7 +35,7 @@ class Pasien extends Migration
             $table->text('provinsi')->nullable();
 
             $table->unsignedBigInteger('asuransi')->nullable();
-            $table->text('id_asuransi')->nullable();
+            $table->integer('id_asuransi')->nullable()->comment('nanti dapat disesuaikan apakah type data ini sesuai');
 
             $table->unsignedBigInteger('pekerjaan')->nullable();
 

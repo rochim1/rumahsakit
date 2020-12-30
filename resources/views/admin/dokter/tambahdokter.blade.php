@@ -119,23 +119,23 @@
                             <div class="form-row ">
                                 <label class="col-sm-2 form-group col-form-label">nama</label>
                                 <div class="col-sm-6 form-group">
-                                    <input v-bind:class="{'is-invalid': errors.get('nama') }" v-model="form.nama"
+                                    <input  v-bind:class="{'is-invalid': errors.get('nama') }" v-model="form.nama"
                                         type="text" name="nama" class="form-control" id="nama" placeholder="Nama">
-                                    <small v-bind:class="{ collapse: isActive, 'text-danger': errors.get('nama') }">
+                                    <small  v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('nama') }">
                                         @{{errors.get('nama')}}
                                     </small>
                                 </div>
 
                                 <div class="form-group col-sm-4">
                                     {{-- <label for="jenis_kelamin">Jeis Kel.</label> --}}
-                                    <select v-bind:class="{'is-invalid': errors.get('jenis_kelamin') }"
+                                    <select     v-bind:class="{'is-invalid': errors.get('jenis_kelamin') }"
                                         v-model="form.jenis_kelamin" class="form-control" name="jenis_kelamin" id="jk">
                                         <option value="">--- Jenis Kelamin ---</option>
                                         <option value="L">laki-laki</option>
                                         <option value="P">Perempuan</option>
                                     </select>
                                     <small
-                                        v-bind:class="{ collapse: isActive, 'text-danger': errors.get('jenis_kelamin') }">
+                                            v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('jenis_kelamin') }">
                                         @{{errors.get('jenis_kelamin')}}
                                     </small>
                                 </div>
@@ -144,18 +144,18 @@
                             <div class="form-row">
                                 <label class="col-sm-2 form-group col-form-label">NIK</label>
                                 <div class="form-group col-sm-6">
-                                    <input v-bind:class="{'is-invalid': errors.get('NIK') }" v-model="form.NIK"
+                                    <input  v-bind:class="{'is-invalid': errors.get('NIK') }" v-model="form.NIK"
                                         type="number" name="nik" class="form-control" id="NIK" placeholder="NIK">
-                                    <small v-bind:class="{ collapse: isActive, 'text-danger': errors.get('NIK') }">
+                                    <small  v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('NIK') }">
                                         @{{errors.get('NIK')}}
                                     </small>
                                 </div>
                                 <div class="col-md-4 form-group">
-                                    <input v-bind:class="{'is-invalid': errors.get('tanggal_lahir') }"
+                                    <input  v-bind:class="{'is-invalid': errors.get('tanggal_lahir') }"
                                         v-model="form.tanggal_lahir" class="form-control" placeholder="tanggal lahir"
                                         type="date" name="tanggal_lahir">
                                     <small
-                                        v-bind:class="{ collapse: isActive, 'text-danger': errors.get('tanggal_lahir') }">
+                                            v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('tanggal_lahir') }">
                                         @{{errors.get('tanggal_lahir')}}
                                     </small>
                                 </div>
@@ -164,11 +164,11 @@
                             <div class="form-row">
                                 <label class="col-sm-2 form-group col-form-label">nomor str</label>
                                 <div class="form-group col-sm-5">
-                                    <input v-bind:class="{'is-invalid': errors.get('nomor_str') }"
+                                    <input  v-bind:class="{'is-invalid': errors.get('nomor_str') }"
                                         v-model="form.nomor_str" type="number" name="nomor_Str" class="form-control"
                                         id="str" placeholder="nomor_str">
                                     <small
-                                        v-bind:class="{ collapse: isActive, 'text-danger': errors.get('nomor_str') }">
+                                            v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('nomor_str') }">
                                         @{{errors.get('nomor_str')}}
                                     </small>
                                 </div>
@@ -177,11 +177,11 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text" id="inputGroupPrepend3">@</span>
                                         </div>
-                                        <input v-bind:class="{'is-invalid': errors.get('email') }" v-model="form.email"
+                                        <input  v-bind:class="{'is-invalid': errors.get('email') }" v-model="form.email"
                                             type="email" name="email" class="form-control" id="email"
                                             placeholder="email">
                                     </div>
-                                    <small v-bind:class="{ collapse: isActive, 'text-danger': errors.get('email') }">
+                                    <small  v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('email') }">
                                         @{{errors.get('email')}}
                                     </small>
                                 </div>
@@ -190,10 +190,10 @@
                             <div class="form-row">
                                 <label class="col-sm-2 form-group col-form-label">nomor telpon</label>
                                 <div class="form-group col-md-10">
-                                    <input type="number" v-bind:class="{'is-invalid': errors.get('telpon') }"
+                                    <input type="number"    v-bind:class="{'is-invalid': errors.get('telpon') }"
                                         type="text" v-model="form.telpon" class="form-control" placeholder=""
                                         name="telpon">
-                                    <small v-bind:class="{ collapse: isActive, 'text-danger': errors.get('telpon') }">
+                                    <small  v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('telpon') }">
                                         @{{errors.get('telpon')}}
                                     </small>
                                 </div>
@@ -203,7 +203,7 @@
                                 <label class="col-sm-2 form-group col-form-label">dokter spesialis</label>
                                 <div class="form-group col-md-6">
                                     {{-- {{dd($dataSpesialis)}} --}}
-                                    <select v-bind:class="{'is-invalid': errors.get('spesialis') }"
+                                    <select     v-bind:class="{'is-invalid': errors.get('spesialis') }"
                                         v-model="form.spesialis" class="form-control" v-model="spesialis"
                                         name="spesialis" id="spesialis">
                                         @foreach ($dataSpesialis as $item)
@@ -211,16 +211,16 @@
                                         @endforeach
                                     </select>
                                     <small
-                                        v-bind:class="{ collapse: isActive, 'text-danger': errors.get('spesialis') }">
+                                            v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('spesialis') }">
                                         @{{errors.get('spesialis')}}
                                     </small>
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <input v-bind:class="{'is-invalid': errors.get('universitas') }" type="text"
+                                    <input  v-bind:class="{'is-invalid': errors.get('universitas') }" type="text"
                                         v-model="form.universitas" class="form-control" placeholder="lulusan univ"
                                         name="lulusan">
                                     <small
-                                        v-bind:class="{ collapse: isActive, 'text-danger': errors.get('universitas') }">
+                                            v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('universitas') }">
                                         @{{errors.get('universitas')}}
                                     </small>
                                 </div>
@@ -229,7 +229,7 @@
                             <div class="form-row">
                                 <label class="col-sm-2 form-group col-form-label">Jabatan</label>
                                 <div class="col-md-4 form-group">
-                                    <select v-bind:class="{'is-invalid': errors.get('jabatan') }" v-model="form.jabatan"
+                                    <select     v-bind:class="{'is-invalid': errors.get('jabatan') }" v-model="form.jabatan"
                                         type="text" class="form-control" placeholder="jabatan" name="jabatan">
                                         <option value="">-- jabatan --</option>
                                         @foreach ($dataJabatan as $item)
@@ -237,13 +237,13 @@
                                         @endforeach
                                         <select>
                                             <small
-                                                v-bind:class="{ collapse: isActive, 'text-danger': errors.get('jabatan') }">
+                                                    v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('jabatan') }">
                                                 @{{errors.get('jabatan')}}
                                             </small>
                                 </div>
                                 <label class="col-sm-2 form-group col-form-label">Agama</label>
                                 <div class="form-group col-sm-4">
-                                    <select v-bind:class="{'is-invalid': errors.get('agama') }" v-model="form.agama"
+                                    <select     v-bind:class="{'is-invalid': errors.get('agama') }" v-model="form.agama"
                                         class="form-control" name="agama" id="agama">
                                         <option value="">--- Agama ---</option>
                                         <option value="Islam">Islam</option>
@@ -253,7 +253,7 @@
                                         <option value="Budha">Budha</option>
                                         <option value="Konghucu">Konghucu</option>
                                     </select>
-                                    <small v-bind:class="{ collapse: isActive, 'text-danger': errors.get('agama') }">
+                                    <small  v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('agama') }">
                                         @{{errors.get('agama')}}
                                     </small>
                                 </div>
@@ -261,9 +261,9 @@
                             <div class="form-row">
                                 <label class="col-sm-2 form-group col-form-label">Alamat</label>
                                 <div class="col-md-10 form-group">
-                                    <textarea v-bind:class="{'is-invalid': errors.get('alamat') }" v-model="form.alamat"
+                                    <textarea   v-bind:class="{'is-invalid': errors.get('alamat') }" v-model="form.alamat"
                                         name="alamat" class="form-control"></textarea>
-                                    <small v-bind:class="{ collapse: isActive, 'text-danger': errors.get('alamat') }">
+                                    <small  v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('alamat') }">
                                         @{{errors.get('alamat')}}
                                     </small>
                                 </div>
@@ -275,7 +275,7 @@
                                         <img v-bind:src="fotoData" class="img-rounded img-thumbnail m-2"
                                             style="width: 150px; height:auto;">
                                     </div>
-                                    <small v-bind:class="{ collapse: isActive, 'text-danger': errors.get('foto') }">
+                                    <small  v-bind:class="{ collapse: isActive, 'invalid-tooltip': errors.get('foto') }">
                                         @{{errors.get('foto')}}
                                     </small>
                                     <input v-on:change="onImageChange" type="file" name="foto" class="form-control">
@@ -314,6 +314,7 @@
                 <div class="card" id="daftar_recent">
                     <div class="card-body">
                         <h4>Dokter Last Input</h4>
+                        @{{last_dokter}}
                         <div class="list-group" v-for="item in last_dokter">
                             <span style="display: flex" class="row list-group-item list-group-item-action">
                                 <span class="col-md-8">
@@ -391,10 +392,6 @@
     let vue = new Vue({
         el: "#vueField",
         data: {
-            classObject: {
-                collapse: true,
-                'text-danger': true
-            },
             isActive: false,
             hasError: true,
             id_dokter: '',
