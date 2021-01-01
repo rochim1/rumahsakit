@@ -471,11 +471,10 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="col-form-label">pilih dokter</label>
-                                        <select v-model="dokter" :click="tampildokter" class="form-control" name="pemeriksaan_lab" id="lab_periksa">
-                                            <option value="">--- pilih lab ---</option>
-                                            @foreach ($dataSpesialis as $item)
-                                            <option value="{{$item->id_spesialis}}">{{$item->spesialis}}</option>
-                                            @endforeach
+                                        <select v-model="dokter" v-on:click="tampildokter" class="form-control" name="pemeriksaan_lab" id="lab_periksa">
+                                            <option value="">--- pilih dokter ---</option>
+                                            <option v-for="item in dataDokter" :value="item.id_dokter">@{{item.nama_dokter}}</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -507,7 +506,7 @@
                         hari: '',
                         jam: '',
                     },
-                    dokter:'';
+                    dokter:'',
                     dataDokter: [],
                     fotoData: "{{asset('/images/index.png')}}",
                     kota: [],
@@ -827,13 +826,15 @@
                         }
                     },
                     tampildokter: function () {
-                        if (this.jam && this.hari) {
+                        if (this.periksa.jam && this.periksa.hari) {
                             var data = new FormData();
+
                             $.each(this.periksa, function (index, value) {
                                 data.append(index, value);
                             });
-                            axios.get('/listdoktersekarang', data).then(respon => {
-                                    alert(respon.data)
+
+                            axios.post('/listdoktersekarang', data).then(respon => {
+                                this.dataDokter = respon.data;
                             }).catch(error => {
 
                             });

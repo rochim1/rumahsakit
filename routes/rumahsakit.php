@@ -126,7 +126,7 @@ Route::group(['middleware' => 'authAdmin'], function () {
     Route::post('/edit_tindakan/{id}', 'rscontroller@edit_tindakan')->name('edit_tindakan');
 
     Route::get('/jadwalsekarang', 'rscontroller@jadwalsekarang')->name('jadwal_sekarang');
-    Route::get('/listdoktersekarang', 'rscontroller@listdoktersekarang')->name('listdoktersekarang');
+    Route::post('/listdoktersekarang', 'rscontroller@listdoktersekarang')->name('listdoktersekarang');
     // Route::post('/simpan_tindakan', 'rscontroller@simpan_tindakan')->name('simpan_tindakan');
     // Route::post('/hapus_tindakan/{id}', 'rscontroller@hapus_tindakan')->name('hapus_tindakan');
     Route::get('/chart_hari', 'chart@chart_hari')->name('chart_hari');

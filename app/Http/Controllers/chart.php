@@ -19,13 +19,13 @@ class chart extends Controller
     {
         $datadokter = DB::table('jadwaldokter')->select()->get();
 
-        $senin = $datadokter->where('hari','senin')->count();
-        $selasa = $datadokter->where('hari','selasa')->count();
-        $rabu = $datadokter->where('hari','rabu')->count();
-        $kamis = $datadokter->where('hari','kamis')->count();
-        $jumat = $datadokter->where('hari','jumat')->count();
-        $sabtu = $datadokter->where('hari','sabtu')->count();
-        $minggu = $datadokter->where('hari','minggu')->count();
+        $senin = $datadokter->where('hari','Senin')->count();
+        $selasa = $datadokter->where('hari','Selasa')->count();
+        $rabu = $datadokter->where('hari','Rabu')->count();
+        $kamis = $datadokter->where('hari','Kamis')->count();
+        $jumat = $datadokter->where('hari','Jumat')->count();
+        $sabtu = $datadokter->where('hari','Sabtu')->count();
+        $minggu = $datadokter->where('hari','Minggu')->count();
 
         return ([$senin,$selasa,$rabu,$kamis,$jumat,$sabtu,$minggu]);
 

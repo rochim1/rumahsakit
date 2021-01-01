@@ -719,7 +719,7 @@ class rscontroller extends Controller
     }
     public function buatjadwal(Request $request, $id)
     {
-        $datahari = array('senin','selasa','rabu','kamis','jumat','sabtu','minggu');
+        $datahari = array('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu');
         foreach ($datahari as $key => $value) {
             if ($request->$value) {
                 DB::table('jadwaldokter')->insert([
@@ -736,24 +736,42 @@ class rscontroller extends Controller
     }
     public function jadwalsekarang()
     {
-        $jam = Carbon::now()->format('H:i');
+        $jam = Carbon::now()->format('H:i:s');
         $hari = Carbon::now()->translatedFormat('l');
         return response()->json(["status" => "success", "jam" => $jam, "hari" => $hari]);
     }
     public function listdoktersekarang(Request $request)
     {
-        $jam = $request->jam;
         $hari = $request->hari;
         $poli = $request->poli;
-        $dapat = DB::table('jadwaldokter as j')
-        ->join('dokter as d', 'd.spesialis', '=', $request->poli)
-            ->join('jadwaljam as jj', 'j.id_jam', '=', 'jj.id')
-            ->select()
-            ->where('spesialis', $hari)
-            ->where('hari', $hari)
+
+        $hasiljJam = 0 ;
+        $jam = $request->jam;
+        $jam = strtotime($jam);
+        $jam = date('H:i:s', $jam);
+
+        $lastTime = DB::table('jadwaljam')->where('jam_selesai', DB::raw("(select max(`jam_selesai`) from jadwaljam)"))->select('jam_selesai')->first();
+        $lastTime = strtotime($lastTime->jam_selesai);
+        $lastTime = date('H:i:s', $lastTime);
+
+        if ($jam >= $lastTime) {
+            $hasiljJam = count(DB::table('jadwaljam')->select()->get());
+        }else{
+            $hasiljJam = DB::table('jadwaljam')
             ->where('jam_mulai', '<=', $jam)
             ->where('jam_selesai', '>=', $jam)
+            ->select('id')
             ->get();
+        }
+
+        $dapat = DB::table('jadwaldokter as j')
+        ->join('dokter as d', 'd.id_dokter', '=', 'j.id_dokter')
+        ->join('jadwaljam as jj', 'j.id_jam', '=', 'jj.id')
+        ->where('jj.id', $hasiljJam)
+        ->where('d.spesialis', $poli)
+        ->where('j.hari', $hari)
+        ->select()
+        ->get();
         return response()->json($dapat);
     }
 }

@@ -213,39 +213,39 @@
                                     <label class="col-sm-2 form-group  col-form-label">Hari</label>
                                     <div class="col-sm-10 form-group ">
                                         <div class="form-check form-check-inline">
-                                            <input v-model="jadwaljam.senin" class="form-check-input" type="checkbox"
-                                                id="senin" value="senin">
+                                            <input v-model="jadwaljam.Senin" class="form-check-input" type="checkbox"
+                                                id="Senin" value="Senin">
                                             <label class="form-check-label" for="Senin">Senin</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input v-model="jadwaljam.selasa" class="form-check-input" type="checkbox"
-                                                id="selasa" value="selasa">
+                                            <input v-model="jadwaljam.Selasa" class="form-check-input" type="checkbox"
+                                                id="Selasa" value="Selasa">
                                             <label class="form-check-label" for="Selasa">Selasa</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input v-model="jadwaljam.rabu" class="form-check-input" type="checkbox"
-                                                id="rabu" value="rabu">
+                                            <input v-model="jadwaljam.Rabu" class="form-check-input" type="checkbox"
+                                                id="Rabu" value="Rabu">
                                             <label class="form-check-label" for="Rabu">Rabu</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input v-model="jadwaljam.kamis" class="form-check-input" type="checkbox"
-                                                id="kamis" value="kamis">
+                                            <input v-model="jadwaljam.Kamis" class="form-check-input" type="checkbox"
+                                                id="Kamis" value="Kamis">
                                             <label class="form-check-label" for="Kamis">Kamis</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input v-model="jadwaljam.jumat" class="form-check-input" type="checkbox"
-                                                id="jumat" value="Jumat">
-                                            <label class="form-check-label" for="jumat">Jumat</label>
+                                            <input v-model="jadwaljam.Jumat" class="form-check-input" type="checkbox"
+                                                id="Jumat" value="Jumat">
+                                            <label class="form-check-label" for="Jumat">Jumat</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input v-model="jadwaljam.sabtu" class="form-check-input" type="checkbox"
-                                                id="sabtu" value="Sabtu">
-                                            <label class="form-check-label" for="sabtu">Sabtu</label>
+                                            <input v-model="jadwaljam.Sabtu" class="form-check-input" type="checkbox"
+                                                id="Sabtu" value="Sabtu">
+                                            <label class="form-check-label" for="Sabtu">Sabtu</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input v-model="jadwaljam.minggu" class="form-check-input is-invalid"
-                                                type="checkbox" id="minggu" value="Minggu">
-                                            <label class="form-check-label" for="minggu">Minggu (UGD)</label>
+                                            <input v-model="jadwaljam.Minggu" class="form-check-input is-invalid"
+                                                type="checkbox" id="Minggu" value="Minggu">
+                                            <label class="form-check-label" for="Minggu">Minggu (UGD)</label>
                                         </div>
                                         <br>
                                         <small class="">pilih hari dengan jadwal jam yang sama, jika jam pada hari
@@ -482,23 +482,23 @@
                 search: '',
             },
             jadwaljam: {
-                senin: '',
-                selasa: '',
-                rabu: '',
-                kamis: '',
-                jumat: '',
-                sabtu: '',
-                minggu: '',
+                Senin: '',
+                Selasa: '',
+                Rabu: '',
+                Kamis: '',
+                Jumat: '',
+                Sabtu: '',
+                Minggu: '',
                 jam: '',
             },
             charthari: {
-                senin: '',
-                selasa: '',
-                rabu: '',
-                kamis: '',
-                jumat: '',
-                sabtu: '',
-                minggu: '',
+                Senin: '',
+                Selasa: '',
+                Rabu: '',
+                Kamis: '',
+                Jumat: '',
+                Sabtu: '',
+                Minggu: '',
             },
             foto: "{{asset('/images/index.png')}}",
             dataDokter: [],
@@ -583,11 +583,11 @@
                                 ],
                                 datasets: [{
                                     label: "data presentase hari",
-                                    data: [vm.charthari.senin, vm.charthari
-                                        .selasa, vm.charthari.rabu,
-                                        vm.charthari.kamis, vm.charthari
-                                        .jumat, vm.charthari.sabtu,
-                                        vm.charthari.minggu
+                                    data: [vm.charthari.Senin, vm.charthari
+                                        .Selasa, vm.charthari.Rabu,
+                                        vm.charthari.Kamis, vm.charthari
+                                        .Jumat, vm.charthari.Sabtu,
+                                        vm.charthari.Minggu
                                     ],
                                     borderColor: "rgba(117, 113, 249, 0.9)",
                                     borderWidth: "0",
@@ -762,13 +762,14 @@
                     Swal.fire("berhasil membuat jadwal",
                         resp.data.message,
                         "success");
-                    this.jadwaljam.senin = "";
-                    this.jadwaljam.selasa = "";
-                    this.jadwaljam.rabu = "";
-                    this.jadwaljam.kamis = "";
-                    this.jadwaljam.jumat = "";
-                    this.jadwaljam.sabtu = "";
-                    this.jadwaljam.minggu = "";
+                        // alert(this.jadwaljam.Senin);
+                    this.jadwaljam.Senin = "";
+                    this.jadwaljam.Selasa = "";
+                    this.jadwaljam.Rabu = "";
+                    this.jadwaljam.Kamis = "";
+                    this.jadwaljam.Jumat = "";
+                    this.jadwaljam.Sabtu = "";
+                    this.jadwaljam.Minggu = "";
                     this.jadwaljam.jam = "";
                     this.jadwal();
                     this.barChart();
