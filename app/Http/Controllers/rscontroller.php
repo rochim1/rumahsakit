@@ -761,7 +761,8 @@ class rscontroller extends Controller
             ->where('jam_mulai', '<=', $jam)
             ->where('jam_selesai', '>=', $jam)
             ->select('id')
-            ->get();
+            ->first();
+            $hasiljJam = $hasiljJam->id;
         }
 
         $dapat = DB::table('jadwaldokter as j')

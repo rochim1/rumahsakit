@@ -358,6 +358,7 @@
                             <li><a href="{{route('masterdokter')}}">Master Dokter</a></li>
                             <li><a href="{{route('tambahdokter')}}">tambah dokter</a></li>
                             <li><a href="{{route('jadwaldokter')}}">jadwal dokter</a></li>
+                            <li><a href="{{route('jadwaldokter')}}">pasien pending</a></li>
                         </ul>
                     </li>
 

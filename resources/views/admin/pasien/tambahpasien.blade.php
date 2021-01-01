@@ -387,13 +387,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-                Launch static backdrop modal
-            </button>
 
             <!-- Modal -->
-            <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog"
+            <div class="modal fade" id="Modalpemeriksaan" data-backdrop="static" tabindex="-1" role="dialog"
                 aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -433,8 +429,8 @@
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label class="col-form-label">pilih hari</label>
-                                                <select class="form-control" v-model="periksa.hari" name="pemeriksaan_lab"
-                                                    id="lab_periksa">
+                                                <select class="form-control" v-model="periksa.hari"
+                                                    name="pemeriksaan_lab" id="lab_periksa">
                                                     <option value="">--- pilih hari ---</option>
                                                     <option value="Senin">senin</option>
                                                     <option value="Selasa">selasa</option>
@@ -471,9 +467,11 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="col-form-label">pilih dokter</label>
-                                        <select v-model="dokter" v-on:click="tampildokter" class="form-control" name="pemeriksaan_lab" id="lab_periksa">
+                                        <select v-model="dokter" v-on:click="tampildokter" class="form-control"
+                                            name="pemeriksaan_lab" id="lab_periksa">
                                             <option value="">--- pilih dokter ---</option>
-                                            <option v-for="item in dataDokter" :value="item.id_dokter">@{{item.nama_dokter}}</option>
+                                            <option v-for="item in dataDokter" :value="item.id_dokter">
+                                                @{{item.nama_dokter}}</option>
 
                                         </select>
                                     </div>
@@ -491,7 +489,7 @@
                             <button type="button" class="btn btn-secondary gradient-2"
                                 data-dismiss="modal">Close</button>
                             <a href="" class="btn btn-primary gradient-4">Advance</a>
-                            <button type="button" class="btn btn-primary gradient-1">Understood</button>
+                            <button type="button" class="btn btn-primary gradient-1">Ok</button>
                         </div>
                     </div>
                 </div>
@@ -506,7 +504,7 @@
                         hari: '',
                         jam: '',
                     },
-                    dokter:'',
+                    dokter: '',
                     dataDokter: [],
                     fotoData: "{{asset('/images/index.png')}}",
                     kota: [],
@@ -664,17 +662,33 @@
                                 $.each(this.infotambahan, function (index, value) {
                                     data.append(index, value);
                                 });
-                            }
+                            };
 
                             axios.post("{{route('daftarPasien')}}", data)
                                 .then(Respon => {
                                     console.log(Respon.data.message.nama);
-                                    Swal.fire("Berhasil Input Pasien!",
-                                        Respon.data.message.nama +
-                                        " dengan No.RM : " +
-                                        Respon.data.message.rekam, "success");
+                                    const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: 'top-end',
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                        didOpen: (toast) => {
+                                            toast.addEventListener('mouseenter', Swal
+                                                .stopTimer)
+                                            toast.addEventListener('mouseleave', Swal
+                                                .resumeTimer)
+                                        }
+                                    })
+
+                                    Toast.fire({
+                                        icon: 'success',
+                                        title: "Berhasil Input Pasien!" + Respon.data.message
+                                            .nama
+                                    });
                                     this.clear();
                                     this.generate();
+                                    $("#Modalpemeriksaan").modal('show');
                                 })
                                 .catch(err => {
                                     Swal.fire("Gagal Input Pasien!",
@@ -686,7 +700,6 @@
                         }
                     },
                     umur: function () {
-                        this.data_form.tgl_lahir = $("#mdate").val();
                         if (this.data_form.tgl_lahir) {
                             bulan = this.data_form.tgl_lahir.substr(5, 2).toString();
                             tanggal = this.data_form.tgl_lahir.substr(8, 2).toString();
@@ -834,9 +847,30 @@
                             });
 
                             axios.post('/listdoktersekarang', data).then(respon => {
-                                this.dataDokter = respon.data;
-                            }).catch(error => {
+                                if (respon.data) {
+                                    this.dataDokter = respon.data;
+                                } else {
+                                    const Toast = Swal.mixin({
+                                        toast: true,
+                                        position: 'top-end',
+                                        showConfirmButton: false,
+                                        timer: 3000,
+                                        timerProgressBar: true,
+                                        didOpen: (toast) => {
+                                            toast.addEventListener('mouseenter', Swal
+                                                .stopTimer)
+                                            toast.addEventListener('mouseleave', Swal
+                                                .resumeTimer)
+                                        }
+                                    })
 
+                                    Toast.fire({
+                                        icon: 'error',
+                                        title: 'jadwal dokter kosong'
+                                    })
+                                }
+                            }).catch(error => {
+                                Swal.fire('error', error.message, 'error');
                             });
                         }
                     },
@@ -846,23 +880,7 @@
                             this.periksa.jam = respon.data.jam;
                             this.periksa.hari = respon.data.hari;
                         }).catch(error => {
-                            const Toast = Swal.mixin({
-                                toast: true,
-                                position: 'top-end',
-                                showConfirmButton: false,
-                                timer: 3000,
-                                timerProgressBar: true,
-                                didOpen: (toast) => {
-                                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                                    toast.addEventListener('mouseleave', Swal
-                                        .resumeTimer)
-                                }
-                            })
-
-                            Toast.fire({
-                                icon: 'error',
-                                title: 'jadwal dokter kosong'
-                            })
+                            Swal.fire("error", "Gagal otomatisasi waktu", "error");
                         })
                     }
                 },
