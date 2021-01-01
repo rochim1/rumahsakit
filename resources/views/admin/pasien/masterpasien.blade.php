@@ -13,7 +13,7 @@
                     <div class="card-body">
                         <h3 class="card-title text-white">Pasien Terdaftar</h3>
                         <div class="d-inline-block">
-                        <h2 class="text-white">{{$jumlahPasien}}</h2>
+                            <h2 class="text-white">{{$jumlahPasien}}</h2>
                             {{-- <p class="text-white mb-0">Jan - March 2019</p> --}}
                         </div>
                         <span class="float-right display-5 opacity-5"><span class="iconify"
@@ -26,7 +26,7 @@
                     <div class="card-body">
                         <h3 class="card-title text-white">Pasien Rawat Inap</h3>
                         <div class="d-inline-block">
-                        <h2 class="text-white">{{ $jumlahRawatInap}}</h2>
+                            <h2 class="text-white">{{ $jumlahRawatInap}}</h2>
                             {{-- <p class="text-white mb-0">Jan - March 2019</p> --}}
                         </div>
                         <span class="float-right display-5 opacity-5"><span class="iconify"
@@ -39,7 +39,7 @@
                     <div class="card-body">
                         <h3 class="card-title text-white">Pasien Berasuransi</h3>
                         <div class="d-inline-block">
-                        <h2 class="text-white">{{ $jumlahAsuransi }}</h2>
+                            <h2 class="text-white">{{ $jumlahAsuransi }}</h2>
                             {{-- <p class="text-white mb-0">Jan - March 2019</p> --}}
                         </div>
                         <span class="float-right display-5 opacity-5"><span class="iconify"
@@ -52,7 +52,7 @@
                     <div class="card-body">
                         <h3 class="card-title text-white">Pasien Non-asuransi</h3>
                         <div class="d-inline-block">
-                        <h2 class="text-white">{{$jumlahTanpaAsuransi}}</h2>
+                            <h2 class="text-white">{{$jumlahTanpaAsuransi}}</h2>
                             {{-- <p class="text-white mb-0">Jan - March 2019</p> --}}
                         </div>
                         <span class="float-right display-5 opacity-5"><span class="iconify" data-icon="bx:bx-shield-x"
@@ -61,6 +61,36 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Line chart</h4>
+                        <canvas id="lineChart" width="500" height="250"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Doughut chart</h4>
+                        <canvas id="doughutChart" width="500" height="250"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Single Bar Chart</h4>
+                        <canvas id="singelBarChart" width="500" height="250"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -82,20 +112,24 @@
                                 </thead>
                                 <tbody>
                                     @php
-                                        $no = 1;
+                                    $no = 1;
                                     @endphp
                                     @foreach ($pasien as $item)
-                                            <tr>
-                                                <td style="width: 20px">{{$no++}}</td>
-                                                <td>{{$item->nama}}</td>
-                                                <td>{{$item->rekam_medis}}</td>
-                                                <td>{{$item->jenisKelamin}}</td>
-                                                <td>{{$item->NIK}}</td>
-                                                <td>{{$item->telpon}}</td>
-                                                <td>{{$item->status}}</td>
-                                            <td style="width: 150px; font-size: 16px" class="text-center"><a href="{{url('edit_pasien/'.$item->id_pasien)}}"><span class="icon-pencil"></span> edit</a> | <a href="#"><span class="icon-trash text-danger"></span> hapus</a></td></td>
-                                            </tr>
-                                           @endforeach
+                                    <tr>
+                                        <td style="width: 20px">{{$no++}}</td>
+                                        <td>{{$item->nama}}</td>
+                                        <td>{{$item->rekam_medis}}</td>
+                                        <td>{{$item->jenisKelamin}}</td>
+                                        <td>{{$item->NIK}}</td>
+                                        <td>{{$item->telpon}}</td>
+                                        <td>{{$item->status}}</td>
+                                        <td style="width: 150px; font-size: 16px" class="text-center"><a
+                                                href="{{url('edit_pasien/'.$item->id_pasien)}}"><span
+                                                    class="icon-pencil"></span> edit</a> | <a href="#"><span
+                                                    class="icon-trash text-danger"></span> hapus</a></td>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
 
@@ -103,15 +137,16 @@
                         <script>
                             new Vue({
                                 el: "#listPasien",
-                                data : {
+                                data: {
 
                                 },
-                                methods : {
+                                methods: {
                                     tampilPasien: function (params) {
                                         axios.get("daftarPasien").then()
                                     }
                                 }
                             })
+
                         </script>
                     </div>
                 </div>
@@ -210,5 +245,8 @@
 <script src="{{asset('Componentadmin/plugins/tables/js/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('Componentadmin/plugins/tables/js/datatable/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{asset('Componentadmin/plugins/tables/js/datatable-init/datatable-basic.min.js')}}"></script>
-@endsection
 
+<script src="{{asset('Componentadmin/plugins/chart.js/Chart.bundle.min.js')}}"></script>
+{{-- todo : perlu dibenahi untuk inisialisasinya --}}
+<script src="{{asset('Componentadmin/js/plugins-init/chartjs-init.js')}}"></script>
+@endsection

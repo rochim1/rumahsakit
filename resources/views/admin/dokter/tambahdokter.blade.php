@@ -313,7 +313,7 @@
             <div class="col-md-4">
                 <div class="card" id="daftar_recent">
                     <div class="card-body">
-                        <h4>Dokter Last Input</h4>
+                        <h4>Recent new Dokter</h4>
                         <div class="list-group" v-for="item in last_dokter">
                             <span style="display: flex" class="row list-group-item list-group-item-action">
                                 <span class="col-md-8">
@@ -332,7 +332,7 @@
                 </div>
                 <div class="card" id="daftar_update">
                     <div class="card-body">
-                        <h4>Dokter Last update</h4>
+                        <h4>Recent update Dokter</h4>
                         <div class="list-group" v-for="item in last_update_dokter">
                             <span style="display: flex" class="row list-group-item list-group-item-action">
                                 <span class="col-md-8">

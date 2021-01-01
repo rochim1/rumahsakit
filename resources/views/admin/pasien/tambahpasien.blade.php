@@ -386,6 +386,27 @@
                         </form>
                     </div>
                 </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">recent new pasien</h4>
+                        {{-- <div class="list-group" v-for="item in last_dokter"> --}}
+                        <div class="list-group">
+                            <span style="display: flex" class="row list-group-item list-group-item-action">
+                                <span class="col-md-8">
+                                    nama pasien
+                                </span>
+                                <span class="col-md-4">
+                                    <a href="javascript:;" v-on:click="get_dokter(item.id_dokter)"> <span
+                                            class="icon-pencil"></span></a> |
+                                    <a href="javascript:;" v-on:click="hapus_dokter(item.id_dokter)">
+                                        <span class="icon-trash text-danger"></span>
+                                    </a>
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Modal -->
@@ -414,7 +435,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-8">
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="col-form-label">cara masuk</label>
                                         @foreach ($caramasuk as $item)
