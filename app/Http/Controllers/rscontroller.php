@@ -31,6 +31,9 @@ class rscontroller extends Controller
         $dataSpesialis = $this->dataSpesialis();
         $pekerjaanPasien = DB::table('pekerjaan_pasien')->select()->get();
         $asuransi = DB::table('asuransi')->select()->get();
+
+        // $jadwaljam = DB::table('jadwaljam')->select()->get();
+
         $cacat = DB::table('cacatfisik')->select()->get();
         $bahasa = DB::table('bahasa')->select()->get();
         $id_pasien = $this->rekmed();
@@ -730,5 +733,27 @@ class rscontroller extends Controller
         }
 
         return response()->json(["status" => "success", "message" => "berhasil tambah jadwal dokter"]);
+    }
+    public function jadwalsekarang()
+    {
+        $jam = Carbon::now()->format('H:i');
+        $hari = Carbon::now()->translatedFormat('l');
+        return response()->json(["status" => "success", "jam" => $jam, "hari" => $hari]);
+    }
+    public function listdoktersekarang(Request $request)
+    {
+        $jam = $request->jam;
+        $hari = $request->hari;
+        $poli = $request->poli;
+        $dapat = DB::table('jadwaldokter as j')
+        ->join('dokter as d', 'd.spesialis', '=', $request->poli)
+            ->join('jadwaljam as jj', 'j.id_jam', '=', 'jj.id')
+            ->select()
+            ->where('spesialis', $hari)
+            ->where('hari', $hari)
+            ->where('jam_mulai', '<=', $jam)
+            ->where('jam_selesai', '>=', $jam)
+            ->get();
+        return response()->json($dapat);
     }
 }

@@ -31,6 +31,6 @@ class DatabaseSeeder extends Seeder
         $this->call(kerjaOperasional::class);
         $this->call(cacatfisik::class);
         $this->call(asuransi::class);
-        // $this->call(suplier::class);
+        $this->call(suplier::class);
     }
 }

@@ -10,7 +10,7 @@
 {{-- <link href="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet"> --}}
 @endsection
 @section('uper_script')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @endsection
 @section('content')
 <div class="content-body">
@@ -464,7 +464,7 @@
                                 axios.post("{{route('daftarPasien')}}", data)
                                     .then(Respon => {
                                         console.log(Respon.data.message.nama);
-                                        swal("Berhasil Input Pasien!",
+                                        Swal.fire("Berhasil Input Pasien!",
                                             Respon.data.message.nama +
                                             " dengan No.RM : " +
                                             Respon.data.message.rekam, "success");
@@ -472,12 +472,12 @@
                                             this.generate();
                                     })
                                     .catch(err => {
-                                        swal("Gagal Input Pasien!",
+                                        Swal.fire("Gagal Input Pasien!",
                                             "periksa form atau segera hubungi administrator",
                                             "error");
                                     });
                         } else {
-                            swal("Gagal Input Pasien!", "generate no rekam medis", "error");
+                            Swal.fire("Gagal Input Pasien!", "generate no rekam medis", "error");
                         }
                     },
                     umur: function () {
@@ -488,7 +488,7 @@
                             tahun = this.data_form.tgl_lahir.substr(0, 4).toString();
                             this.getAge(bulan + "/" + tanggal + "/" + tahun);
                         } else {
-                            swal("isikan tanggal lahir", "", "warning");
+                            Swal.fire("isikan tanggal lahir", "", "warning");
                         }
                     },
                     getAge: function (dateString) {

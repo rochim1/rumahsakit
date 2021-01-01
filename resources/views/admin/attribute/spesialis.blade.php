@@ -7,7 +7,7 @@
 <link href="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 @endsection
 @section('uper_script')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @endsection
 @section('content')
 <div id="dokter" class="content-body">
@@ -269,7 +269,7 @@
                         }
                     })
                     .catch(err => {
-                        swal("gagal", err.message, "error");
+                        Swal.fire("gagal", err.message, "error");
                     });
             },
             tambah_spesialis: function () {
@@ -285,13 +285,13 @@
                 data.append('spesialis', this.spesialis);
                 axios.post('/simpan_spesialis', data)
                     .then(resp => {
-                        swal("sukses", resp.data.message, "success");
+                        Swal.fire("sukses", resp.data.message, "success");
                         $('#exampleModal').modal('hide');
                         $('.modal-backdrop').remove();
                         this.tampil_spesialis();
                     })
                     .catch(err => {
-                        swal("gagal", err.response.data, "error");
+                        Swal.fire("gagal", err.response.data, "error");
                     });
             },
             editSpesialis: function (id) {
@@ -307,7 +307,7 @@
                         })
                     .catch(
                         err => {
-                            swal("Gagal tampil detail spesialis!",
+                            Swal.fire("Gagal tampil detail spesialis!",
                                 "hub administrator", "error");
                         }
                     );
@@ -317,14 +317,14 @@
                 var data = new FormData;
                 data.append('spesialis', this.spesialis);
                 axios.post('/edit_spesialis/' + this.id_spesialis, data).then(Resp => {
-                        swal("Sukses!",
+                        Swal.fire("Sukses!",
                             Resp.data.message, "success");
                             $('#exampleModal').modal('hide');
                             this.tampil_spesialis();
                     })
                     .catch(
                         err => {
-                            swal("Gagal!",
+                            Swal.fire("Gagal!",
                                 err.response.data.message, "error");
                         }
                     );
@@ -334,7 +334,7 @@
                 const self = this;
                 axios.post('hapus_spesialis/' + this.id_spesialis).then(
                     Respon => {
-                        swal("Sukses!",
+                        Swal.fire("Sukses!",
                             Respon.data.message, "success");
                             $('#exampleModal').modal('hide');
                             this.tampil_spesialis();
@@ -369,7 +369,7 @@
                         }
                     })
                     .catch(err => {
-                        swal("gagal", err.message, "error");
+                        Swal.fire("gagal", err.message, "error");
                     });
             },
             tambah_jabatan: function () {
@@ -386,13 +386,13 @@
                 data.append('jabatan', this.jabatan);
                 axios.post('/simpan_jabatan', data)
                     .then(resp => {
-                        swal("sukses", resp.data.message, "success");
+                        Swal.fire("sukses", resp.data.message, "success");
                         $('#exampleModal1').modal('hide');
                         $('.modal-backdrop').remove();
                         this.tampil_jabatan();
                     })
                     .catch(err => {
-                        swal("gagal", err.response.data, "error");
+                        Swal.fire("gagal", err.response.data, "error");
                     });
             },
             editjabatan: function (id) {
@@ -408,7 +408,7 @@
                         })
                     .catch(
                         err => {
-                            swal("Gagal tampil detail jabatan!",
+                            Swal.fire("Gagal tampil detail jabatan!",
                                 "hub administrator", "error");
                         }
                     );
@@ -418,14 +418,14 @@
                 var data = new FormData;
                 data.append('jabatan', this.jabatan);
                 axios.post('/edit_jabatan/' + this.id_jabatan, data).then(Resp => {
-                        swal("Sukses!",
+                        Swal.fire("Sukses!",
                             Resp.data.message, "success");
                         $('#exampleModal1').modal('hide');
                         this.tampil_jabatan();
                     })
                     .catch(
                         err => {
-                            swal("Gagal!",
+                            Swal.fire("Gagal!",
                                 err.response.data.message, "error");
                         }
                     );
@@ -435,7 +435,7 @@
                 const self = this;
                 axios.post('hapus_jabatan/' + this.id_jabatan).then(
                     Respon => {
-                        swal("Sukses!",
+                        Swal.fire("Sukses!",
                             Respon.data.message, "success");
                             $('#exampleModal1').modal('hide');
                             this.tampil_jabatan();

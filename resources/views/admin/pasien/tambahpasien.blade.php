@@ -10,7 +10,7 @@
 {{-- <link href="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet"> --}}
 @endsection
 @section('uper_script')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @endsection
 @section('content')
 <div class="content-body">
@@ -408,7 +408,8 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="col-form-label">poli</label>
-                                        <select class="form-control" name="pemeriksaan" id="spesialisPeriksa">
+                                        <select v-model="periksa.poli" class="form-control" name="pemeriksaan"
+                                            id="spesialisPeriksa">
                                             <option value="">--- pilih poli ---</option>
                                             @foreach ($dataSpesialis as $item)
                                             <option value="{{$item->id_spesialis}}">{{$item->spesialis}}</option>
@@ -432,30 +433,37 @@
                                         <div class="col-md-5">
                                             <div class="form-group">
                                                 <label class="col-form-label">pilih hari</label>
-                                                <select class="form-control" name="pemeriksaan_lab" id="lab_periksa">
-                                                    <option value="">--- pilih lab ---</option>
-                                                    @foreach ($dataSpesialis as $item)
-                                                    <option value="{{$item->id_spesialis}}">{{$item->spesialis}}
-                                                    </option>
-                                                    @endforeach
+                                                <select class="form-control" v-model="periksa.hari" name="pemeriksaan_lab"
+                                                    id="lab_periksa">
+                                                    <option value="">--- pilih hari ---</option>
+                                                    <option value="Senin">senin</option>
+                                                    <option value="Selasa">selasa</option>
+                                                    <option value="Rabu">rabu</option>
+                                                    <option value="Kamis">kamis</option>
+                                                    <option value="Jumat">jumat</option>
+                                                    <option value="Sabtu">sabtu</option>
+                                                    <option value="Minggu">minggu</option>
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-md-5">
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label class="col-form-label">pilih jam</label>
-                                                <select class="form-control" name="pemeriksaan_lab" id="lab_periksa">
-                                                    <option value="">--- pilih lab ---</option>
-                                                    @foreach ($dataSpesialis as $item)
-                                                    <option value="{{$item->id_spesialis}}">{{$item->spesialis}}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
+                                                <input type="time" v-model="periksa.jam" class="form-control">
                                             </div>
                                         </div>
-                                        <div class="col-md-2">
-                                             <label class="col-form-label"></label>
-                                            <button class="btn gradient-1">now</button>
+                                        <div class="col-md-3">
+                                            <label class="col-form-label">buat sekarang</label>
+                                            {{-- <div class="form-control none-border"> --}}
+                                            <button type="button" v-on:click="sekarang"
+                                                class="btn gradient-1">sekarang</button>
+                                            {{-- </div> --}}
+                                        </div>
+
+                                        <div class="alert alert-warning alert-dismissible fade show">
+                                            Todo : seharusnya lebih baik menggunakan javascript untuk fungsi tombol
+                                            "buat sekarang" karena untuk jam tidak realtime resiko pada saat mendekati
+                                            perubahan jadwal dokter
                                         </div>
                                     </div>
 
@@ -463,7 +471,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="col-form-label">pilih dokter</label>
-                                        <select class="form-control" name="pemeriksaan_lab" id="lab_periksa">
+                                        <select v-model="dokter" :click="tampildokter" class="form-control" name="pemeriksaan_lab" id="lab_periksa">
                                             <option value="">--- pilih lab ---</option>
                                             @foreach ($dataSpesialis as $item)
                                             <option value="{{$item->id_spesialis}}">{{$item->spesialis}}</option>
@@ -474,15 +482,17 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="col-form-label">keluhan</label>
-                                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
                                     </div>
                                 </div>
 
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Understood</button>
+                            <button type="button" class="btn btn-secondary gradient-2"
+                                data-dismiss="modal">Close</button>
+                            <a href="" class="btn btn-primary gradient-4">Advance</a>
+                            <button type="button" class="btn btn-primary gradient-1">Understood</button>
                         </div>
                     </div>
                 </div>
@@ -492,6 +502,13 @@
             new Vue({
                 el: '#vuetemp',
                 data: {
+                    periksa: {
+                        poli: '',
+                        hari: '',
+                        jam: '',
+                    },
+                    dokter:'';
+                    dataDokter: [],
                     fotoData: "{{asset('/images/index.png')}}",
                     kota: [],
                     kabupaten: [],
@@ -653,7 +670,7 @@
                             axios.post("{{route('daftarPasien')}}", data)
                                 .then(Respon => {
                                     console.log(Respon.data.message.nama);
-                                    swal("Berhasil Input Pasien!",
+                                    Swal.fire("Berhasil Input Pasien!",
                                         Respon.data.message.nama +
                                         " dengan No.RM : " +
                                         Respon.data.message.rekam, "success");
@@ -661,12 +678,12 @@
                                     this.generate();
                                 })
                                 .catch(err => {
-                                    swal("Gagal Input Pasien!",
+                                    Swal.fire("Gagal Input Pasien!",
                                         "periksa form atau segera hubungi administrator",
                                         "error");
                                 });
                         } else {
-                            swal("Gagal Input Pasien!", "generate no rekam medis", "error");
+                            Swal.fire("Gagal Input Pasien!", "generate no rekam medis", "error");
                         }
                     },
                     umur: function () {
@@ -677,7 +694,7 @@
                             tahun = this.data_form.tgl_lahir.substr(0, 4).toString();
                             this.getAge(bulan + "/" + tanggal + "/" + tahun);
                         } else {
-                            swal("isikan tanggal lahir", "", "warning");
+                            Swal.fire("isikan tanggal lahir", "", "warning");
                         }
                     },
                     getAge: function (dateString) {
@@ -808,6 +825,44 @@
                         } else {
                             $('#formIdAsuransi').addClass('collapse');
                         }
+                    },
+                    tampildokter: function () {
+                        if (this.jam && this.hari) {
+                            var data = new FormData();
+                            $.each(this.periksa, function (index, value) {
+                                data.append(index, value);
+                            });
+                            axios.get('/listdoktersekarang', data).then(respon => {
+                                    alert(respon.data)
+                            }).catch(error => {
+
+                            });
+                        }
+                    },
+                    sekarang: function () {
+                        //alert("masih menggunakan php agar lebih cepat menggunakan jscript seharusnya");
+                        axios.get('/jadwalsekarang').then(respon => {
+                            this.periksa.jam = respon.data.jam;
+                            this.periksa.hari = respon.data.hari;
+                        }).catch(error => {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                                    toast.addEventListener('mouseleave', Swal
+                                        .resumeTimer)
+                                }
+                            })
+
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'jadwal dokter kosong'
+                            })
+                        })
                     }
                 },
 

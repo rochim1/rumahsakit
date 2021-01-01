@@ -78,7 +78,7 @@
 </style>
 @endsection
 @section('uper_script')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @endsection
 @section('content')
 <div class="content-body">
@@ -314,7 +314,6 @@
                 <div class="card" id="daftar_recent">
                     <div class="card-body">
                         <h4>Dokter Last Input</h4>
-                        @{{last_dokter}}
                         <div class="list-group" v-for="item in last_dokter">
                             <span style="display: flex" class="row list-group-item list-group-item-action">
                                 <span class="col-md-8">
@@ -493,7 +492,7 @@
                     }).then(Resp => {
                         this.isActive = true;
                         this.errors.destroy();
-                        swal("berhasil input dokter, periksa email untuk konfirmasi",
+                        Swal.fire("berhasil input dokter, periksa email untuk konfirmasi",
                             Resp.data.message,
                             "success");
                         // Resp.response.data = false;
@@ -501,7 +500,7 @@
                         vue.cencel();
                     })
                     .catch(err => {
-                        swal("Gagal Input Dokter!", "perhatikan field" + err.response.data.message,
+                        Swal.fire("Gagal Input Dokter!", "perhatikan field" + err.response.data.message,
                             "error");
                         // ini sepaket
                         this.errors.record(err.response.data);
@@ -515,7 +514,7 @@
                         this.last_dokter = Resp.data;
                     })
                     .catch(err => {
-                        swal("Gagal Menampilkan Data!",
+                        Swal.fire("Gagal Menampilkan Data!",
                             err, "error");
                     });
             },
@@ -527,13 +526,13 @@
                         console.log(this.last_update_dokter);
                     })
                     .catch(err => {
-                        swal("Gagal Menampilkan Data!",
+                        Swal.fire("Gagal Menampilkan Data!",
                             err, "error");
                     });
                 this.last_save();
             },
             hapus_dokter: function (id) {
-                swal("yakin anda akan menghapus", {
+                Swal.fire("yakin anda akan menghapus", {
                         buttons: {
                             cancel: "batal",
                             hapus: true,
@@ -544,7 +543,7 @@
                             case "hapus":
                                 id_dokter = id;
                                 axios.delete("/hapus_dokter/" + id).then(Respon => {
-                                    swal("berhasil hapus",
+                                    Swal.fire("berhasil hapus",
                                         "dokter dengan id: " + id_dokter +
                                         ", berhasil di hapus", "success");
                                 })
@@ -623,7 +622,7 @@
                     form_data.append(index, value);
                 });
                 axios.post('/update_dokter/' + id, form_data).then(Resp => {
-                        swal("berhasil update dokter", Resp.data.message,
+                        Swal.fire("berhasil update dokter", Resp.data.message,
                             "success");
                         this.isActive = true;
                         this.errors.destroy();
@@ -634,7 +633,7 @@
                     .catch(err => {
                         // this.hasError = true;
                         // this.isActive = false;
-                        swal("Gagal update Dokter!",
+                        Swal.fire("Gagal update Dokter!",
                             "perhatikan field", "error");
                         console.log(err.response.data);
                         vue.errors.record(err.response.data);

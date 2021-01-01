@@ -7,7 +7,7 @@
 <link href="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 @endsection
 @section('uper_script')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @endsection
 @section('content')
 <div id="kamar" class="content-body">
@@ -391,7 +391,7 @@
                         }
                     })
                     .catch(err => {
-                        swal("gagal", err.message, "error");
+                        Swal.fire("gagal", err.message, "error");
                     });
             },
             tambah_kamar: function () {
@@ -422,14 +422,14 @@
 
                 axios.post('/simpan_kamar', data)
                     .then(resp => {
-                        swal("sukses", resp.data.message, "success");
+                        Swal.fire("sukses", resp.data.message, "success");
                         $('#exampleModal').modal('hide');
                         $('.modal-backdrop').remove();
                         this.tampil_kamar();
                     })
                     .catch(err => {
                         console.log(err.response.data);
-                        swal("gagal", err.response.data.message, "error");
+                        Swal.fire("gagal", err.response.data.message, "error");
                     });
             },
             editKamar: function (id) {
@@ -451,7 +451,7 @@
                         })
                     .catch(
                         err => {
-                            swal("Gagal tampil detail kamar!",
+                            Swal.fire("Gagal tampil detail kamar!",
                                 "hub administrator", "error");
                         }
                     );
@@ -467,21 +467,21 @@
                 data.append('nama_kamar', namakamar);
 
                 axios.post('/edit_kamar/' + this.form_kamar.id_kamar, data).then(Resp => {
-                        swal("Sukses!",
+                        Swal.fire("Sukses!",
                             Resp.data.message, "success");
                         $('#exampleModal').modal('hide');
                         this.tampil_kamar();
                     })
                     .catch(
                         err => {
-                            swal("Gagal!",
+                            Swal.fire("Gagal!",
                                 err.response.data.message, "error");
                         }
                     );
 
             },
             hapus_kamar: function () {
-                swal("yakin anda akan menghapus", {
+                Swal.fire("yakin anda akan menghapus", {
                         buttons: {
                             cancel: "batal",
                             hapus: true,
@@ -493,7 +493,7 @@
                                 const self = this;
                                 axios.post('hapus_kamar/' + this.form_kamar.id_kamar).then(
                                     Respon => {
-                                        swal("Sukses!",
+                                        Swal.fire("Sukses!",
                                             Respon.data.message, "success");
                                         $('#exampleModal').modal('hide');
                                         this.tampil_kamar();
@@ -523,7 +523,7 @@
                         }
                     })
                     .catch(err => {
-                        swal("gagal", err.message, "error");
+                        Swal.fire("gagal", err.message, "error");
                     });
             },
             tambah_kelas: function () {
@@ -545,14 +545,14 @@
 
                 axios.post('/simpan_kelas', data)
                     .then(resp => {
-                        swal("sukses", resp.data.message, "success");
+                        Swal.fire("sukses", resp.data.message, "success");
                         $('#olahKelas').modal('hide');
                         $('.modal-backdrop').remove();
                         this.tampil_kelas();
                     })
                     .catch(err => {
                         console.log(err.response.data);
-                        swal("gagal", err.response.data.message, "error");
+                        Swal.fire("gagal", err.response.data.message, "error");
                     });
             },
             editkelas: function (id) {
@@ -571,7 +571,7 @@
                         })
                     .catch(
                         err => {
-                            swal("Gagal tampil detail kelas!",
+                            Swal.fire("Gagal tampil detail kelas!",
                                 err.response, "error");
                         }
                     );
@@ -584,20 +584,20 @@
                     data.append(index, value);
                 });
                 axios.post('/edit_kelas/' + vm.form_kelas.id_kelas, data).then(Resp => {
-                        swal("Sukses!", Resp.data.message, "success");
+                        Swal.fire("Sukses!", Resp.data.message, "success");
                         $('#olahKelas').modal('hide');
                         vm.tampil_kelas();
                     })
                     .catch(
                         err => {
-                            swal("Gagal!",
+                            Swal.fire("Gagal!",
                                 err.response.data.message, "error");
                         }
                     );
 
             },
             hapus_kelas: function (id) {
-                swal("yakin anda akan menghapus", {
+                Swal.fire("yakin anda akan menghapus", {
                         buttons: {
                             cancel: "batal",
                             hapus: true,
@@ -609,7 +609,7 @@
                                 const self = this;
                                 axios.post('hapus_kelas/' + id).then(
                                     Respon => {
-                                        swal("Sukses!",
+                                        Swal.fire("Sukses!",
                                             Respon.data.message, "success");
                                         $('#olahKelas').modal('hide');
                                         this.tampil_kelas();
@@ -638,7 +638,7 @@
                         }
                     })
                     .catch(err => {
-                        swal("gagal", err.message, "error");
+                        Swal.fire("gagal", err.message, "error");
                     });
             },
             tambah_bangsal: function () {
@@ -661,14 +661,14 @@
 
                 axios.post('/simpan_bangsal', data)
                     .then(resp => {
-                        swal("sukses", resp.data.message, "success");
+                        Swal.fire("sukses", resp.data.message, "success");
                         $('#olahBangsal').modal('hide');
                         $('.modal-backdrop').remove();
                         this.tampil_bangsal();
                     })
                     .catch(err => {
                         console.log(err.response.data);
-                        swal("gagal", err.response.data.message, "error");
+                        Swal.fire("gagal", err.response.data.message, "error");
                     });
             },
             editbangsal: function (id) {
@@ -687,7 +687,7 @@
                         })
                     .catch(
                         err => {
-                            swal("Gagal tampil detail bangsal!",
+                            Swal.fire("Gagal tampil detail bangsal!",
                                 err.response, "error");
                         }
                     );
@@ -700,20 +700,20 @@
                     data.append(index, value);
                 });
                 axios.post('/edit_bangsal/' + vm.form_bangsal.id_bangsal, data).then(Resp => {
-                        swal("Sukses!", Resp.data.message, "success");
+                        Swal.fire("Sukses!", Resp.data.message, "success");
                         $('#olahBangsal').modal('hide');
                         vm.tampil_bangsal();
                     })
                     .catch(
                         err => {
-                            swal("Gagal!",
+                            Swal.fire("Gagal!",
                                 err.response.data.message, "error");
                         }
                     );
 
             },
             hapus_bangsal: function (id) {
-                swal("yakin anda akan menghapus", {
+                Swal.fire("yakin anda akan menghapus", {
                         buttons: {
                             cancel: "batal",
                             hapus: true,
@@ -725,7 +725,7 @@
                                 const self = this;
                                 axios.post('hapus_bangsal/' + id).then(
                                     Respon => {
-                                        swal("Sukses!",
+                                        Swal.fire("Sukses!",
                                             Respon.data.message, "success");
                                         $('#olahBangsal').modal('hide');
                                         this.tampil_bangsal();

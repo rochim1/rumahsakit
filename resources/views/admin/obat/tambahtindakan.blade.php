@@ -7,7 +7,7 @@
 <link href="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 @endsection
 @section('uper_script')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @endsection
 @section('content')
 <div id="tindakan" class="content-body">
@@ -260,7 +260,7 @@
                         }
                     })
                     .catch(err => {
-                        swal("gagal", err.message, "error");
+                        Swal.fire("gagal", err.message, "error");
                     });
             },
             filter_tindakan: function () {
@@ -287,7 +287,7 @@
                         }
                     })
                     .catch(err => {
-                        swal("gagal", err.message, "error");
+                        Swal.fire("gagal", err.message, "error");
                     });
             },
             tambah_tindakan: function () {
@@ -308,7 +308,7 @@
                 });
                 axios.post('/simpan_tindakan', data)
                     .then(resp => {
-                        swal("sukses", resp.data.message, "success");
+                        Swal.fire("sukses", resp.data.message, "success");
                         $('#exampleModal').modal('hide');
                         $('.modal-backdrop').remove();
                         if (this.filter_idSpesialis) {
@@ -319,7 +319,7 @@
                     })
                     .catch(err => {
                         console.log(err.response.data);
-                        swal("gagal", err.response.data.message, "error");
+                        Swal.fire("gagal", err.response.data.message, "error");
                     });
             },
             edittindakan: function (id) {
@@ -340,7 +340,7 @@
                         })
                     .catch(
                         err => {
-                            swal("Gagal tampil detail tindakan!", "hub administrator", "error");
+                            Swal.fire("Gagal tampil detail tindakan!", "hub administrator", "error");
                         }
                     );
 
@@ -353,7 +353,7 @@
                 });
 
                 axios.post('/edit_tindakan/' + this.form_tindakan.id_tindakan, data).then(Resp => {
-                        swal("Sukses!",
+                        Swal.fire("Sukses!",
                             Resp.data.message, "success");
                         $('#exampleModal').modal('hide');
                         if (this.filter_idSpesialis) {
@@ -364,14 +364,14 @@
                     })
                     .catch(
                         err => {
-                            swal("Gagal!",
+                            Swal.fire("Gagal!",
                                 err.response.data.message, "error");
                         }
                     );
 
             },
             hapus_tindakan: function () {
-                swal("yakin anda akan menghapus", {
+                Swal.fire("yakin anda akan menghapus", {
                         buttons: {
                             cancel: "batal",
                             hapus: true,
@@ -383,7 +383,7 @@
                                 const self = this;
                                 axios.post('hapus_tindakan/' + this.form_tindakan.id_tindakan).then(
                                     Respon => {
-                                        swal("Sukses!",
+                                        Swal.fire("Sukses!",
                                             Respon.data.message, "success");
                                         $('#exampleModal').modal('hide');
                                         if (this.filter_idSpesialis) {

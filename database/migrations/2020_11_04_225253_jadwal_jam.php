@@ -15,8 +15,8 @@ class JadwalJam extends Migration
     {
         Schema::create('jadwalJam', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('jam_mulai', 10);
-            $table->string('jam_selesai', 10);
+            $table->time('jam_mulai', 10);
+            $table->time('jam_selesai', 10);
             $table->string('keterangan')->nullable();
             // $table->timestamps();
         });

@@ -85,7 +85,7 @@
 </style>
 @endsection
 @section('uper_script')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @endsection
 @section('content')
 <div class="content-body">
@@ -215,36 +215,36 @@
                                         <div class="form-check form-check-inline">
                                             <input v-model="jadwaljam.senin" class="form-check-input" type="checkbox"
                                                 id="senin" value="senin">
-                                            <label class="form-check-label" for="senin">Senin</label>
+                                            <label class="form-check-label" for="Senin">Senin</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input v-model="jadwaljam.selasa" class="form-check-input" type="checkbox"
                                                 id="selasa" value="selasa">
-                                            <label class="form-check-label" for="selasa">Selasa</label>
+                                            <label class="form-check-label" for="Selasa">Selasa</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input v-model="jadwaljam.rabu" class="form-check-input" type="checkbox"
                                                 id="rabu" value="rabu">
-                                            <label class="form-check-label" for="rabu">Rabu</label>
+                                            <label class="form-check-label" for="Rabu">Rabu</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input v-model="jadwaljam.kamis" class="form-check-input" type="checkbox"
                                                 id="kamis" value="kamis">
-                                            <label class="form-check-label" for="kamis">Kamis</label>
+                                            <label class="form-check-label" for="Kamis">Kamis</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input v-model="jadwaljam.jumat" class="form-check-input" type="checkbox"
-                                                id="jumat" value="jumat">
+                                                id="jumat" value="Jumat">
                                             <label class="form-check-label" for="jumat">Jumat</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input v-model="jadwaljam.sabtu" class="form-check-input" type="checkbox"
-                                                id="sabtu" value="sabtu">
+                                                id="sabtu" value="Sabtu">
                                             <label class="form-check-label" for="sabtu">Sabtu</label>
                                         </div>
                                         <div class="form-check form-check-inline">
                                             <input v-model="jadwaljam.minggu" class="form-check-input is-invalid"
-                                                type="checkbox" id="minggu" value="minggu">
+                                                type="checkbox" id="minggu" value="Minggu">
                                             <label class="form-check-label" for="minggu">Minggu (UGD)</label>
                                         </div>
                                         <br>
@@ -606,7 +606,7 @@
                         });
                     });
                 }).catch(error => {
-                    swal("gagal", error.message, "error");
+                    Swal.fire("gagal", error.message, "error");
                 });
             },
             prepareTable: function () {
@@ -637,7 +637,7 @@
                         }
                     })
                     .catch(err => {
-                        swal("gagal", err.message, "error");
+                        Swal.fire("gagal", err.message, "error");
                     });
             },
             search: function () {
@@ -735,7 +735,7 @@
                     }
                     this.jadwal();
                 }).catch(error => {
-                    swal("Gagal ambil data detail Dokter!", "hub administrator", "error");
+                    Swal.fire("Gagal ambil data detail Dokter!", "hub administrator", "error");
                 })
 
                 this.form.berdasarkan = "Nama";
@@ -759,7 +759,7 @@
                 });
 
                 axios.post('/buatjadwal/' + this.id_dokter, form_data).then(resp => {
-                    swal("berhasil membuat jadwal",
+                    Swal.fire("berhasil membuat jadwal",
                         resp.data.message,
                         "success");
                     this.jadwaljam.senin = "";
@@ -773,7 +773,7 @@
                     this.jadwal();
                     this.barChart();
                 }).catch(error => {
-                    swal("gagal", "gagal buat jadwal dokter",
+                    Swal.fire("gagal", "gagal buat jadwal dokter",
                         "error");
                 });
             },
@@ -789,7 +789,7 @@
                             }
                         })
                         .catch(err => {
-                            swal("gagal", err.message, "error");
+                            Swal.fire("gagal", err.message, "error");
                         });
                 }
 

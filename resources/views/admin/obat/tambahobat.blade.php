@@ -7,7 +7,7 @@
 <link href="./plugins/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 @endsection
 @section('uper_script')
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 @endsection
 @section('content')
 <div id="obat" class="content-body">
@@ -374,7 +374,7 @@
                         }
                     })
                     .catch(err => {
-                        swal("gagal", err.message, "error");
+                        Swal.fire("gagal", err.message, "error");
                     });
             },
             tambah_obat: function () {
@@ -395,14 +395,14 @@
                 });
                 axios.post('/simpan_obat', data)
                     .then(resp => {
-                        swal("sukses", resp.data.message, "success");
+                        Swal.fire("sukses", resp.data.message, "success");
                         $('#exampleModal').modal('hide');
                         $('.modal-backdrop').remove();
                         this.tampil_obat();
                     })
                     .catch(err => {
                         console.log(err.response.data);
-                        swal("gagal", err.response.data.message, "error");
+                        Swal.fire("gagal", err.response.data.message, "error");
                     });
             },
             editobat: function (id) {
@@ -425,7 +425,7 @@
                         })
                     .catch(
                         err => {
-                            swal("Gagal tampil detail obat!", "hub administrator", "error");
+                            Swal.fire("Gagal tampil detail obat!", "hub administrator", "error");
                         }
                     );
 
@@ -438,21 +438,21 @@
                 });
 
                 axios.post('/edit_obat/' + this.form_obat.id_obat, data).then(Resp => {
-                        swal("Sukses!",
+                        Swal.fire("Sukses!",
                             Resp.data.message, "success");
                         $('#exampleModal').modal('hide');
                         this.tampil_obat();
                     })
                     .catch(
                         err => {
-                            swal("Gagal!",
+                            Swal.fire("Gagal!",
                                 err.response.data.message, "error");
                         }
                     );
 
             },
             hapus_obat: function () {
-                swal("yakin anda akan menghapus", {
+                Swal.fire("yakin anda akan menghapus", {
                         buttons: {
                             cancel: "batal",
                             hapus: true,
@@ -464,7 +464,7 @@
                                 const self = this;
                                 axios.post('hapus_obat/' + this.form_obat.id_obat).then(
                                     Respon => {
-                                        swal("Sukses!",
+                                        Swal.fire("Sukses!",
                                             Respon.data.message, "success");
                                         $('#exampleModal').modal('hide');
                                         this.tampil_obat();
@@ -487,7 +487,7 @@
                         }
                     })
                     .catch(err => {
-                        swal("gagal", err.message, "error");
+                        Swal.fire("gagal", err.message, "error");
                     });
             },
             tambah_kategori: function () {
@@ -509,14 +509,14 @@
 
                 axios.post('/simpan_kategori', data)
                     .then(resp => {
-                        swal("sukses", resp.data.message, "success");
+                        Swal.fire("sukses", resp.data.message, "success");
                         $('#olahkategori').modal('hide');
                         $('.modal-backdrop').remove();
                         this.tampil_kategori();
                     })
                     .catch(err => {
                         console.log(err.response.data);
-                        swal("gagal", err.response.data.message, "error");
+                        Swal.fire("gagal", err.response.data.message, "error");
                     });
             },
             editkategori: function (id) {
@@ -536,7 +536,7 @@
                         })
                     .catch(
                         err => {
-                            swal("Gagal tampil detail kategori!",
+                            Swal.fire("Gagal tampil detail kategori!",
                                 "hub administrator", "error");
                         }
                     );
@@ -549,21 +549,21 @@
                     data.append(index, value);
                 });
                 axios.post('/edit_kategori/' + this.form_kategori.id_kategori, data).then(Resp => {
-                        swal("Sukses!",
+                        Swal.fire("Sukses!",
                             Resp.data.message, "success");
                         $('#olahkategori').modal('hide');
                         this.tampil_kategori();
                     })
                     .catch(
                         err => {
-                            swal("Gagal!",
+                            Swal.fire("Gagal!",
                                 err.response.data.message, "error");
                         }
                     );
 
             },
             hapus_kategori: function (id) {
-                swal("yakin anda akan menghapus", {
+                Swal.fire("yakin anda akan menghapus", {
                         buttons: {
                             cancel: "batal",
                             hapus: true,
@@ -575,7 +575,7 @@
                                 const self = this;
                                 axios.post('hapus_kategori/' + id).then(
                                     Respon => {
-                                        swal("Sukses!",
+                                        Swal.fire("Sukses!",
                                             Respon.data.message, "success");
                                         $('#olahkategori').modal('hide');
                                         this.tampil_kategori();
@@ -600,7 +600,7 @@
                         }
                     })
                     .catch(err => {
-                        swal("gagal", err.message, "error");
+                        Swal.fire("gagal", err.message, "error");
                     });
             },
             tambah_satuan: function () {
@@ -622,14 +622,14 @@
 
                 axios.post('/simpan_satuan', data)
                     .then(resp => {
-                        swal("sukses", resp.data.message, "success");
+                        Swal.fire("sukses", resp.data.message, "success");
                         $('#olahsatuan').modal('hide');
                         $('.modal-backdrop').remove();
                         this.tampil_satuan();
                     })
                     .catch(err => {
                         console.log(err.response.data);
-                        swal("gagal", err.response.data.message, "error");
+                        Swal.fire("gagal", err.response.data.message, "error");
                     });
             },
             editsatuan: function (id) {
@@ -649,7 +649,7 @@
                         })
                     .catch(
                         err => {
-                            swal("Gagal tampil detail satuan!",
+                            Swal.fire("Gagal tampil detail satuan!",
                                 "hub administrator", "error");
                         }
                     );
@@ -662,21 +662,21 @@
                     data.append(index, value);
                 });
                 axios.post('/edit_satuan/' + this.form_satuan.id_satuan, data).then(Resp => {
-                        swal("Sukses!",
+                        Swal.fire("Sukses!",
                             Resp.data.message, "success");
                         $('#olahsatuan').modal('hide');
                         this.tampil_satuan();
                     })
                     .catch(
                         err => {
-                            swal("Gagal!",
+                            Swal.fire("Gagal!",
                                 err.response.data.message, "error");
                         }
                     );
 
             },
             hapus_satuan: function (id) {
-                swal("yakin anda akan menghapus", {
+                Swal.fire("yakin anda akan menghapus", {
                         buttons: {
                             cancel: "batal",
                             hapus: true,
@@ -688,7 +688,7 @@
                                 const self = this;
                                 axios.post('hapus_satuan/' + id).then(
                                     Respon => {
-                                        swal("Sukses!",
+                                        Swal.fire("Sukses!",
                                             Respon.data.message, "success");
                                         $('#olahsatuan').modal('hide');
                                         this.tampil_satuan();
