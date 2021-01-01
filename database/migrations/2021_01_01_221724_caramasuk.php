@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class JadwalJam extends Migration
+class Caramasuk extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class JadwalJam extends Migration
      */
     public function up()
     {
-        Schema::create('jadwalJam', function (Blueprint $table) {
+        Schema::create('caramasuk', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->time('jam_mulai');
-            $table->time('jam_selesai');
-            $table->string('keterangan')->nullable();
-            // $table->timestamps();
+            $table->string('cara_masuk');
         });
     }
 
@@ -29,6 +26,6 @@ class JadwalJam extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jadwalJam');
+        Schema::dropIfExists('caramasuk');
     }
 }

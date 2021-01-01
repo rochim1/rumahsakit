@@ -400,8 +400,34 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form class="form-row">
-                                <div class="col-md-6">
+                            <form action="{{route('buatRM')}}" class="form-row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="col-form-label">id pasien</label>
+                                        <input type="text" readonly class="form-control" v-model="periksa.id_pasien">
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="col-form-label">nama pasien</label>
+                                        <input type="text" readonly class="form-control" v-model="periksa.nama_pasien">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label class="col-form-label">cara masuk</label>
+                                        @foreach ($caramasuk as $item)
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                id="inlineRadio1" value="{{$item->id}}">
+                                            <label class="form-check-label" for="inlineRadio1">{{$item->cara_masuk}}</label>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="col-form-label">poli</label>
                                         <select v-model="periksa.poli" class="form-control" name="pemeriksaan"
@@ -413,17 +439,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label class="col-form-label">laboratori</label>
-                                        <select class="form-control" name="pemeriksaan_lab" id="lab_periksa">
-                                            <option value="">--- pilih lab ---</option>
-                                            @foreach ($dataSpesialis as $item)
-                                            <option value="{{$item->id_spesialis}}">{{$item->spesialis}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
+
                                 <div class="col-md-12">
                                     <div class="form-row">
                                         <div class="col-md-5">
@@ -467,7 +483,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="col-form-label">pilih dokter</label>
-                                        <select v-model="dokter" v-on:click="tampildokter" class="form-control"
+                                        <select v-model="periksa.dokter" v-on:click="tampildokter" class="form-control"
                                             name="pemeriksaan_lab" id="lab_periksa">
                                             <option value="">--- pilih dokter ---</option>
                                             <option v-for="item in dataDokter" :value="item.id_dokter">
@@ -479,15 +495,17 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="col-form-label">keluhan</label>
-                                        <textarea class="form-control" name="" id="" cols="30" rows="10"></textarea>
+                                        <textarea v-model="periksa.keluhan" class="form-control"
+                                            placeholder="keluhan dapat disampaikan nanti"></textarea>
                                     </div>
                                 </div>
 
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary gradient-2"
+                            <button type="button" class="btn btn-secondary gradient-2 float-left"
                                 data-dismiss="modal">Close</button>
+                            <a href="" class="btn btn-primary gradient-4">Print</a>
                             <a href="" class="btn btn-primary gradient-4">Advance</a>
                             <button type="button" class="btn btn-primary gradient-1">Ok</button>
                         </div>
@@ -500,17 +518,23 @@
                 el: '#vuetemp',
                 data: {
                     periksa: {
+                        id_pasien: '',
+                        nama_pasien: '',
+                        cara_masuk: '',
                         poli: '',
                         hari: '',
                         jam: '',
+                        dokter: '',
+                        keluhan: '',
                     },
-                    dokter: '',
                     dataDokter: [],
                     fotoData: "{{asset('/images/index.png')}}",
+
                     kota: [],
                     kabupaten: [],
                     kecamatan: [],
                     kelurahan: [],
+
                     kota_kel: [],
                     kabupaten_kel: [],
                     kecamatan_kel: [],
@@ -666,7 +690,8 @@
 
                             axios.post("{{route('daftarPasien')}}", data)
                                 .then(Respon => {
-                                    console.log(Respon.data.message.nama);
+                                    self.periksa.id_pasien = Respon.data.message.id_pasien;
+                                    self.periksa.nama_pasien = Respon.data.message.nama_pasien;
                                     const Toast = Swal.mixin({
                                         toast: true,
                                         position: 'top-end',
@@ -847,6 +872,7 @@
                             });
 
                             axios.post('/listdoktersekarang', data).then(respon => {
+
                                 if (respon.data) {
                                     this.dataDokter = respon.data;
                                 } else {
@@ -882,6 +908,10 @@
                         }).catch(error => {
                             Swal.fire("error", "Gagal otomatisasi waktu", "error");
                         })
+                    },
+                    buatRM: function () {
+
+                        // axios.post('')
                     }
                 },
 

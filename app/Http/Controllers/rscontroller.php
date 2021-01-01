@@ -31,13 +31,14 @@ class rscontroller extends Controller
         $dataSpesialis = $this->dataSpesialis();
         $pekerjaanPasien = DB::table('pekerjaan_pasien')->select()->get();
         $asuransi = DB::table('asuransi')->select()->get();
+        $caramasuk = DB::table('caramasuk')->select()->get();
 
         // $jadwaljam = DB::table('jadwaljam')->select()->get();
 
         $cacat = DB::table('cacatfisik')->select()->get();
         $bahasa = DB::table('bahasa')->select()->get();
         $id_pasien = $this->rekmed();
-        return view('admin.pasien.tambahpasien', compact('id_pasien', 'dataSpesialis','cacat','asuransi', 'bahasa','pekerjaanPasien'));
+        return view('admin.pasien.tambahpasien', compact('id_pasien', 'caramasuk', 'dataSpesialis','cacat','asuransi', 'bahasa','pekerjaanPasien'));
     }
 
     public function randomPassword() {
@@ -149,7 +150,7 @@ class rscontroller extends Controller
         }
 
         return response()->json([
-            "status"=>"success","message"=> ["nama"=> $idpasien,"rekam"=> $request->rekamMedis]
+            "status"=>"success","message"=> ["nama"=> $idpasien,"rekam"=> $request->rekamMedis, "id_pasien" => $idpasien , "nama_pasien" =>  $request->nama_baru]
         ]);
     }
 
@@ -750,16 +751,24 @@ class rscontroller extends Controller
         $jam = strtotime($jam);
         $jam = date('H:i:s', $jam);
 
-        $lastTime = DB::table('jadwaljam')->where('jam_selesai', DB::raw("(select max(`jam_selesai`) from jadwaljam)"))->select('jam_selesai')->first();
-        $lastTime = strtotime($lastTime->jam_selesai);
+        $firstTimeshift = DB::table('jadwaljam')->where('jam_mulai', DB::raw("(select min(`jam_mulai`) from jadwaljam)"))->select('jam_mulai','id')->first();
+        $firstTime = strtotime($firstTimeshift->jam_mulai);
+        $firstTime = date('H:i:s', $firstTime);
+
+
+        $lastTimeshift = DB::table('jadwaljam')->where('jam_mulai', DB::raw("(select max(`jam_mulai`) from jadwaljam)"))->select('jam_mulai','id')->first();
+        $lastTime = strtotime($lastTimeshift->jam_mulai);
         $lastTime = date('H:i:s', $lastTime);
 
-        if ($jam >= $lastTime) {
-            $hasiljJam = count(DB::table('jadwaljam')->select()->get());
-        }else{
+        if ($jam >= $lastTime) { //untuk keadaan jam lebih dari jadwal masuk terakhir pada kurun 24 jam
+            $hasiljJam = $lastTimeshift->id;
+        }else if($jam < $firstTime){ // unutk keadaan jam kurang dari jadwal masuk pertama kali kurun 24jam
+            $hasiljJam = $lastTimeshift->id;
+        }else
+        {
             $hasiljJam = DB::table('jadwaljam')
             ->where('jam_mulai', '<=', $jam)
-            ->where('jam_selesai', '>=', $jam)
+            ->where('jam_selesai', '>', $jam)
             ->select('id')
             ->first();
             $hasiljJam = $hasiljJam->id;
@@ -774,5 +783,11 @@ class rscontroller extends Controller
         ->select()
         ->get();
         return response()->json($dapat);
+    }
+    public function buatRM(Request $request){
+
+        // DB::table('rekammedis')->insert([
+
+        // ]);
     }
 }

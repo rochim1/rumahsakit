@@ -41,6 +41,6 @@ class PgungJawab extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('informasipasien');
+        Schema::dropIfExists('penanggungjawab');
     }
 }
