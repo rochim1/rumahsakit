@@ -25,6 +25,11 @@
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.semanticui.min.css"> --}}
     <style>
+        thead {
+            background: #9e9bfb;
+            color: #fff;
+        }
+
         body,
         .form-control,
         input {
@@ -346,6 +351,19 @@
                             <li><a href="#">appointment pasien</a></li>
                             <li><a href="{{route('pasienterhapus')}}">deleted pasien</a></li>
                             <li><a href="{{route('attr_pasien')}}">attribut pasien</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                            <span class="iconify" data-icon="maki:doctor-15" data-inline="false"></span> <span
+                                class="nav-text">Perawat</span>
+                        </a>
+                        <ul aria-expanded="false">
+                            <li><a href="{{route('masterdokter')}}">Master Dokter</a></li>
+                            <li><a href="{{route('tambahdokter')}}">tambah dokter</a></li>
+                            <li><a href="{{route('jadwaldokter')}}">jadwal dokter</a></li>
+                            <li><a href="{{route('jadwaldokter')}}">pasien pending</a></li>
                         </ul>
                     </li>
 
