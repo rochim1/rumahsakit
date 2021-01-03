@@ -36,7 +36,7 @@
                         <h4 class="card-title pb-2">Edit Pasien</h4>
                         @foreach($dataPasien as $data)
 
-                        <form v-on:submit="submit" id="form_register">
+                        <form id="form_register">
 
                             <div class="form-row" id="rekamMedis">
                                 <label class="col-sm-2 col-form-label">No. Rekam Medik</label>
