@@ -31,7 +31,12 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title pb-2">Pendaftaran Pasien Baru</h4>
+                        <div class="d-flex justify-content-between">
+                            <h4 class="card-title pb-2">Pendaftaran Pasien Baru</h4>
+                            <a href="javascript();" class="tambah" data-toggle="modal">
+                                <span class="iconify" data-icon="fluent:print-20-regular"
+                                    data-inline="false"></span>print</a>
+                        </div>
                         <form v-on:submit.prevent id="form_register">
 
                             <div class="form-row">
@@ -47,81 +52,103 @@
                             </div>
 
                             <h5 class="card-title pt-3 pb-2">Biodata Pasien</h5>
+                            <div class="border-bottom-1 mb-2">
+                                <div class="form-row ">
+                                    <label class="col-sm-2 form-group col-form-label">nama</label>
+                                    <div class="col-sm-6 form-group">
+                                        <input v-model="data_form.nama_baru" type="text" name="nama"
+                                            class="form-control" id="nama" placeholder="Nama">
+                                    </div>
 
-                            <div class="form-row ">
-                                <label class="col-sm-2 form-group col-form-label">nama</label>
-                                <div class="col-sm-6 form-group">
-                                    <input v-model="data_form.nama_baru" type="text" name="nama" class="form-control"
-                                        id="nama" placeholder="Nama">
-                                </div>
-
-                                <div class="form-group col-sm-4">
-                                    <select v-model="data_form.jenis_kelamin" class="form-control" name="jenis_kelamin"
-                                        id="jk">
-                                        <option value="">--- Jenis Kelamin ---</option>
-                                        <option value="L">laki-laki</option>
-                                        <option value="P">Perempuan</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <label class="col-sm-2 form-group col-form-label">NIK</label>
-                                <div class="form-group col-sm-4">
-                                    <input v-model="data_form.NIK" type="text" name="nik" class="form-control" id="nama"
-                                        placeholder="NIK">
-                                </div>
-                                <div class="form-group col-sm-2">
-                                    <select v-model="data_form.warganegara" class="form-control" name="warga_negara"
-                                        id="warga_negara">
-                                        <option value="">--- warga negara ---</option>
-                                        <option value="WNI">--- WNI ---</option>
-                                        <option value="WNA">--- WNA ---</option>
-                                    </select>
+                                    <div class="form-group col-sm-4">
+                                        <select v-model="data_form.jenis_kelamin" class="form-control"
+                                            name="jenis_kelamin" id="jk">
+                                            <option value="">--- Jenis Kelamin ---</option>
+                                            <option value="L">laki-laki</option>
+                                            <option value="P">Perempuan</option>
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <div class="form-group col-sm-4">
-                                    <select v-model="data_form.agama" class="form-control" name="jenis_kelamin" id="jk">
-                                        <option value="">--- Agama ---</option>
-                                        <option value="Islam">Islam</option>
-                                        <option value="Kristen">Kristen</option>
-                                        <option value="Katolik">Katolik</option>
-                                        <option value="Hindu">Hindu</option>
-                                        <option value="Budha">Budha</option>
-                                        <option value="Konghucu">Konghucu</option>
-                                    </select>
-                                </div>
-                            </div>
+                                <div class="form-row">
+                                    <label class="col-sm-2 form-group col-form-label">NIK</label>
+                                    <div class="form-group col-sm-4">
+                                        <input v-model="data_form.NIK" type="text" name="nik" class="form-control"
+                                            id="nama" placeholder="NIK">
+                                    </div>
+                                    <div class="form-group col-sm-2">
+                                        <select v-model="data_form.warganegara" class="form-control" name="warga_negara"
+                                            id="warga_negara">
+                                            <option value="">--- warga negara ---</option>
+                                            <option value="WNI">--- WNI ---</option>
+                                            <option value="WNA">--- WNA ---</option>
+                                        </select>
+                                    </div>
 
-                            <div class="form-row">
-                                <label class="col-sm-2 form-group col-form-label">tanggal lahir</label>
-                                <div class="col-md-4 form-group">
-                                    <input v-on:change="umur" v-model="data_form.tgl_lahir" type="date"
-                                        class="form-control" placeholder="2017-06-04" id="mdate" name="tanggal_lahir">
-                                </div>
-                                <div class="col-md-3 form-group">
-                                    <input readonly v-model="data_form.umur" type="text" class="form-control"
-                                        name="umur" placeholder="umur">
-                                </div>
-                                <div class="col-md-3 form-group">
-                                    <input readonly v-model="data_form.bulan" type="text" class="form-control"
-                                        placeholder="lebih bulan">
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <label class="col-sm-2 form-group col-form-label">nama ibu kandung</label>
-                                <div class="form-group col-md-6">
-                                    <input type="text" class="form-control" v-model="data_form.namaibu">
+                                    <div class="form-group col-sm-4">
+                                        <select v-model="data_form.agama" class="form-control" name="jenis_kelamin"
+                                            id="jk">
+                                            <option value="">--- Agama ---</option>
+                                            <option value="Islam">Islam</option>
+                                            <option value="Kristen">Kristen</option>
+                                            <option value="Katolik">Katolik</option>
+                                            <option value="Hindu">Hindu</option>
+                                            <option value="Budha">Budha</option>
+                                            <option value="Konghucu">Konghucu</option>
+                                        </select>
+                                    </div>
                                 </div>
 
-                                <div class="form-group col-md-4">
-                                    <select v-model="data_form.pekerjaan" class="form-control" name="pekerjaan" id="jk">
-                                        <option value="">--- pekerjaan pasien---</option>
-                                        @foreach ($pekerjaanPasien as $item)
-                                        <option value="{{$item->id}}">{{$item->pekerjaan_pasien}}</option>
-                                        @endforeach
-                                    </select>
+                                <div class="form-row">
+                                    <label class="col-sm-2 form-group col-form-label">tanggal lahir</label>
+                                    <div class="col-md-4 form-group">
+                                        <input v-on:change="umur" v-model="data_form.tgl_lahir" type="date"
+                                            class="form-control" placeholder="2017-06-04" id="mdate"
+                                            name="tanggal_lahir">
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <input readonly v-model="data_form.umur" type="text" class="form-control"
+                                            name="umur" placeholder="umur">
+                                    </div>
+                                    <div class="col-md-3 form-group">
+                                        <input readonly v-model="data_form.bulan" type="text" class="form-control"
+                                            placeholder="lebih bulan">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <label class="col-sm-2 form-group col-form-label">nama ibu kandung</label>
+                                    <div class="form-group col-md-4">
+                                        <input type="text" class="form-control" v-model="data_form.namaibu">
+                                    </div>
+
+                                    <div class="form-group col-md-3">
+                                        <select v-model="data_form.pendidikan" class="form-control" name="pekerjaan"
+                                            id="jk">
+                                            <option value="">--- pendidikan terakhir ---</option>
+                                            <option value="SD/MI">SD/MI</option>
+                                            <option value="SMP/MTS">SMP/MTS</option>
+                                            <option value="SMA/SMK/MA">SMA/SMK/MA</option>
+                                            <option value="D1">D1</option>
+                                            <option value="D2">D2</option>
+                                            <option value="D3">D3</option>
+                                            <option value="D4">D4</option>
+                                            <option value="S1">S1</option>
+                                            <option value="S2">S2</option>
+                                            <option value="S3">S3</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-md-3">
+                                        <select v-model="data_form.pekerjaan" class="form-control" name="pekerjaan"
+                                            id="jk">
+                                            <option value="">--- pekerjaan pasien---</option>
+                                            @foreach ($pekerjaanPasien as $item)
+                                            <option value="{{$item->id}}">{{$item->pekerjaan_pasien}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -203,6 +230,12 @@
                                     style="height: 200px">
                                 <input style="display: none" type="file" id="pilihprofil" v-on:change="onImageChange">
                             </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
 
                             <div class="form-group ">
                                 <label for="">asuransi</label>
@@ -214,11 +247,24 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div id="formIdAsuransi" class="form-group collapse">
                                 <label>nomor id asuransi</label>
                                 <input name="idasuransi" type="number" class="form-control"
                                     v-model="data_form.idasuransi">
                             </div>
+
+                            <div class="form-group">
+                                <label>status kawin</label>
+                                <select name="kawin" type="text" class="form-control" v-model="data_form.kawin">
+                                    <option value="">-- status kawin --</option>
+                                    <option value="belum kawin">belum kawin</option>
+                                    <option value="kawin">kawin</option>
+                                    <option value="cerai hidup">cerai hidup</option>
+                                    <option value="cerai mati">cerai mati</option>
+                                </select>
+                            </div>
+                            <h4>sekunder</h4>
                             <div class="form-group">
                                 <label>bahasa</label>
                                 <select name="bahasa" type="text" class="form-control" v-model="data_form.bahasa">
@@ -228,6 +274,7 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label>cacat fisik</label>
                                 <select name="cacatfisik" class="form-control" v-model="data_form.cacatfisik">
@@ -383,7 +430,6 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
 
@@ -436,15 +482,19 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <div class="form-group">
+                                    <div class="form-group form-row">
                                         <label class="col-form-label">cara masuk</label>
-                                        @foreach ($caramasuk as $item)
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                id="inlineRadio1" value="{{$item->id}}">
-                                            <label class="form-check-label" for="inlineRadio1">{{$item->cara_masuk}}</label>
+                                        <div class="form-group">
+
+                                            @foreach ($caramasuk as $item)
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="inlineRadioOptions"
+                                                    id="inlineRadio1" value="{{$item->id}}">
+                                                <label class="form-check-label"
+                                                    for="inlineRadio1">{{$item->cara_masuk}}</label>
+                                            </div>
+                                            @endforeach
                                         </div>
-                                        @endforeach
                                     </div>
                                 </div>
 
@@ -532,6 +582,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <script>
@@ -571,6 +622,7 @@
                         umur: '',
                         bulan: '',
                         namaibu: '',
+                        pendidikan: '',
                         pekerjaan: '',
                         telp: '',
                         email: '',
@@ -587,6 +639,7 @@
                         idasuransi: '',
 
                         bahasa: '',
+                        kawin: '',
                         cacatfisik: '',
                         cirifisik: '',
                     },

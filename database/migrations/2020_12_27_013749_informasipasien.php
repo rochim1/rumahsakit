@@ -27,15 +27,15 @@ class InformasiPasien extends Migration
             $table->string("hubungan_keluarga")->nullable();
             $table->string("nama_keluarga")->nullable();
             $table->string("pekerjaan_keluarga")->nullable();
-            $table->string("telpon")->nullable();
-            $table->string("email")->unique()->nullable();
-            $table->string("jenis_kelamin")->nullable();
+            $table->string("telpon_kel")->nullable();
+            $table->string("email_kel")->unique()->nullable();
+            $table->string("jenis_kelamin_kel")->nullable();
 
-            $table->text('kelurahan', 30)->nullable();
-            $table->text('kecamatan', 30)->nullable();
-            $table->text('kabupaten', 30)->nullable();
-            $table->text('provinsi', 30)->nullable();
-            $table->string("alamat")->nullable();
+            $table->text('kelurahan_kel', 30)->nullable();
+            $table->text('kecamatan_kel', 30)->nullable();
+            $table->text('kabupaten_kel', 30)->nullable();
+            $table->text('provinsi_kel', 30)->nullable();
+            $table->string("alamat_kel")->nullable();
 
             $table->timestamps();
             $table->softDeletes('deleted_at')->nullable();

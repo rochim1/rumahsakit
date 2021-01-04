@@ -17,16 +17,21 @@ class Pasien extends Migration
             $table->id('id_pasien'); // sudah auto increment
             $table->string('rekam_medis')->unique();
             $table->string('nama')->comment('nama user');
-            $table->string('jenisKelamin');
             $table->string('NIK')->unique();
-            $table->string('warga_negara');
-            $table->string('agama');
-            $table->string('status_pasien')->nullable()->comment("status untuk saat ini apakah sedang dirawat atau tidak"); //rawat inap / rawat jalan
+            $table->string('jenisKelamin');
             $table->date('tanggal_lahir');
             $table->integer('umur_daftar')->nullable()->comment("dibutuhkan agar mengetahui umur pasien ketika mendaftar");
             $table->integer('lebih_bulan')->nullable();
-            $table->string('email')->unique()->nullable();
+            $table->string('warga_negara');
+            $table->string('agama');
             $table->text('telpon');
+            $table->string('email')->unique()->nullable();
+
+            $table->string('nama_ibu')->nullable();
+            $table->string('pendidikan')->nullable();
+
+            $table->string('status_pasien')->nullable()->comment("status untuk saat ini apakah sedang dirawat atau tidak"); //rawat inap / rawat jalan
+
             $table->string('alamat')->nullable();
 
             $table->text('kelurahan')->nullable();
@@ -41,7 +46,7 @@ class Pasien extends Migration
 
             $table->string('status_nikah')->nullable();
 
-            $table->string('ciri_fisik')->nullable();
+            $table->string('foto')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             // dapat dikosongi (null)
             $table->string('password');

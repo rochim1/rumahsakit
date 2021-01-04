@@ -24,7 +24,13 @@ class rscontroller extends Controller
     }
     public function rekmed(){
         $id_pasien = DB::table('pasien')->select('id_pasien')->orderByDesc('id_pasien')->first();
-        $hasil = "RM-".date("Ydm").'-'.$id_pasien->id_pasien;
+        $nomor = $id_pasien->id_pasien + 1;
+        if (isset($id_pasien)) {
+            $hasil = "RM-".date("dmY").'-'.$nomor;
+        }else
+        {
+            $hasil = "RM-".date("dmY").'-1';
+        }
         return $hasil;
     }
     public function regpasien(){
@@ -50,8 +56,26 @@ class rscontroller extends Controller
         return $pass;
     }
     public function editPasien($id_pasien){
-        $dataPasien = pasien::where('id_pasien',$id_pasien)->get();
-        return view('admin.pasien.updatePasien', compact('dataPasien'));
+        // $dataSpesialis = $this->dataSpesialis();
+        $pekerjaanPasien = DB::table('pekerjaan_pasien as p')
+        ->select()->get();
+        $asuransi = DB::table('asuransi')->select()->get();
+        // $caramasuk = DB::table('caramasuk')->select()->get();
+
+        // $jadwaljam = DB::table('jadwaljam')->select()->get();
+
+        $cacat = DB::table('cacatfisik')->select()->get();
+        $bahasa = DB::table('bahasa')->select()->get();
+        $dataPasien = '';
+        $dataPasien = pasien::from('pasien as p')
+            ->join('informasipasien as i', 'i.id_pasien','=', 'p.id_pasien')
+            ->where('p.id_pasien', $id_pasien)
+            ->select('p.*','i.*')->first();
+        // $dataPasien = (array) $dataPasien;
+        // return dd($dataPasien);
+        // return $dataPasien;
+        // return response()->json($data, 200, $headers);
+        return view('admin.pasien.updatePasien', compact('pekerjaanPasien','bahasa','cacat','asuransi'))->with('dataPasien', $dataPasien);
     }
 
     public function attr_pasien(){
@@ -89,34 +113,40 @@ class rscontroller extends Controller
         $namafoto = '';
         if ($request->hasFile('foto')) {
             $datafoto = $request->file('foto');
-            $namafoto = $datafoto->getClientOriginalName() . '.' . $datafoto->getClientOriginalExtension();
+            // $namafoto = $datafoto->getClientOriginalName() . '.' . $datafoto->getClientOriginalExtension();
+            $namafoto = $datafoto->getClientOriginalName();
             // $namafoto = $datafoto->getClientOriginalName();
-            $request->file('foto')->storeAs('fotoPasien/' . $request->nama . '-' . $id, $namafoto);
+            $request->file('foto')->storeAs('fotoPasien/-' . $id, $namafoto);
         }
 
         // get last inserted id from db builder
         $idpasien = DB::table('pasien')->insertGetId([
             'rekam_medis' => $request->rekamMedis,
             'nama' => $request->nama_baru,
-            'jenisKelamin' => $request->jenis_kelamin,
             'NIK' => $request->NIK,
-            'warga_negara' => $request->warganegara,
-            'agama' => $request->agama,
+            'jenisKelamin' => $request->jenis_kelamin,
             'tanggal_lahir' => $request->tgl_lahir,
-
             'umur_daftar' => str_replace(' tahun','',$request->umur),
             'lebih_bulan' => str_replace('bulan', '', $request->bulan),
-
+            'warga_negara' => $request->warganegara,
+            'agama' => $request->agama,
+            'telpon' => $request->telp,
             'email' => $request->email,
+            'nama_ibu' => $request->namaibu,
+            'pendidikan' => $request->pendidikan,
+            'status_pasien' => 'non-aktif',
+
             'alamat' => $request->alamat.' alamat detail : '.$alamat_detail ,
             'kelurahan' => $request->kelurahan,
             'kecamatan' => $request->kecamatan,
             'kabupaten' => $request->kabupaten,
             'provinsi' => $request->kota,
-            'telpon' => $request->telp,
-            // 'asuransi' => $request->asuransi,
+            'asuransi' => $request->asuransi,
+            'id_asuransi' => $request->id_asuransi,
             // asuransi di pindah ke table tambahan
             'pekerjaan' => $request->pekerjaan,
+            'status_nikah' => $request->pekerjaan,
+            'foto' => $namafoto,
             // 'email_verified_at' =>
             'password' => $password,
             // 'remember_token' =>
@@ -137,14 +167,14 @@ class rscontroller extends Controller
                 "hubungan_keluarga" => $request->hubungan_kel,
                 "nama_keluarga" => $request->nama_kel,
                 "pekerjaan_keluarga" => $request->pekerjaan_kel,
-                "telpon" => $request->telp_kel,
-                "email" => $request->email_kel,
-                "jenis_kelamin" => $request->jenis_kel,
-                "kelurahan" => $request->kelurahan_kel,
-                "kecamatan" => $request->kecamatan_kel,
-                "kabupaten" => $request->kabupaten_kel,
-                "provinsi" => $request->kota_kel,
-                "alamat" => $request->alamat_kel,
+                "telpon_kel" => $request->telp_kel,
+                "email_kel" => $request->email_kel,
+                "jenis_kelamin_kel" => $request->jenis_kel,
+                "kelurahan_kel" => $request->kelurahan_kel,
+                "kecamatan_kel" => $request->kecamatan_kel,
+                "kabupaten_kel" => $request->kabupaten_kel,
+                "provinsi_kel" => $request->kota_kel,
+                "alamat_kel" => $request->alamat_kel,
                 "updated_at" => Carbon::now(),
             ]);
         }

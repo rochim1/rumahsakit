@@ -30,6 +30,7 @@ class pasien_seeder extends Seeder
             DB::table('pasien')->insert([
             'rekam_medis'=> "RM-". $faker->isbn10,
             'nama' => $faker->name,
+            'nama_ibu' => $faker->name,
             // 'jenisKelamin' => strval($faker->randomElements(array('L','P'),1)),
             'jenisKelamin' => 'P',
             'NIK' => $faker->isbn10 ,
@@ -45,10 +46,16 @@ class pasien_seeder extends Seeder
             'telpon' => $faker->e164PhoneNumber,
             'alamat' => $faker->address,
 
-            'kelurahan' => $faker->address,
-            'kecamatan' => $faker->stateAbbr,
-            'kabupaten' => $faker->city,
-            'provinsi' => $faker->state,
+                // 'kelurahan' => $faker->address,
+                // 'kecamatan' => $faker->stateAbbr,
+                // 'kabupaten' => $faker->city,
+                // 'provinsi' => $faker->state,
+
+                'kelurahan' => 3404120002,
+                'kecamatan' => 3404120,
+                'kabupaten' => 3404,
+                'provinsi' => 34,
+
 
             'asuransi' => $asuransi[$rand_keys],
             // 'pekerjaan' => $faker->jobTitle,

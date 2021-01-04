@@ -25,6 +25,11 @@
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.semanticui.min.css"> --}}
     <style>
+        .iconify {
+            font-size: 22px;
+            padding: 0 0.4375rem 0 0;
+        }
+
         thead {
             background: #9e9bfb;
             color: #fff;
@@ -356,8 +361,8 @@
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="iconify" data-icon="maki:doctor-15" data-inline="false"></span> <span
-                                class="nav-text">Perawat</span>
+                            <span class="iconify" data-icon="la:user-nurse" data-inline="false"></span>
+                            <span class="nav-text">Perawat</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('masterdokter')}}">Master Dokter</a></li>
@@ -382,8 +387,8 @@
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="iconify" data-icon="bx:bxs-report" data-inline="false"></span> <span
-                                class="nav-text">Data Rekam Medis</span>
+                            <span class="iconify" data-icon="bi:clipboard-data" data-inline="false"></span>
+                            <span class="nav-text">Data Rekam Medis</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('AllUsers')}}">seluruh pengguna</a></li>
@@ -394,8 +399,9 @@
 
                     <li>
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <span class="iconify" data-icon="bx:bxs-report" data-inline="false"></span> <span
-                                class="nav-text">Kamar</span>
+                            <span class="iconify" data-icon="fluent:conference-room-28-regular"
+                                data-inline="false"></span>
+                            <span class="nav-text">Kamar</span>
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('kamar')}}">master kamar</a></li>
@@ -441,8 +447,18 @@
 
                 <li>
                     <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <span class="iconify" data-icon="bx:bx-plus-medical" data-inline="false"></span>
+                        <span class="iconify" data-icon="ic:outline-local-hospital" data-inline="false"></span>
                         <span class="nav-text">Poli</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('AllUsers')}}">master poli</a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <span class="iconify" data-icon="icomoon-free:lab" data-inline="false"></span>
+                        <span class="nav-text">Laboratori</span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{route('AllUsers')}}">master poli</a></li>
@@ -463,7 +479,7 @@
 
                 <li>
                     <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <span class="iconify" data-icon="medical-icon:i-care-staff-area" data-inline="false"></span>
+                        <span class="iconify" data-icon="cil:truck" data-inline="false"></span>
                         <span class="nav-text">Suplier</span>
                     </a>
                     <ul aria-expanded="false">
@@ -472,12 +488,35 @@
                         <li><a href="{{route('tampiladmin')}}">Admin</a></li>
                     </ul>
                 </li>
-
+                <li class="nav-label">Laporan</li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <span class="iconify" data-icon="grommet-icons:money" data-inline="false"></span>
+                        <span class="nav-text">Keuangan</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('listproduk')}}">list Produk</a></li>
+                        <li><a href="{{route('tambahproduk')}}">Tambah Produk</a></li>
+                        <li><a href="{{route('produkjunk')}}">trash</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <span class="iconify" data-icon="fluent:presenter-20-regular" data-inline="false"></span>
+                        <span class="nav-text">Presensi</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{route('listproduk')}}">list Produk</a></li>
+                        <li><a href="{{route('tambahproduk')}}">Tambah Produk</a></li>
+                        <li><a href="{{route('produkjunk')}}">trash</a></li>
+                    </ul>
+                </li>
                 <li class="nav-label">Others</li>
 
                 <li>
                     <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="menu-icon icon-bag"></i> <span class="nav-text">Permintaan Barang</span>
+                        <span class="iconify" data-icon="bi:box" data-inline="false"></span>
+                        <span class="nav-text">Permintaan Barang</span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{route('listproduk')}}">list Produk</a></li>
@@ -488,7 +527,8 @@
 
                 <li>
                     <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                        <i class="menu-icon icon-bag"></i> <span class="nav-text">Attribute</span>
+                        <span class="iconify" data-icon="carbon:tool-box" data-inline="false"></span>
+                        <span class="nav-text">Attribute</span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{route('spesialis')}}">Spesialis dan Jabatan</a></li>
