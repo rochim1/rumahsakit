@@ -11,7 +11,7 @@
     {{-- <link rel="stylesheet" href="{{asset('css/ionicons.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/flaticon/flaticon.css')}}"> --}}
     {{-- <link rel="stylesheet" href="{{asset('css/icomoon.css')}}"> --}}
-    <link rel="icon" type="Componentadmin/image/png" sizes="16x16" href="Componentadmin/images/favicon.png">
+    <link rel="icon" type="Componentadmin/image/png" sizes="16x16" href="{{asset('Componentadmin/images/favicon.png')}}">
     <!-- Pignose Calender -->
     <link href="{{asset('Componentadmin/plugins/pg-calendar/css/pignose.calendar.min.css')}}" rel="stylesheet">
     <!-- Chartist -->
@@ -20,6 +20,7 @@
         href="{{asset('Componentadmin/plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css')}}">
     <!-- Custom Stylesheet -->
     <link href="{{asset('Componentadmin/css/style.css')}}" rel="stylesheet">
+    {{-- <link href="{{asset('css/animate.css')}}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     {{-- <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"> --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
@@ -354,7 +355,7 @@
                             <li><a href="{{route('masterpasien')}}">master pasien</a></li>
                             <li><a href="{{route('regpasien')}}">registrasi pasien</a></li>
                             <li><a href="#">appointment pasien</a></li>
-                            <li><a href="{{route('pasienterhapus')}}">deleted pasien</a></li>
+                            <li><a href="#">deleted pasien</a></li>
                             <li><a href="{{route('attr_pasien')}}">attribut pasien</a></li>
                         </ul>
                     </li>

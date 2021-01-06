@@ -29,6 +29,13 @@
 
     <div class="container-fluid" id="editPasien">
         <div class="row">
+            <div class="col-md-12 alert alert-info alert-dismissible fade show" role="alert">
+                <h4>info</h4>
+                untuk atribut pendukung yang memiliki foreign dengan table lain lebih ringkas jika tidak mengacu pada id(primary key) pada table foreign tapi langsung saja merujuk pada value nya dengan syarat on update cascade dan on delete cascade dan merupakan unique key juga
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="col-md-8">
                 <div class="card">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -38,7 +45,8 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="pills-tambahan-tab" data-toggle="pill" href="#pills-tambahan"
-                                role="tab" aria-controls="pills-tambahan" v-on:click="infotambahan" aria-selected="false">Info tambahan</a>
+                                role="tab" aria-controls="pills-tambahan" v-on:click="infotambahan"
+                                aria-selected="false">Info tambahan</a>
                         </li>
 
                     </ul>
@@ -59,10 +67,6 @@
                                         <div class=" form-group col-sm-8">
                                             <input v-on:click.prevent id="rekammedis" v-model=" data_form.rekamMedis"
                                                 type="text" class="form-control" readonly value="">
-                                        </div>
-                                        <div class=" form-group col-sm-2">
-                                            <button type="button" v-on:click="generate"
-                                                class="btn btn-primary gradient-1">refresh</button>
                                         </div>
                                     </div>
 
@@ -141,16 +145,11 @@
                                                 <select v-model="data_form.pendidikan" class="form-control"
                                                     name="pekerjaan" id="jk">
                                                     <option value="">--- pendidikan terakhir ---</option>
-                                                    <option value="SD/MI">SD/MI</option>
-                                                    <option value="SMP/MTS">SMP/MTS</option>
-                                                    <option value="SMA/SMK/MA">SMA/SMK/MA</option>
-                                                    <option value="D1">D1</option>
-                                                    <option value="D2">D2</option>
-                                                    <option value="D3">D3</option>
-                                                    <option value="D4">D4</option>
-                                                    <option value="S1">S1</option>
-                                                    <option value="S2">S2</option>
-                                                    <option value="S3">S3</option>
+                                                    @foreach ($pendidikan as $item)
+                                                    <option value="{{$item->pendidikan}}">{{$item->pendidikan}}</option>
+                                                    @endforeach
+
+
                                                 </select>
                                             </div>
 
@@ -166,7 +165,7 @@
 
                                         </div>
                                     </div>
-
+                                    <h4>Kontak Pasien</h4>
                                     <div class="form-row">
                                         <label class="col-sm-2 form-group col-form-label">No Telp</label>
                                         <div class="form-group col-md-5">
@@ -179,54 +178,70 @@
                                         </div>
                                     </div>
 
+                                    <h4>Alamat Pasien</h4>
                                     <div class="form-row">
-                                        <label class="col-sm-2 form-group col-form-label">Alamat</label>
+                                        <div class="border p-3 form-row">
+                                            <div class="col-sm-6 form-group">
+                                                <label>kelurahan</label>
+                                                <select class="form-control" v-model="data_form.kelurahan">
+                                                    <option value="">--Kelurahan--</option>
+                                                    <option v-for="item in kelurahan" :value="item.id">@{{item.nama}}
+                                                    </option>
+                                                </select>
+                                            </div>
 
-                                        <div class="form-group col-md-5">
-                                            <select class="form-control" v-model="data_form.kelurahan" id="kelurahan">
-                                                <option value="">--Kelurahan--</option>
-                                                <option v-for="item in kelurahan" :value="item.id">@{{item.nama}}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-5">
-                                            <select v-model="data_form.kecamatan" class="form-control" id="kecamatan">
-                                                <option value="">--Kecamatan--</option>
-                                                <option v-on:click="apiKelurahan(item.id,1)" v-for="item in kecamatan"
-                                                    :value="item.id">@{{item.nama}}</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group offset-md-2  col-md-5">
-                                            <select v-model="data_form.kabupaten" class="form-control" id="kabupaten">
-                                                <option value="">--Kabupaten--</option>
-                                                <option v-on:click="apiKecamatan(item.id,1)" v-for="item in kabupaten"
-                                                    :value="item.id">@{{item.nama}}</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-5">
-                                            <select v-on:click="apiKota(1)" v-model="data_form.kota"
-                                                class="form-control" id="kota">
-                                                <option value="">--Kota--</option>
-                                                <option v-on:click="apiKabupaten(item.id, 1)" v-for="item in kota"
-                                                    :value="item.id">@{{item.nama}}</option>
-                                            </select>
+                                            <div class="col-sm-6 form-group">
+                                                <label>kecamatan</label>
+                                                <select v-model="data_form.kecamatan" class="form-control"
+                                                    id="kecamatan">
+                                                    <option value="">--Kecamatan--</option>
+                                                    <option v-on:click="apiKelurahan(item.id,1)"
+                                                        v-for="item in kecamatan" :value="item.id">
+                                                        @{{item.nama}}</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-6 form-group">
+                                                <label>kabupaten</label>
+                                                <select class="form-control" v-model="data_form.kabupaten">
+                                                    <option value="">-- Kabupaten --</option>
+                                                    <option v-on:click="apiKecamatan(item.id,1)"
+                                                        v-for="item in kabupaten" :value="item.id">
+                                                        @{{item.nama}}</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-6 form-group">
+                                                <label>kota / provinsi</label>
+                                                <select v-on:click="apiKota(2)" v-model="data_form.kota"
+                                                    class="form-control">
+                                                    <option value="">--Kota--</option>
+                                                    <option v-on:click="apiKabupaten(item.id,1)" v-for="item in kota"
+                                                        :value="item.id">
+                                                        @{{item.nama}}</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-12 form-group">
+                                                <textarea style="height: 120px" v-model="data_form.alamat" name="alamat"
+                                                    class="form-control"></textarea>
+                                            </div>
                                         </div>
                                     </div>
 
 
-                                    <div class="form-row">
-                                        <div class="offset-md-2 col-md-10 form-group">
-                                            <textarea style="height: 120px" v-model="data_form.alamat" name="alamat"
-                                                class="form-control"></textarea>
-                                        </div>
-                                    </div>
+
 
                                     <div class="form-row mt-2">
-                                        <div class="col-sm-10 offset-sm-2">
-                                            <button type="button"
-                                                class="btn form-group btn-primary gradient-1">Daftar</button>
-                                            <button type="reset" v-on:click="clear"
-                                                class="btn form-group btn-whatsapp">Clear</button>
+                                        <div class="col-sm-10 offset-sm-2 d-flex flex-row-reverse">
+                                            <button type="button" class="ml-3 btn form-group btn-primary gradient-1"
+                                                v-on:click="updatePasien">Update</button>
+                                            <button type="button" class="ml-3 btn form-group btn-primary gradient-1"
+                                                v-on:click="updatePasien">Cetak ulang kartu</button>
+                                                <button type="reset" v-on:click="clear"
+                                                class="btn form-group ml-3 btn-whatsapp">Clear</button>
+                                                <button type="button" class="btn btn-danger form-group btn-danger btn-google"
+                                                    v-on:click="updatePasien">kembali</button>
                                             {{-- <button type="button" v-on:click="printFormMedis"
                                         class="btn form-group btn-danger gradient-2">Cancel</button> --}}
                                         </div>
@@ -241,9 +256,20 @@
                                 <form v-on:submit.prevent>
                                     <h4 class="mt-2">Biodata keluarga pasien</h4>
                                     <div class="form-row">
-                                        <div class="col-sm-8 form-group">
+                                        <div class="col-sm-2 form-group">
+                                            <label>hub Keluarga</label>
+                                            <select v-model="infotambahan.hubungan_kel" class="form-control"
+                                                id="hubkeluarga">
+                                                <option value="">--hubungan keluarga--</option>
+                                                <option value="1">ayah</option>
+                                                <option value="2">ibu</option>
+                                                <option value="3">anak</option>
+                                                <option value="4">keluarga</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6 form-group">
                                             <label>Nama Keluarga</label>
-                                            <input type="email" class="form-control" id="nama_kel"
+                                            <input type="text" class="form-control" id="nama_kel"
                                                 v-model="infotambahan.nama_kel">
                                         </div>
 
@@ -331,8 +357,8 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
+
             </div>
             <div class="col-md-4">
                 <div class="card">
@@ -407,7 +433,18 @@
                 </div>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Riwayat Medis</h4>
+                        <h4>Riwayat pengeditan biodata</h4>
+                        <h6>Example heading <span class="badge badge-primary gradient-4">New</span></h6>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Riwayat Pemeriksaan</h4>
                         <div class="list-group">
                             <button type="button" class="list-group-item list-group-item-action active">
                                 Cras justo odio
@@ -423,7 +460,8 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Riwayat Lab</h4>
@@ -442,7 +480,8 @@
                         </div>
                     </div>
                 </div>
-
+            </div>
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Alergi Obat</h4>
@@ -463,306 +502,345 @@
                 </div>
             </div>
         </div>
-    </div>
-    <script>
-        new Vue({
-            el: '#editPasien',
-            data: {
-                fotoData: "",
-                id_pasien: "{{$dataPasien->id_pasien}}",
-                kota: [],
-                kabupaten: [],
-                kecamatan: [],
-                kelurahan: [],
+        <script>
+            new Vue({
+                el: '#editPasien',
+                data: {
+                    fotoData: "",
+                    id_pasien: "{{$dataPasien->id_pasien}}",
+                    kota: [],
+                    kabupaten: [],
+                    kecamatan: [],
+                    kelurahan: [],
 
-                kota_kel: [],
-                kabupaten_kel: [],
-                kecamatan_kel: [],
-                kelurahan_kel: [],
+                    kota_kel: [],
+                    kabupaten_kel: [],
+                    kecamatan_kel: [],
+                    kelurahan_kel: [],
 
-                data_form: {
-                    rekamMedis: "{{$dataPasien->rekam_medis}}",
-                    nama_baru: "{{$dataPasien->nama}}",
-                    jenis_kelamin: "{{$dataPasien->jenisKelamin}}",
-                    NIK: "{{$dataPasien->NIK}}",
-                    warganegara: "{{$dataPasien->warga_negara}}",
-                    agama: "{{$dataPasien->agama}}",
-                    tgl_lahir: "{{$dataPasien->tanggal_lahir}}",
-                    umur: "{{$dataPasien->umur_daftar}} tahun",
-                    bulan: "{{$dataPasien->lebih_bulan}} bulan",
-                    namaibu: "{{$dataPasien->nama_ibu}}",
-                    pendidikan: "{{$dataPasien->pendidikan}}",
-                    pekerjaan: "{{$dataPasien->pekerjaan}}",
-                    telp: "{{$dataPasien->telpon}}",
-                    email: "{{$dataPasien->email}}",
+                    data_form: {
+                        rekamMedis: "{{$dataPasien->rekam_medis}}",
+                        nama_baru: "{{$dataPasien->nama}}",
+                        jenis_kelamin: "{{$dataPasien->jenisKelamin}}",
+                        NIK: "{{$dataPasien->NIK}}",
+                        warganegara: "{{$dataPasien->warga_negara}}",
+                        agama: "{{$dataPasien->agama}}",
+                        tgl_lahir: "{{$dataPasien->tanggal_lahir}}",
+                        umur: "{{$dataPasien->umur_daftar}} tahun",
+                        bulan: "{{$dataPasien->lebih_bulan}} bulan",
+                        namaibu: "{{$dataPasien->nama_ibu}}",
+                        pendidikan: "{{$dataPasien->pendidikan}}",
+                        pekerjaan: "{{$dataPasien->pekerjaan}}",
+                        telp: "{{$dataPasien->telpon}}",
+                        email: "{{$dataPasien->email}}",
 
-                    kelurahan: "{{$dataPasien->kelurahan}}",
-                    kecamatan: "{{$dataPasien->kecamatan}}",
-                    kabupaten: "{{$dataPasien->kabupaten}}",
-                    kota: "{{$dataPasien->provinsi}}",
-                    alamat: "{{$dataPasien->alamat}}",
+                        kelurahan: "{{$dataPasien->kelurahan}}",
+                        kecamatan: "{{$dataPasien->kecamatan}}",
+                        kabupaten: "{{$dataPasien->kabupaten}}",
+                        kota: "{{$dataPasien->provinsi}}",
+                        alamat: "{{$dataPasien->alamat}}",
 
-                    foto: "{{$dataPasien->foto}}",
+                        foto: "{{$dataPasien->foto}}",
 
-                    asuransi: "{{$dataPasien->asuransi}}",
-                    idasuransi: "{{$dataPasien->id_asuransi}}",
+                        asuransi: "{{$dataPasien->asuransi}}",
+                        idasuransi: "{{$dataPasien->id_asuransi}}",
 
-                    bahasa: "{{$dataPasien->bahasa}}",
-                    cacatfisik: "{{$dataPasien->cacat_fisik }}",
-                    cirifisik: "{{$dataPasien->ciri_fisik}}",
+                        bahasa: "{{$dataPasien->bahasa}}",
+                        kawin: "{{$dataPasien->status_nikah}}",
+                        cacatfisik: "{{$dataPasien->cacat_fisik }}",
+                        cirifisik: "{{$dataPasien->ciri_fisik}}",
+                    },
+                    infotambahan: {
+                        hubungan_kel: '{{$dataPasien->hubungan_keluarga}}',
+                        nama_kel: '{{$dataPasien->nama_keluarga}}',
+                        jenis_kel: '{{$dataPasien->jenis_kelamin_kel}}',
+                        pekerjaan_kel: '{{$dataPasien->pekerjaan_keluarga}}',
+                        telp_kel: '{{$dataPasien->telpon_kel}}',
+                        email_kel: '{{$dataPasien->email_kel}}',
+
+                        kelurahan_kel: '{{$dataPasien->kelurahan_kel}}',
+                        kecamatan_kel: '{{$dataPasien->kecamatan_kel}}',
+                        kabupaten_kel: '{{$dataPasien->kabupaten_kel}}',
+                        kota_kel: '{{$dataPasien->provinsi_kel}}',
+                        alamat_kel: '{{$dataPasien->alamat_kel}}',
+                    }
                 },
-                infotambahan: {
-                    hubungan_kel: '{{$dataPasien->hubungan_keluarga}}',
-                    nama_kel: '{{$dataPasien->nama_keluarga}}',
-                    jenis_kel: '{{$dataPasien->jenis_kelamin_kel}}',
-                    pekerjaan_kel: '{{$dataPasien->pekerjaan_keluarga}}',
-                    telp_kel: '{{$dataPasien->telpon_kel}}',
-                    email_kel: '{{$dataPasien->email_kel}}',
-
-                    kelurahan_kel: '{{$dataPasien->kelurahan_kel}}',
-                    kecamatan_kel: '{{$dataPasien->kecamatan_kel}}',
-                    kabupaten_kel: '{{$dataPasien->kabupaten_kel}}',
-                    kota_kel: '{{$dataPasien->provinsi_kel}}',
-                    alamat_kel: '{{$dataPasien->alamat_kel}}',
-                }
-            },
-            created: function(){
-                const vm = this;
-                vm.apiKota(1);
-                vm.apiKabupaten(vm.data_form.kota , 1);
-                vm.apiKecamatan(vm.data_form.kabupaten, 1);
-                vm.apiKelurahan(vm.data_form.kecamatan, 1);
-            },
-            mounted: function () {
-                const vm = this;
-                if (vm.data_form.foto == "") {
-                    alert('kosong');
-                    vm.fotoData = "{{asset('/images/index.png')}}";
-                } else {
+                created: function () {
+                    const vm = this;
+                    vm.apiKota(1);
+                    vm.apiKabupaten(vm.data_form.kota, 1);
+                    vm.apiKecamatan(vm.data_form.kabupaten, 1);
+                    vm.apiKelurahan(vm.data_form.kecamatan, 1);
+                },
+                mounted: function () {
+                    const vm = this;
+                    if (vm.data_form.foto == "") {
+                        vm.fotoData = "{{asset('/images/index.png')}}";
+                    } else {
                         vm.fotoData = '../storage/fotoPasien/-' + vm.data_form.rekamMedis + '/' +
                             vm.data_form.foto;
-                };
-                Vue.nextTick(function () {
-                vm.asuransiCtrl();
-                });
-            },
-            methods: {
-                browsefile: function () {
-                    $('#pilihprofil').click();
-                },
-                onImageChange(e) {
-                    let files = e.target.files || e.dataTransfer.files;
-                    if (!files.length) //jika tidak terisi
-                        return;
-                    this.createImage(files[0]);
-                    // karena data berupa array maka file[0]
-                },
-                createImage(file) {
-
-                    let reader = new FileReader();
-                    let vm = this;
-                    reader.onload = (e) => {
-                        vm.fotoData = e.target.result;
-                        vm.data_form.foto = file;
                     };
-                    reader.readAsDataURL(file);
+                        vm.asuransiCtrl();
                 },
-                asuransiCtrl: function () {
-                    if (this.data_form.asuransi) {
-                        $('#formIdAsuransi').removeClass('collapse');
-                    } else {
-                        $('#formIdAsuransi').addClass('collapse');
-                    }
-                },
-                generate: function () {
-                    axios.get("{{route('rekammedis')}}").then(
-                        Respons => {
-                            this.data_form.rekamMedis = Respons.data;
-                        }
-                    )
-                },
-                apiKota: function (urutan) {
-                    const vm = this;
-                    axios.get("/daftarkota").then(hasil => {
-                        if (urutan == 1) {
-                            vm.kota = JSON.parse(hasil.data).provinsi;
+                methods: {
+                    browsefile: function () {
+                        $('#pilihprofil').click();
+                    },
+                    onImageChange(e) {
+                        let files = e.target.files || e.dataTransfer.files;
+                        if (!files.length) //jika tidak terisi
+                            return;
+                        this.createImage(files[0]);
+                        // karena data berupa array maka file[0]
+                    },
+                    createImage(file) {
+
+                        let reader = new FileReader();
+                        let vm = this;
+                        reader.onload = (e) => {
+                            vm.fotoData = e.target.result;
+                            vm.data_form.foto = file;
+                        };
+                        reader.readAsDataURL(file);
+                    },
+                    asuransiCtrl: function () {
+
+                        if (this.data_form.asuransi) {
+                            Vue.nextTick(function () {
+                            $('#formIdAsuransi').removeClass('collapse');
+                            });
                         } else {
-                            vm.kota_kel = JSON.parse(hasil.data).provinsi;
+                            Vue.nextTick(function () {
+                            $('#formIdAsuransi').addClass('collapse');
+                            });
                         }
-                    }).catch(error => {
-                        vm.kota = [];
-                        vm.kota_kel = [];
-                    });
-                },
-                apiKabupaten: function (idkota, urutan) {
-                    axios.get("/daftarkabupaten/" + idkota).then(hasil => {
-                        if (urutan == 1) {
-                            this.kabupaten = JSON.parse(hasil.data).kota_kabupaten;
-                        } else {
-                            this.kabupaten_kel = JSON.parse(hasil.data).kota_kabupaten;
-                        }
-                    }).catch(error => {
-                        this.kabupaten = [];
-                        this.kabupaten_kel = [];
-                    });
-                },
-                apiKecamatan: function (idkabupaten, urutan) {
-                    axios.get("/daftarkecamatan/" + idkabupaten).then(
-                        hasil => {
+                    },
+                    apiKota: function (urutan) {
+                        const vm = this;
+                        axios.get("/daftarkota").then(hasil => {
                             if (urutan == 1) {
-                                this.kecamatan = JSON.parse(hasil.data).kecamatan;
+                                vm.kota = JSON.parse(hasil.data).provinsi;
                             } else {
-                                this.kecamatan_kel = JSON.parse(hasil.data).kecamatan;
+                                vm.kota_kel = JSON.parse(hasil.data).provinsi;
                             }
                         }).catch(error => {
-                        this.kecamatan = [];
-                        this.kecamatan_kel = [];
-                    });
-                },
-                apiKelurahan: function (idkelurahan, urutan) {
-                    axios.get("/daftarkelurahan/" + idkelurahan).then(
-                        hasil => {
+                            vm.kota = [];
+                            vm.kota_kel = [];
+                        });
+                    },
+                    apiKabupaten: function (idkota, urutan) {
+                        axios.get("/daftarkabupaten/" + idkota).then(hasil => {
                             if (urutan == 1) {
-                                this.kelurahan = JSON.parse(hasil.data).kelurahan;
+                                this.kabupaten = JSON.parse(hasil.data).kota_kabupaten;
                             } else {
-                                this.kelurahan_kel = JSON.parse(hasil.data).kelurahan;
+                                this.kabupaten_kel = JSON.parse(hasil.data).kota_kabupaten;
                             }
                         }).catch(error => {
-                        this.kelurahan = [];
-                        this.kelurahan_kel = [];
-                    });
-                },
-                umur: function () {
-                    if (this.data_form.tgl_lahir) {
-                        bulan = this.data_form.tgl_lahir.substr(5, 2).toString();
-                        tanggal = this.data_form.tgl_lahir.substr(8, 2).toString();
-                        tahun = this.data_form.tgl_lahir.substr(0, 4).toString();
-                        this.getAge(bulan + "/" + tanggal + "/" + tahun);
-                    } else {
-                        Swal.fire("isikan tanggal lahir", "", "warning");
-                    }
-                },
-                getAge: function (dateString) {
-                    {
-                        var now = new Date();
-                        var today = new Date(now.getYear(), now.getMonth(), now
-                            .getDate());
-
-                        var yearNow = now.getYear();
-                        var monthNow = now.getMonth();
-                        var dateNow = now.getDate();
-
-                        var dob = new Date(dateString.substring(6, 10),
-                            dateString.substring(0, 2) - 1,
-                            dateString.substring(3, 5)
-                        );
-
-                        var yearDob = dob.getYear();
-                        var monthDob = dob.getMonth();
-                        var dateDob = dob.getDate();
-                        var age = {};
-                        var ageString = "";
-                        var yearString = "";
-                        var monthString = "";
-                        var dayString = "";
-
-
-                        yearAge = yearNow - yearDob;
-
-                        if (monthNow >= monthDob)
-                            var monthAge = monthNow - monthDob;
-                        else {
-                            yearAge--;
-                            var monthAge = 12 + monthNow - monthDob;
+                            this.kabupaten = [];
+                            this.kabupaten_kel = [];
+                        });
+                    },
+                    apiKecamatan: function (idkabupaten, urutan) {
+                        axios.get("/daftarkecamatan/" + idkabupaten).then(
+                            hasil => {
+                                if (urutan == 1) {
+                                    this.kecamatan = JSON.parse(hasil.data).kecamatan;
+                                } else {
+                                    this.kecamatan_kel = JSON.parse(hasil.data).kecamatan;
+                                }
+                            }).catch(error => {
+                            this.kecamatan = [];
+                            this.kecamatan_kel = [];
+                        });
+                    },
+                    apiKelurahan: function (idkelurahan, urutan) {
+                        axios.get("/daftarkelurahan/" + idkelurahan).then(
+                            hasil => {
+                                if (urutan == 1) {
+                                    this.kelurahan = JSON.parse(hasil.data).kelurahan;
+                                } else {
+                                    this.kelurahan_kel = JSON.parse(hasil.data).kelurahan;
+                                }
+                            }).catch(error => {
+                            this.kelurahan = [];
+                            this.kelurahan_kel = [];
+                        });
+                    },
+                    umur: function () {
+                        if (this.data_form.tgl_lahir) {
+                            bulan = this.data_form.tgl_lahir.substr(5, 2).toString();
+                            tanggal = this.data_form.tgl_lahir.substr(8, 2).toString();
+                            tahun = this.data_form.tgl_lahir.substr(0, 4).toString();
+                            this.getAge(bulan + "/" + tanggal + "/" + tahun);
+                        } else {
+                            Swal.fire("isikan tanggal lahir", "", "warning");
                         }
+                    },
+                    getAge: function (dateString) {
+                        {
+                            var now = new Date();
+                            var today = new Date(now.getYear(), now.getMonth(), now
+                                .getDate());
 
-                        if (dateNow >= dateDob)
-                            var dateAge = dateNow - dateDob;
-                        else {
-                            monthAge--;
-                            var dateAge = 31 + dateNow - dateDob;
+                            var yearNow = now.getYear();
+                            var monthNow = now.getMonth();
+                            var dateNow = now.getDate();
 
-                            if (monthAge < 0) {
-                                monthAge = 11;
+                            var dob = new Date(dateString.substring(6, 10),
+                                dateString.substring(0, 2) - 1,
+                                dateString.substring(3, 5)
+                            );
+
+                            var yearDob = dob.getYear();
+                            var monthDob = dob.getMonth();
+                            var dateDob = dob.getDate();
+                            var age = {};
+                            var ageString = "";
+                            var yearString = "";
+                            var monthString = "";
+                            var dayString = "";
+
+
+                            yearAge = yearNow - yearDob;
+
+                            if (monthNow >= monthDob)
+                                var monthAge = monthNow - monthDob;
+                            else {
                                 yearAge--;
+                                var monthAge = 12 + monthNow - monthDob;
                             }
-                        }
 
-                        age = {
-                            years: yearAge,
-                            months: monthAge,
-                            days: dateAge
+                            if (dateNow >= dateDob)
+                                var dateAge = dateNow - dateDob;
+                            else {
+                                monthAge--;
+                                var dateAge = 31 + dateNow - dateDob;
+
+                                if (monthAge < 0) {
+                                    monthAge = 11;
+                                    yearAge--;
+                                }
+                            }
+
+                            age = {
+                                years: yearAge,
+                                months: monthAge,
+                                days: dateAge
+                            };
+
+                            if (age.years > 1) yearString = " tahun";
+                            else yearString = " tahun";
+                            if (age.months > 1) monthString = " bulan";
+                            else monthString = " bulan";
+                            if (age.days > 1) dayString = " hari";
+                            else dayString = " hari";
+
+
+                            if ((age.years > 0) && (age.months > 0) && (age.days > 0)) {
+                                this.data_form.umur = age.years + yearString;
+                                this.data_form.bulan = age.months + monthString;
+                                days = age.days + dayString;
+                            } else if ((age.years == 0) && (age.months == 0) && (age.days >
+                                    0)) {
+                                this.data_form.umur = 0;
+                                this.data_form.bulan = 0;
+                                days = age.days + dayString;
+                            } else if ((age.years > 0) && (age.months == 0) && (age.days ==
+                                    0)) {
+                                this.data_form.umur = age.years + yearString;
+                                this.data_form.bulan = 0;
+                                days = "HBD";
+                            } else if ((age.years > 0) && (age.months > 0) && (age.days ==
+                                    0)) {
+                                this.data_form.umur = age.years + yearString;
+                                this.data_form.bulan = age.months + monthString;
+                                days = 0;
+                            } else if ((age.years == 0) && (age.months > 0) && (age.days >
+                                    0)) {
+                                this.data_form.umur = 0;
+                                this.data_form.bulan = age.months + monthString;
+                                days = age.days + dayString;
+                            } else if ((age.years > 0) && (age.months == 0) && (age.days >
+                                    0)) {
+                                this.data_form.umur = age.years + yearString;
+                                this.data_form.bulan = 0;
+                                days = age.days;
+                            } else if ((age.years == 0) && (age.months > 0) && (age.days ==
+                                    0)) {
+                                this.data_form.umur = 0;
+                                this.data_form.bulan = age.months + monthString;
+                                days = 0;
+                            } else ageString = "Oops! Could not calculate age!";
+                        }
+                    },
+                    infotambahan: function () {
+                        vm.apiKota(2);
+                        vm.apiKabupaten(vm.infotambahan.kota_kel, 2);
+                        vm.apiKecamatan(vm.infotambahan.kabupaten_kel, 2);
+                        vm.apiKelurahan(vm.infotambahan.kecamatan_kel, 2);
+                    },
+                    clear: function () {
+                        const vm = this;
+                        $.each(this.data_form, function (index, value) {
+                            vm.data_form[index] = '';
+                        });
+                        $.each(this.infotambahan, function (index, value) {
+                            vm.infotambahan[index] = '';
+                        });
+                        vm.fotoData = "{{asset('/images/index.png')}}";
+                    },
+                    updatePasien: function () {
+
+                        const self = this;
+                        var data = new FormData();
+                        $.each(this.data_form, function (index, value) {
+                            data.append(index, value);
+                        });
+
+                        if (this.infotambahan.hubungan_kel) {
+                            $.each(this.infotambahan, function (index, value) {
+                                data.append(index, value);
+                            });
                         };
 
-                        if (age.years > 1) yearString = " tahun";
-                        else yearString = " tahun";
-                        if (age.months > 1) monthString = " bulan";
-                        else monthString = " bulan";
-                        if (age.days > 1) dayString = " hari";
-                        else dayString = " hari";
+                        axios.post("{{route('updatePasien')}}", data)
+                            .then(Respon => {
+                                const Toast = Swal.mixin({
+                                    toast: true,
+                                    position: 'top-end',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    timerProgressBar: true,
+                                    didOpen: (toast) => {
+                                        toast.addEventListener('mouseenter', Swal
+                                            .stopTimer)
+                                        toast.addEventListener('mouseleave', Swal
+                                            .resumeTimer)
+                                    }
+                                })
 
+                                Toast.fire({
+                                    icon: 'success',
+                                    title: "Berhasil Update Pasien!" + Respon.data.message
+                                        .nama
+                                });
+                            })
+                            .catch(err => {
+                                Swal.fire("Gagal Update Pasien!",
+                                    "periksa form atau segera hubungi administrator",
+                                    "error");
+                            });
 
-                        if ((age.years > 0) && (age.months > 0) && (age.days > 0)) {
-                            this.data_form.umur = age.years + yearString;
-                            this.data_form.bulan = age.months + monthString;
-                            days = age.days + dayString;
-                        } else if ((age.years == 0) && (age.months == 0) && (age.days >
-                                0)) {
-                            this.data_form.umur = 0;
-                            this.data_form.bulan = 0;
-                            days = age.days + dayString;
-                        } else if ((age.years > 0) && (age.months == 0) && (age.days ==
-                                0)) {
-                            this.data_form.umur = age.years + yearString;
-                            this.data_form.bulan = 0;
-                            days = "HBD";
-                        } else if ((age.years > 0) && (age.months > 0) && (age.days ==
-                                0)) {
-                            this.data_form.umur = age.years + yearString;
-                            this.data_form.bulan = age.months + monthString;
-                            days = 0;
-                        } else if ((age.years == 0) && (age.months > 0) && (age.days >
-                                0)) {
-                            this.data_form.umur = 0;
-                            this.data_form.bulan = age.months + monthString;
-                            days = age.days + dayString;
-                        } else if ((age.years > 0) && (age.months == 0) && (age.days >
-                                0)) {
-                            this.data_form.umur = age.years + yearString;
-                            this.data_form.bulan = 0;
-                            days = age.days;
-                        } else if ((age.years == 0) && (age.months > 0) && (age.days ==
-                                0)) {
-                            this.data_form.umur = 0;
-                            this.data_form.bulan = age.months + monthString;
-                            days = 0;
-                        } else ageString = "Oops! Could not calculate age!";
                     }
-                },
-                infotambahan: function(){
-                    vm.apiKota(2);
-                vm.apiKabupaten(vm.infotambahan.kota_kel, 2);
-                vm.apiKecamatan(vm.infotambahan.kabupaten_kel, 2);
-                vm.apiKelurahan(vm.infotambahan.kecamatan_kel, 2);
-                },
-                clear: function () {
-                    const vm = this;
-                    $.each(this.data_form, function (index, value) {
-                        vm.data_form[index] = '';
-                    });
-                    $.each(this.infotambahan, function (index, value) {
-                        vm.infotambahan[index] = '';
-                    });
-                    vm.fotoData = "{{asset('/images/index.png')}}";
-                },
-            }
-        });
 
-    </script>
-    <!-- #/ container -->
-</div>
-@endsection
+                }
+            });
 
-@section('script')
-<script src="{{asset('Componentadmin/plugins/moment/moment.js')}}"></script>
-@endsection
+        </script>
+        <!-- #/ container -->
+    </div>
+    @endsection
+
+    @section('script')
+    <script src="{{asset('Componentadmin/plugins/moment/moment.js')}}"></script>
+    @endsection

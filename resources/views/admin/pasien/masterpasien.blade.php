@@ -3,6 +3,9 @@
 @section('style')
 <link href="{{asset('Componentadmin/plugins/tables/css/datatable/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 @endsection
+@section('uper_script')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+@endsection
 @section('content')
 <div class="content-body">
 
@@ -105,7 +108,9 @@
                                             <td>{{$item->status}}</td>
                                             <td style="width: 150px; font-size: 16px" class="text-center"><a
                                                     href="{{url('edit_pasien/'.$item->id_pasien)}}"><span
-                                                        class="icon-pencil"></span> edit</a> | <a href="#"><span
+                                                        class="icon-pencil"></span> edit</a> | <a
+                                                    href="javascript:void(0);"
+                                                    v-on:click="hapuspasien({{$item->id_pasien}})"><span
                                                         class="icon-trash text-danger"></span> hapus</a>
                                             </td>
                                         </tr>
@@ -139,10 +144,10 @@
                 <div class="col-md-12">
 
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-title">Pasien Rawat Inap</div>
+                            <div class="card-title">Invoice Pasien Ranap</div>
                             <div class="table-responsive">
                                 <table class="display table table-striped table-bordered zero-configuration">
                                     <thead>
@@ -187,7 +192,7 @@
     const vue = new Vue({
         el: '#masterpasien',
         data: {
-
+            alasan: '',
         },
         mounted: function () {
 
@@ -306,6 +311,27 @@
                                 }
                             }]
                         }
+                    }
+                });
+            },
+            hapuspasien: function (id_pasien) {
+                Swal.fire({
+                    title: 'yakin akan menghapus?',
+                    html: "berikan alasan menghapus! <select id='alasanHapus' class='form-control mt-2' v-model='hapus' name='alasan'><option value='data tidak valid'>data tidak valid</option><option value='pasien meninggal'>pasien meninggal</option><option value='alasan lain'>alasan lain</option></select>",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Ya, Hapus',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.alasan = $("#alasanHapus").val();
+                        axios.post("hapus_pasien/"+id_pasien, this.alasan).then(hasil => {
+                            alert("sukses");
+                        }).catch(error => {
+
+                        });
                     }
                 });
             }

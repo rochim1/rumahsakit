@@ -38,13 +38,13 @@ class rscontroller extends Controller
         $pekerjaanPasien = DB::table('pekerjaan_pasien')->select()->get();
         $asuransi = DB::table('asuransi')->select()->get();
         $caramasuk = DB::table('caramasuk')->select()->get();
-
+        $pendidikan = DB::table('pendidikan')->select()->get();
         // $jadwaljam = DB::table('jadwaljam')->select()->get();
 
         $cacat = DB::table('cacatfisik')->select()->get();
         $bahasa = DB::table('bahasa')->select()->get();
-        $id_pasien = $this->rekmed();
-        return view('admin.pasien.tambahpasien', compact('id_pasien', 'caramasuk', 'dataSpesialis','cacat','asuransi', 'bahasa','pekerjaanPasien'));
+        $rekammedis = $this->rekmed();
+        return view('admin.pasien.tambahpasien', compact('rekammedis', 'pendidikan', 'caramasuk', 'dataSpesialis','cacat','asuransi', 'bahasa','pekerjaanPasien'));
     }
 
     public function randomPassword() {
@@ -60,6 +60,7 @@ class rscontroller extends Controller
         $pekerjaanPasien = DB::table('pekerjaan_pasien as p')
         ->select()->get();
         $asuransi = DB::table('asuransi')->select()->get();
+        $pendidikan = DB::table('pendidikan')->select()->get();
         // $caramasuk = DB::table('caramasuk')->select()->get();
 
         // $jadwaljam = DB::table('jadwaljam')->select()->get();
@@ -75,7 +76,7 @@ class rscontroller extends Controller
         // return dd($dataPasien);
         // return $dataPasien;
         // return response()->json($data, 200, $headers);
-        return view('admin.pasien.updatePasien', compact('pekerjaanPasien','bahasa','cacat','asuransi'))->with('dataPasien', $dataPasien);
+        return view('admin.pasien.updatePasien', compact('pekerjaanPasien','pendidikan','bahasa','cacat','asuransi'))->with('dataPasien', $dataPasien);
     }
 
     public function attr_pasien(){
@@ -145,7 +146,7 @@ class rscontroller extends Controller
             'id_asuransi' => $request->id_asuransi,
             // asuransi di pindah ke table tambahan
             'pekerjaan' => $request->pekerjaan,
-            'status_nikah' => $request->pekerjaan,
+            'status_nikah' => $request->kawin,
             'foto' => $namafoto,
             // 'email_verified_at' =>
             'password' => $password,
@@ -185,15 +186,19 @@ class rscontroller extends Controller
     }
 
     public function masterpasien(){
-        $pasien = pasien::all();
+        $pasien = pasien::whereNull('deleted_at')->get();
         $jumlahAsuransi = pasien::where('asuransi', 'BPJS')->count();
         $jumlahTanpaAsuransi = pasien::where('asuransi', '!=', 'BPJS')->orWhereNull('asuransi')->count();
         $jumlahRawatInap = pasien::where('status_pasien', 'rawat inap')->count();
         $jumlahPasien = pasien::all()->count();;
         return view('admin.pasien.masterpasien', compact('pasien','jumlahAsuransi','jumlahPasien','jumlahTanpaAsuransi', 'jumlahRawatInap'));
     }
-    public function hapus_pasien(){
-        //todo
+    public function hapus_pasien(Request $request, $id_pasien){
+        DB::table('pasien')->where('id_pasien', $id_pasien)->update([
+            'alasan_hapus' => $request->alasan,
+            'deleted_at' => Carbon::now(),
+        ]);
+        return response()->json(['success' => 'berhasil', 'message' => 'data pasien berhasil dihapus']);
     }
     public function dataSpesialis()
     {

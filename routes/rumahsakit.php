@@ -40,8 +40,12 @@ Route::group(['middleware' => 'authAdmin'], function () {
     // Route::post('/daftar_pasien', 'rscontroller@daftarPasien')->name('updatePasien');
     Route::get('/edit_pasien/{id}', 'rscontroller@editPasien')->name('editPasien');
     Route::get('/register_pasien', 'rscontroller@regpasien')->name('regpasien');
+    Route::get('/printmember', function(){
+        return view('admin.pasien.membercard');
+    })->name('regpasien');
     Route::get('/attr_pasien', 'rscontroller@attr_pasien')->name('attr_pasien');
-    Route::get('/deletedPasien', 'rscontroller@hapus_pasien')->name('pasienterhapus');
+    Route::post('/hapus_pasien/{id}', 'rscontroller@hapus_pasien')->name('pasienterhapus');
+    Route::get('/updatePasien', 'rscontroller@updatePasien')->name('updatePasien');
     Route::get('/master_pasien', 'rscontroller@masterpasien')->name('masterpasien');
 
     Route::get('/rekammedis', 'rscontroller@rekmed')->name('rekammedis');
@@ -132,4 +136,10 @@ Route::group(['middleware' => 'authAdmin'], function () {
     // Route::post('/simpan_tindakan', 'rscontroller@simpan_tindakan')->name('simpan_tindakan');
     // Route::post('/hapus_tindakan/{id}', 'rscontroller@hapus_tindakan')->name('hapus_tindakan');
     Route::get('/chart_hari', 'chart@chart_hari')->name('chart_hari');
+    Route::get('qr-code-g', function () {
+        \QrCode::size(500)
+            ->format('png')
+            ->generate('Medikre.com', public_path('images/qrcode.png'));
+        return view('qrCode');
+    });
 });

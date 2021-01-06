@@ -1,9 +1,58 @@
 @extends('admin.index')
 @section('title','tambah pasien')
 @section('style')
+<style>
+    .hvr-float-shadow {
+        display: inline-block;
+        vertical-align: middle;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        position: relative;
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform;
+        transition-property: transform;
+    }
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css"
-    rel="stylesheet" />
+    .hvr-float-shadow:before {
+        pointer-events: none;
+        position: absolute;
+        z-index: -1;
+        content: '';
+        top: 100%;
+        left: 5%;
+        height: 10px;
+        width: 90%;
+        opacity: 0;
+        background: -webkit-radial-gradient(center, ellipse, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+        background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 80%);
+        /* W3C */
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform, opacity;
+        transition-property: transform, opacity;
+    }
+
+    .hvr-float-shadow:hover,
+    .hvr-float-shadow:focus,
+    .hvr-float-shadow:active {
+        -webkit-transform: translateY(-5px);
+        transform: translateY(-5px);
+        /* move the element up by 5px */
+    }
+
+    .hvr-float-shadow:hover:before,
+    .hvr-float-shadow:focus:before,
+    .hvr-float-shadow:active:before {
+        opacity: 1;
+        -webkit-transform: translateY(5px);
+        transform: translateY(5px);
+        /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+    }
+
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
 <link
     href="{{asset('Componentadmin/plugins/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css')}}"
     rel="stylesheet">
@@ -126,16 +175,9 @@
                                         <select v-model="data_form.pendidikan" class="form-control" name="pekerjaan"
                                             id="jk">
                                             <option value="">--- pendidikan terakhir ---</option>
-                                            <option value="SD/MI">SD/MI</option>
-                                            <option value="SMP/MTS">SMP/MTS</option>
-                                            <option value="SMA/SMK/MA">SMA/SMK/MA</option>
-                                            <option value="D1">D1</option>
-                                            <option value="D2">D2</option>
-                                            <option value="D3">D3</option>
-                                            <option value="D4">D4</option>
-                                            <option value="S1">S1</option>
-                                            <option value="S2">S2</option>
-                                            <option value="S3">S3</option>
+                                            @foreach ($pendidikan as $item)
+                                            <option value="{{$item->pendidikan}}">{{$item->pendidikan}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -152,6 +194,7 @@
                                 </div>
                             </div>
 
+                            <h4>Kontak Pasien</h4>
                             <div class="form-row">
                                 <label class="col-sm-2 form-group col-form-label">No Telp</label>
                                 <div class="form-group col-md-5">
@@ -163,53 +206,65 @@
                                 </div>
                             </div>
 
+                            <h4>Alamat Pasien</h4>
                             <div class="form-row">
-                                <label class="col-sm-2 form-group col-form-label">Alamat</label>
+                                <div class="border p-3 form-row">
+                                    <div class="col-sm-6 form-group">
+                                        <label>kelurahan</label>
+                                        <select class="form-control" v-model="data_form.kelurahan">
+                                            <option value="">--Kelurahan--</option>
+                                            <option v-for="item in kelurahan" :value="item.id">@{{item.nama}}
+                                            </option>
+                                        </select>
+                                    </div>
 
-                                <div class="form-group col-md-5">
-                                    <select class="form-control" v-model="data_form.kelurahan" id="kelurahan">
-                                        <option value="">--Kelurahan--</option>
-                                        <option v-for="item in kelurahan" :value="item.id">@{{item.nama}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <select v-model="data_form.kecamatan" class="form-control" id="kecamatan">
-                                        <option value="">--Kecamatan--</option>
-                                        <option v-on:click="apiKelurahan(item.id,1)" v-for="item in kecamatan"
-                                            :value="item.id">@{{item.nama}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group offset-md-2  col-md-5">
-                                    <select v-model="data_form.kabupaten" class="form-control" id="kabupaten">
-                                        <option value="">--Kabupaten--</option>
-                                        <option v-on:click="apiKecamatan(item.id,1)" v-for="item in kabupaten"
-                                            :value="item.id">@{{item.nama}}</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-5">
-                                    <select v-on:click="apiKota(1)" v-model="data_form.kota" class="form-control"
-                                        id="kota">
-                                        <option value="">--Kota--</option>
-                                        <option v-on:click="apiKabupaten(item.id, 1)" v-for="item in kota"
-                                            :value="item.id">@{{item.nama}}</option>
-                                    </select>
-                                </div>
-                            </div>
+                                    <div class="col-sm-6 form-group">
+                                        <label>kecamatan</label>
+                                        <select v-model="data_form.kecamatan" class="form-control" id="kecamatan">
+                                            <option value="">--Kecamatan--</option>
+                                            <option v-on:click="apiKelurahan(item.id,1)" v-for="item in kecamatan"
+                                                :value="item.id">
+                                                @{{item.nama}}</option>
+                                        </select>
+                                    </div>
 
+                                    <div class="col-sm-6 form-group">
+                                        <label>kabupaten</label>
+                                        <select class="form-control" v-model="data_form.kabupaten">
+                                            <option value="">-- Kabupaten --</option>
+                                            <option v-on:click="apiKecamatan(item.id,1)" v-for="item in kabupaten"
+                                                :value="item.id">
+                                                @{{item.nama}}</option>
+                                        </select>
+                                    </div>
 
-                            <div class="form-row">
-                                <div class="offset-md-2 col-md-10 form-group">
-                                    <textarea style="height: 120px" v-model="data_form.alamat" name="alamat"
-                                        class="form-control"></textarea>
+                                    <div class="col-sm-6 form-group">
+                                        <label>kota / provinsi</label>
+                                        <select v-on:click="apiKota(2)" v-model="data_form.kota" class="form-control">
+                                            <option value="">--Kota--</option>
+                                            <option v-on:click="apiKabupaten(item.id,1)" v-for="item in kota"
+                                                :value="item.id">
+                                                @{{item.nama}}</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <textarea style="height: 120px" v-model="data_form.alamat" name="alamat"
+                                            class="form-control"></textarea>
+                                    </div>
                                 </div>
                             </div>
 
                             <div class="form-row mt-2">
-                                <div class="col-sm-10 offset-sm-2">
+                                <div class="col-sm-12 d-flex flex-row-reverse">
                                     <button type="button" v-on:click="simpanpasien"
-                                        class="btn form-group btn-primary gradient-1">Daftar</button>
-                                    <button type="reset" v-on:click="clear"
-                                        class="btn form-group btn-whatsapp">Clear</button>
+                                    class="btn ml-3 form-group btn-primary gradient-1">Daftar</button>
+                                    <button type="reset" v-on:click="pemeriksaan(pemeriksaan.id_pasien)"
+                                    class="ml-3 btn form-group btn-primary">Pemeriksaan</button>
+                                    <a href="/printmember" class="btn btn-warning" target="blank">print</a>
+                                    {{-- <button type="reset" v-on:click="clear"
+                                        class="btn form-group btn-whatsapp ">Clear</button> --}}
+
                                     {{-- <button type="button" v-on:click="printFormMedis"
                                         class="btn form-group btn-danger gradient-2">Cancel</button> --}}
                                 </div>
@@ -217,6 +272,39 @@
                         </form>
                     </div>
                 </div>
+
+
+                <div class="modal fade animate__animated animate__rubberBand " id="ModalAsuransi" data-backdrop="static"
+                    tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Pilih Asuransi / Pembayaran</h5>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex flex-wrap">
+                                    <div class="p-2 w-50 hvr-float-shadow">
+                                        <div v-on:click="pilihAsuransi(1)" class="card bg-success">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-center text-white">BPJS</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="p-2 w-50 hvr-float-shadow">
+                                        <div v-on:click="pilihAsuransi(2)" class="card bg-primary">
+                                            <div class="card-body">
+                                                <h5 class="card-title text-center text-white">Pasien Umum</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
 
             <div class="col-md-4">
@@ -237,199 +325,197 @@
                 <div class="card">
                     <div class="card-body">
 
-                            <div class="form-group ">
-                                <label for="">asuransi</label>
-                                <select v-on:change="asuransiCtrl" v-model="data_form.asuransi" class="form-control"
-                                    name="asuransi" id="jk">
-                                    <option value="">--- pilih asuransi ---</option>
-                                    @foreach ($asuransi as $item){
-                                    <option value="{{$item->id}}">{{$item->nama_asuransi}}</option>
-                                    @endforeach
+                        <div class="form-group ">
+                            <label for="">asuransi / pembayaran</label>
+                            <select v-on:change="asuransiCtrl" v-model="data_form.asuransi" class="form-control"
+                                name="asuransi" id="jk">
+                                <option value="">--- pilih asuransi ---</option>
+                                @foreach ($asuransi as $item){
+                                <option value="{{$item->id}}">{{$item->nama_asuransi}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div id="formIdAsuransi" class="form-group collapse">
+                            <label>nomor id asuransi</label>
+                            <input name="idasuransi" type="number" class="form-control" v-model="data_form.idasuransi">
+                        </div>
+
+                        <div class="form-group">
+                            <label>status kawin</label>
+                            <select name="kawin" type="text" class="form-control" v-model="data_form.kawin">
+                                <option value="">-- status kawin --</option>
+                                <option value="belum kawin">belum kawin</option>
+                                <option value="kawin">kawin</option>
+                                <option value="cerai hidup">cerai hidup</option>
+                                <option value="cerai mati">cerai mati</option>
+                            </select>
+                        </div>
+                        <h4>sekunder</h4>
+                        <div class="form-group">
+                            <label>bahasa</label>
+                            <select name="bahasa" type="text" class="form-control" v-model="data_form.bahasa">
+                                <option value="">pilih bahasa</option>
+                                @foreach ($bahasa as $item)
+                                <option value="{{$item->id}}">{{$item->nama_bahasa}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>cacat fisik</label>
+                            <select name="cacatfisik" class="form-control" v-model="data_form.cacatfisik">
+                                <option value="">cacat fisik</option>
+                                @foreach ($cacat as $item)
+                                <option value="{{$item->id_cacatfisik}}">{{$item->nama_cacat}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>ciri fisik</label>
+                            <textarea v-model="data_form.cirifisik" placeholder="ciri2 fisik"
+                                class="form-control"></textarea>
+                        </div>
+
+                        <div class="row form-row">
+                            <div class="form-group col-md-8">
+                                <select v-model="infotambahan.hubungan_kel" class="form-control" id="hubkeluarga">
+                                    <option value="">--tambah info keluarga--</option>
+                                    <option value="1">ayah</option>
+                                    <option value="2">ibu</option>
+                                    <option value="3">anak</option>
+                                    <option value="4">keluarga</option>
                                 </select>
+                                <small id="errHubkel" class="invalid-tooltip collapse">masukkan hubungan keluarga
+                                    terebih dahulu</small>
                             </div>
+                            <div class="form-group col-md-4">
+                                <!-- Button trigger modal -->
+                                <button v-on:click="tambahkel" type="button" class=" m-0 btn btn-primary gradient-1"
+                                    data-toggle="modal">
+                                    tambah
+                                </button>
 
-                            <div id="formIdAsuransi" class="form-group collapse">
-                                <label>nomor id asuransi</label>
-                                <input name="idasuransi" type="number" class="form-control"
-                                    v-model="data_form.idasuransi">
-                            </div>
-
-                            <div class="form-group">
-                                <label>status kawin</label>
-                                <select name="kawin" type="text" class="form-control" v-model="data_form.kawin">
-                                    <option value="">-- status kawin --</option>
-                                    <option value="belum kawin">belum kawin</option>
-                                    <option value="kawin">kawin</option>
-                                    <option value="cerai hidup">cerai hidup</option>
-                                    <option value="cerai mati">cerai mati</option>
-                                </select>
-                            </div>
-                            <h4>sekunder</h4>
-                            <div class="form-group">
-                                <label>bahasa</label>
-                                <select name="bahasa" type="text" class="form-control" v-model="data_form.bahasa">
-                                    <option value="">pilih bahasa</option>
-                                    @foreach ($bahasa as $item)
-                                    <option value="{{$item->id}}">{{$item->nama_bahasa}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>cacat fisik</label>
-                                <select name="cacatfisik" class="form-control" v-model="data_form.cacatfisik">
-                                    <option value="">cacat fisik</option>
-                                    @foreach ($cacat as $item)
-                                    <option value="{{$item->id_cacatfisik}}">{{$item->nama_cacat}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label>ciri fisik</label>
-                                <textarea v-model="data_form.cirifisik" placeholder="ciri2 fisik"
-                                    class="form-control"></textarea>
-                            </div>
-
-                            <div class="row form-row">
-                                <div class="form-group col-md-8">
-                                    <select v-model="infotambahan.hubungan_kel" class="form-control" id="hubkeluarga">
-                                        <option value="">--tambah info keluarga--</option>
-                                        <option value="1">ayah</option>
-                                        <option value="2">ibu</option>
-                                        <option value="3">anak</option>
-                                        <option value="4">keluarga</option>
-                                    </select>
-                                    <small id="errHubkel" class="invalid-tooltip collapse">masukkan hubungan keluarga
-                                        terebih dahulu</small>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <!-- Button trigger modal -->
-                                    <button v-on:click="tambahkel" type="button" class=" m-0 btn btn-primary gradient-1"
-                                        data-toggle="modal">
-                                        tambah
-                                    </button>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="modalTambahinfokel" tabindex="-1" role="dialog"
-                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle">Informasi
-                                                        Keluarga Pasien</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form v-on:submit.prevent>
-                                                        <h4 class="mt-2">Biodata keluarga pasien</h4>
-                                                        <div class="form-row">
-                                                            <div class="col-sm-8 form-group">
-                                                                <label>Nama Keluarga</label>
-                                                                <input type="email" class="form-control" id="nama_kel"
-                                                                    v-model="infotambahan.nama_kel">
-                                                            </div>
-
-                                                            <div class="col-sm-4 form-group">
-                                                                <label>Jenis Kelamin</label>
-                                                                <select v-model="infotambahan.jenis_kel"
-                                                                    class="form-control" name="jenis_kelamin" id="jk">
-                                                                    <option value="">--- Jenis Kelamin ---</option>
-                                                                    <option value="L">laki-laki</option>
-                                                                    <option value="P">Perempuan</option>
-                                                                </select>
-                                                            </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="modalTambahinfokel" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Informasi
+                                                    Keluarga Pasien</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form v-on:submit.prevent>
+                                                    <h4 class="mt-2">Biodata keluarga pasien</h4>
+                                                    <div class="form-row">
+                                                        <div class="col-sm-8 form-group">
+                                                            <label>Nama Keluarga</label>
+                                                            <input type="text" class="form-control" id="nama_kel"
+                                                                v-model="infotambahan.nama_kel">
                                                         </div>
 
-                                                        <div class="form-row">
-                                                            <div class="col-sm-4 form-group">
-                                                                <label>Pekerjaan</label>
-                                                                <select v-model="infotambahan.pekerjaan_kel"
-                                                                    class="form-control" name="pekerjaan" id="jk">
-                                                                    <option value="">--- pekerjaan ---</option>
-                                                                    @foreach ($pekerjaanPasien as $item)
-                                                                    <option value="{{$item->id}}">
-                                                                        {{$item->pekerjaan_pasien}}</option>
-                                                                    @endforeach
-                                                                </select>
-                                                            </div>
+                                                        <div class="col-sm-4 form-group">
+                                                            <label>Jenis Kelamin</label>
+                                                            <select v-model="infotambahan.jenis_kel"
+                                                                class="form-control" name="jenis_kelamin" id="jk">
+                                                                <option value="">--- Jenis Kelamin ---</option>
+                                                                <option value="L">laki-laki</option>
+                                                                <option value="P">Perempuan</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
 
-                                                            <div class="col-sm-8 form-group">
-                                                                <label>Telpon</label>
-                                                                <input v-model="infotambahan.telp_kel" type="number"
-                                                                    class="form-control" name="telp">
-                                                            </div>
+                                                    <div class="form-row">
+                                                        <div class="col-sm-4 form-group">
+                                                            <label>Pekerjaan</label>
+                                                            <select v-model="infotambahan.pekerjaan_kel"
+                                                                class="form-control" name="pekerjaan" id="jk">
+                                                                <option value="">--- pekerjaan ---</option>
+                                                                @foreach ($pekerjaanPasien as $item)
+                                                                <option value="{{$item->id}}">
+                                                                    {{$item->pekerjaan_pasien}}</option>
+                                                                @endforeach
+                                                            </select>
                                                         </div>
 
-                                                        <div class="form-group">
-                                                            <label>email</label>
-                                                            <input v-model="infotambahan.email" type="email"
-                                                                class="form-control" name="email">
+                                                        <div class="col-sm-8 form-group">
+                                                            <label>Telpon</label>
+                                                            <input v-model="infotambahan.telp_kel" type="number"
+                                                                class="form-control" name="telp">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>email</label>
+                                                        <input v-model="infotambahan.email" type="email"
+                                                            class="form-control" name="email">
+                                                    </div>
+
+                                                    <h4 class="mt-2">Alamat</h4>
+                                                    <div class="border p-3 form-row">
+                                                        <div class="col-sm-6 form-group">
+                                                            <label>kelurahan</label>
+                                                            <select class="form-control"
+                                                                v-model="infotambahan.kelurahan_kel">
+                                                                <option value="">--Kelurahan--</option>
+                                                                <option v-for="item in kelurahan_kel" :value="item.id">
+                                                                    @{{item.nama}}</option>
+                                                            </select>
                                                         </div>
 
-                                                        <h4 class="mt-2">Alamat</h4>
-                                                        <div class="border p-3 form-row">
-                                                            <div class="col-sm-6 form-group">
-                                                                <label>kelurahan</label>
-                                                                <select class="form-control"
-                                                                    v-model="infotambahan.kelurahan_kel">
-                                                                    <option value="">--Kelurahan--</option>
-                                                                    <option v-for="item in kelurahan_kel"
-                                                                        :value="item.id">@{{item.nama}}</option>
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="col-sm-6 form-group">
-                                                                <label>kecamatan</label>
-                                                                <select v-model="infotambahan.kecamatan_kel"
-                                                                    class="form-control" id="kecamatan">
-                                                                    <option value="">--Kecamatan--</option>
-                                                                    <option v-on:click="apiKelurahan(item.id,2)"
-                                                                        v-for="item in kecamatan_kel" :value="item.id">
-                                                                        @{{item.nama}}</option>
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="col-sm-6 form-group">
-                                                                <label>kabupaten</label>
-                                                                <select class="form-control"
-                                                                    v-model="infotambahan.kabupaten_kel">
-                                                                    <option value="">-- Kabupaten --</option>
-                                                                    <option v-on:click="apiKecamatan(item.id,2)"
-                                                                        v-for="item in kabupaten_kel" :value="item.id">
-                                                                        @{{item.nama}}</option>
-                                                                </select>
-                                                            </div>
-
-                                                            <div class="col-sm-6 form-group">
-                                                                <label>kota / provinsi</label>
-                                                                <select v-on:click="apiKota(2)"
-                                                                    v-model="infotambahan.kota_kel"
-                                                                    class="form-control">
-                                                                    <option value="">--Kota--</option>
-                                                                    <option v-on:click="apiKabupaten(item.id,2)"
-                                                                        v-for="item in kota_kel" :value="item.id">
-                                                                        @{{item.nama}}</option>
-                                                                </select>
-                                                            </div>
+                                                        <div class="col-sm-6 form-group">
+                                                            <label>kecamatan</label>
+                                                            <select v-model="infotambahan.kecamatan_kel"
+                                                                class="form-control" id="kecamatan">
+                                                                <option value="">--Kecamatan--</option>
+                                                                <option v-on:click="apiKelurahan(item.id,2)"
+                                                                    v-for="item in kecamatan_kel" :value="item.id">
+                                                                    @{{item.nama}}</option>
+                                                            </select>
                                                         </div>
-                                                    </form>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" v-on:click="cancel" class="btn gradient-2"
-                                                        data-dismiss="modal">Cancel</button>
-                                                    <button type="button" class="btn btn-primary gradient-1"
-                                                        data-dismiss="modal">Save
-                                                        changes</button>
-                                                </div>
+
+                                                        <div class="col-sm-6 form-group">
+                                                            <label>kabupaten</label>
+                                                            <select class="form-control"
+                                                                v-model="infotambahan.kabupaten_kel">
+                                                                <option value="">-- Kabupaten --</option>
+                                                                <option v-on:click="apiKecamatan(item.id,2)"
+                                                                    v-for="item in kabupaten_kel" :value="item.id">
+                                                                    @{{item.nama}}</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="col-sm-6 form-group">
+                                                            <label>kota / provinsi</label>
+                                                            <select v-on:click="apiKota(2)"
+                                                                v-model="infotambahan.kota_kel" class="form-control">
+                                                                <option value="">--Kota--</option>
+                                                                <option v-on:click="apiKabupaten(item.id,2)"
+                                                                    v-for="item in kota_kel" :value="item.id">
+                                                                    @{{item.nama}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" v-on:click="cancel" class="btn gradient-2"
+                                                    data-dismiss="modal">Cancel</button>
+                                                <button type="button" class="btn btn-primary gradient-1"
+                                                    data-dismiss="modal">Save
+                                                    changes</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
 
@@ -486,12 +572,12 @@
                                         <label class="col-form-label">cara masuk</label>
                                         <div class="form-group">
 
-                                            @foreach ($caramasuk as $item)
+                                            @foreach ($caramasuk as $index => $item)
                                             <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="inlineRadioOptions"
-                                                    id="inlineRadio1" value="{{$item->id}}">
+                                                    id="inlineRadio{{$index+1}}" value="{{$item->id}}">
                                                 <label class="form-check-label"
-                                                    for="inlineRadio1">{{$item->cara_masuk}}</label>
+                                                    for="inlineRadio{{$index+1}}">{{$item->cara_masuk}}</label>
                                             </div>
                                             @endforeach
                                         </div>
@@ -583,6 +669,8 @@
                     </div>
                 </div>
 
+
+
             </div>
         </div>
         <script>
@@ -612,7 +700,7 @@
                     kecamatan_kel: [],
                     kelurahan_kel: [],
                     data_form: {
-                        rekamMedis: '{{$id_pasien}}',
+                        rekamMedis: '{{$rekammedis}}',
                         nama_baru: '',
                         jenis_kelamin: '',
                         NIK: '',
@@ -657,6 +745,9 @@
                         kota_kel: '',
                         alamat_kel: '',
                     }
+                },
+                created: function () {
+                    this.asuransi();
                 },
                 methods: {
                     browsefile: function () {
@@ -734,8 +825,11 @@
                         axios.get("{{route('rekammedis')}}").then(
                             Respons => {
                                 this.data_form.rekamMedis = Respons.data;
+                                $('#generateBarcode').html('');
                             }
-                        )
+                        );
+                        this.clear();
+                        this.asuransi();
                         // kedepan nomor RM akan dirapikan dan berurutan
                     },
                     clear: function () {
@@ -787,7 +881,7 @@
                                     });
                                     this.clear();
                                     this.generate();
-                                    $("#Modalpemeriksaan").modal('show');
+                                    // $("#Modalpemeriksaan").modal('show');
                                 })
                                 .catch(err => {
                                     Swal.fire("Gagal Input Pasien!",
@@ -986,6 +1080,23 @@
                     buatRM: function () {
 
                         // axios.post('')
+                    },
+                    pemeriksaan: function (id_pasien) {
+                        $("#Modalpemeriksaan").modal('show');
+                    },
+                    asuransi: function () {
+                        Vue.nextTick(function () {
+                            $('#ModalAsuransi').modal('show');
+                        });
+                    },
+                    pilihAsuransi: function (kat) {
+                        if (kat == 1) {
+                            this.data_form.asuransi = 1;
+                        } else {
+                            this.data_form.asuransi = '';
+                        }
+                        $('#ModalAsuransi').modal('hide');
+                        this.asuransiCtrl();
                     }
                 },
 

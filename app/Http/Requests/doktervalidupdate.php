@@ -26,8 +26,8 @@ class doktervalidupdate extends FormRequest
         return [
             'nama' => 'required',
             'jenis_kelamin' => 'required',
-            'NIK' => 'required|min:20',
-            'nomor_str' => 'nullable|min:20',
+            'NIK' => 'required|min:16',
+            'nomor_str' => 'nullable|min:10',
             'email' => 'sometimes|email',
             'telpon' => 'required|min:8',
             'tanggal_lahir' => 'required',
@@ -44,7 +44,7 @@ class doktervalidupdate extends FormRequest
         return [
             'nama.required' => 'nama Tidak Boleh Kosong',
             'NIK.required' => 'NIK tidak boleh kosong',
-            'NIK.required' => 'NIK harus 20 karakter',
+            'NIK.required' => 'NIK harus 16 karakter',
         ];
     }
 }
