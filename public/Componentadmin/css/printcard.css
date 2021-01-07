@@ -1,0 +1,10 @@
+#member-card {
+    background-image: url("http://localhost:8000/images/card.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 500px;
+}
+
+#member-card>.card-header {
+    background: rgba(0, 0, 0, 0.8)
+}

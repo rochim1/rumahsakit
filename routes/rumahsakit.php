@@ -37,15 +37,14 @@ Route::get('/todolist/delete/{id}', 'todolistController@getDelete');
 Route::group(['middleware' => 'authAdmin'], function () {
     Route::post('/test', 'rscontroller@test')->name('test');
     Route::post('/daftar_pasien', 'rscontroller@daftarPasien')->name('daftarPasien');
-    // Route::post('/daftar_pasien', 'rscontroller@daftarPasien')->name('updatePasien');
     Route::get('/edit_pasien/{id}', 'rscontroller@editPasien')->name('editPasien');
     Route::get('/register_pasien', 'rscontroller@regpasien')->name('regpasien');
     Route::get('/printmember', function(){
         return view('admin.pasien.membercard');
-    })->name('regpasien');
+    })->name('printcardpasien');
     Route::get('/attr_pasien', 'rscontroller@attr_pasien')->name('attr_pasien');
     Route::post('/hapus_pasien/{id}', 'rscontroller@hapus_pasien')->name('pasienterhapus');
-    Route::get('/updatePasien', 'rscontroller@updatePasien')->name('updatePasien');
+    Route::post('/updatePasien/{id}', 'rscontroller@updatePasien')->name('updatePasien');
     Route::get('/master_pasien', 'rscontroller@masterpasien')->name('masterpasien');
 
     Route::get('/rekammedis', 'rscontroller@rekmed')->name('rekammedis');
@@ -140,6 +139,7 @@ Route::group(['middleware' => 'authAdmin'], function () {
         \QrCode::size(500)
             ->format('png')
             ->generate('Medikre.com', public_path('images/qrcode.png'));
+            // echo "<img src='qrCode'>";
         return view('qrCode');
     });
 });

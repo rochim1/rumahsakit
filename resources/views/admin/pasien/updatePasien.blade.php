@@ -31,7 +31,9 @@
         <div class="row">
             <div class="col-md-12 alert alert-info alert-dismissible fade show" role="alert">
                 <h4>info</h4>
-                untuk atribut pendukung yang memiliki foreign dengan table lain lebih ringkas jika tidak mengacu pada id(primary key) pada table foreign tapi langsung saja merujuk pada value nya dengan syarat on update cascade dan on delete cascade dan merupakan unique key juga
+                untuk atribut pendukung yang memiliki foreign dengan table lain lebih ringkas jika tidak mengacu pada
+                id(primary key) pada table foreign tapi langsung saja merujuk pada value nya dengan syarat on update
+                cascade dan on delete cascade dan merupakan unique key juga
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -228,24 +230,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
-                                    <div class="form-row mt-2">
-                                        <div class="col-sm-10 offset-sm-2 d-flex flex-row-reverse">
-                                            <button type="button" class="ml-3 btn form-group btn-primary gradient-1"
-                                                v-on:click="updatePasien">Update</button>
-                                            <button type="button" class="ml-3 btn form-group btn-primary gradient-1"
-                                                v-on:click="updatePasien">Cetak ulang kartu</button>
-                                                <button type="reset" v-on:click="clear"
-                                                class="btn form-group ml-3 btn-whatsapp">Clear</button>
-                                                <button type="button" class="btn btn-danger form-group btn-danger btn-google"
-                                                    v-on:click="updatePasien">kembali</button>
-                                            {{-- <button type="button" v-on:click="printFormMedis"
-                                        class="btn form-group btn-danger gradient-2">Cancel</button> --}}
-                                        </div>
-                                    </div>
                                 </form>
 
                             </div>
@@ -354,6 +338,28 @@
                                         </div>
                                     </div>
                                 </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row mt-2">
+                            <div class="col-sm-10 offset-sm-2 d-flex flex-row-reverse">
+                                <button type="button" class="ml-3 btn form-group btn-primary gradient-1"
+                                    v-on:click="updatePasien">Update</button>
+                                <button type="button" class="ml-3 btn form-group btn-primary gradient-1"
+                                    v-on:click="updatePasien">Cetak ulang kartu</button>
+                                <button type="reset" v-on:click="clear"
+                                    class="btn form-group ml-3 btn-whatsapp">Clear</button>
+                                <button type="button" class="ml-3 btn form-group btn-google"
+                                    v-on:click="updatePasien">kembali</button>
+
+
+                                <button type="button" class="btn btn-danger form-group" v-on:click="updatePasien">ganti
+                                    password</button>
+                                {{-- <button type="button" v-on:click="printFormMedis"
+                                        class="btn form-group btn-danger gradient-2">Cancel</button> --}}
                             </div>
                         </div>
                     </div>
@@ -580,7 +586,7 @@
                         vm.fotoData = '../storage/fotoPasien/-' + vm.data_form.rekamMedis + '/' +
                             vm.data_form.foto;
                     };
-                        vm.asuransiCtrl();
+                    vm.asuransiCtrl();
                 },
                 methods: {
                     browsefile: function () {
@@ -607,11 +613,11 @@
 
                         if (this.data_form.asuransi) {
                             Vue.nextTick(function () {
-                            $('#formIdAsuransi').removeClass('collapse');
+                                $('#formIdAsuransi').removeClass('collapse');
                             });
                         } else {
                             Vue.nextTick(function () {
-                            $('#formIdAsuransi').addClass('collapse');
+                                $('#formIdAsuransi').addClass('collapse');
                             });
                         }
                     },
@@ -803,7 +809,7 @@
                             });
                         };
 
-                        axios.post("{{route('updatePasien')}}", data)
+                        axios.post("/updatePasien/" + this.id_pasien, data)
                             .then(Respon => {
                                 const Toast = Swal.mixin({
                                     toast: true,
@@ -821,8 +827,7 @@
 
                                 Toast.fire({
                                     icon: 'success',
-                                    title: "Berhasil Update Pasien!" + Respon.data.message
-                                        .nama
+                                    title: "Berhasil Update Pasien! " + Respon.data.nama
                                 });
                             })
                             .catch(err => {

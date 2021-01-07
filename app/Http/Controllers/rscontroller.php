@@ -83,28 +83,56 @@ class rscontroller extends Controller
         // DB::table('')
         return view('admin.pasien.attr_pasien');
     }
-    public function updatePasien($id_pasien){
-        // $flight = pasien::find($id_pasien);
-        // $flight->nama = ;
-        // $flight->rekam_medis = 'rekamMedis';
-        //     $flight->jenisKelamin = 'jenis_kelamin';
-        //     $flight->NIK = 'NIK';
-        //     $flight->agama = 'agama';
-        //     $flight->tanggal_lahir = 'tgl_lahir';
-        //     $flight->umur_daftar = 'umur';
-        //     $flight->lebih_bulan = 'bulan';
-        //     $flight->email = 'email';
-        //     $flight->alamat = ;
-        //     $flight->telpon = 'telp';
-        //     $flight->asuransi = 'asuransi';
-        //     $flight->pekerjaan = 'pekerjaan';
-        //     // $flight->email_verified_at =
-        //     $flight->passwod = ,
-        //     // $flight-> remember_token =
-        //     $flight->created_t = 'Ym-d H-i-s'),
-        //     // $flight-> updated_at =
-        //     // $flight-> deleted_at =
-        //     $flight->save();
+    public function updatePasien(Request $request, $id_pasien){
+        // return dd($request);
+        $flight = pasien::find($id_pasien);
+        $namafoto_lama = $flight->foto;
+        $id =  $request->rekamMedis;
+        $namafoto = '';
+        if ($request->hasFile('foto')) {
+            $datafoto = $request->file('foto');
+            $namafoto = $datafoto->getClientOriginalName();
+            $exist = Storage::exists('fotoPasien/-' . $id, '1b4842f7e69879c74fe510f7fea4ab91.jpg');
+
+            if ($exist) {
+                Storage::delete('fotoPasien/-' . $id, $namafoto_lama);
+            }
+                $request->file('foto')->storeAs('fotoPasien/-' . $id, $namafoto);
+                $flight->foto = $namafoto;
+
+        }
+
+    $flight->rekam_medis = $request->rekamMedis;
+    $flight->nama = $request->nama_baru;
+    $flight->NIK = $request->NIK;
+    $flight->jenisKelamin = $request->jenis_kelamin;
+    $flight->tanggal_lahir = $request->tgl_lahir;
+    $flight->umur_daftar = str_replace( 'tahun','',$request->umur);
+    $flight->lebih_bulan = str_replace('bulan','',$request->bulan);
+    $flight->warga_negara = $request->warganegara;
+    $flight->agama = $request->agama;
+    $flight->telpon = $request->telp;
+    $flight->email = $request->email;
+    $flight->nama_ibu = $request->namaibu;
+    $flight->pendidikan = $request->pendidikan;
+    $flight->status_pasien = '';
+
+    $flight->alamat = $request->alamat;
+    $flight->kelurahan = $request->kelurahan;
+    $flight->kecamatan = $request->kecamatan;
+    $flight->kabupaten = $request->kabupaten;
+    $flight->provinsi = $request->kota;
+    $flight->asuransi = $request->asuransi;
+    $flight->id_asuransi = $request->id_asuransi;
+    $flight->pekerjaan = $request->pekerjaan;
+    $flight->status_nikah = $request->kawin;
+
+    // email_verified_at =
+    // $flight->password = $password;
+    $flight->updated_at = Carbon::now();
+    $flight->save();
+
+    return response()->json(["status"=>"success", "message"=>"data pasien berhasil diperbarui", "nama" => $request->nama_baru]);
     }
     public function daftarPasien(Request $request){
         $alamat_detail = 'kelurahan ' . $request->kelurahan . ', kecamatan ' . $request->kecamatan . ', kabupaten ' . $request->kabupaten.', kota ' . $request->kota ;
@@ -137,7 +165,7 @@ class rscontroller extends Controller
             'pendidikan' => $request->pendidikan,
             'status_pasien' => 'non-aktif',
 
-            'alamat' => $request->alamat.' alamat detail : '.$alamat_detail ,
+            'alamat' => $request->alamat,
             'kelurahan' => $request->kelurahan,
             'kecamatan' => $request->kecamatan,
             'kabupaten' => $request->kabupaten,
