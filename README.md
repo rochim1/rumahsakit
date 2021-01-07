@@ -6,9 +6,11 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
-##FROM DEVELOPER
-Assalamualaikum wr wb
+## <h1>FROM DEVELOPER</h1>
+
+<p>Assalamualaikum wr wb
 karya ini saya tujukan untuk dirisaya sendiri terlebih selain dalam rangka memenuhi tugas TPE dan TPE Universitas Amikom Yogyakarta, alam proses pembuatan karya berupa web sistem informasi manajemen rumah sakit ini secara pribadi saya melalui beberpa rintangan dalam memahami alur kerja pada rumah sakit, sehingga membutuhkan biaya , dan pada saat pengembangan aplikasi dimana berusaha untuk user friendly membutuhkan waktu yang lebih lama dikarenakan pada saat itu saya masih pemula dalam menguasai VUE js. instance,. sehingga dalam penggunaan aplikasi ini pihak luar dilarang menggunakan tanpa seizin dan ridho dari saya perancang sistem informasi ini, tidak boleh plagiat dan mengambil code dari sini. sekian semoga dapat dimaklumi, wassalamualaikum wr wb
+ </p>
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
